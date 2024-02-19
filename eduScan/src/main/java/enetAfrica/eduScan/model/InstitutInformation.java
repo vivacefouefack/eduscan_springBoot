@@ -4,7 +4,6 @@ import java.time.LocalTime;
 
 import jakarta.persistence.MappedSuperclass;
 import lombok.Data;
-import lombok.NonNull;
 
 @Data
 @MappedSuperclass
