@@ -5,10 +5,11 @@ import java.time.LocalDate;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 
 @Entity
 @AllArgsConstructor
@@ -17,9 +18,10 @@ public class ProspectionRecord extends InstitutInformation {
     @Id
     @GeneratedValue
     private int id;
-    private int seniority;
-    @NonNull private LocalDate firstVisitDate;
-    @NonNull private String interlocutorFirstName;
-    @NonNull private String interlocutorLastName;
-    @NonNull private String interlocutorFunction;
+    
+    @NotEmpty private int seniority;
+    @NotEmpty private LocalDate firstVisitDate;
+    @NotBlank private String interlocutorFirstName;
+    @NotBlank private String interlocutorLastName;
+    @NotBlank private String interlocutorFunction;
 }
