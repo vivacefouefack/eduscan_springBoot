@@ -48,6 +48,7 @@ public class AccountServiceTest {
     public void testNoAccountExecutiveExist() throws Exception {
         List<AccountExecutive> emptyList = new ArrayList<>();
         Mockito.when(service.getAllAccountExecutives()).thenReturn(emptyList);
+
         mvc.perform(get("/api/eduscan/AllAccountExecutive"))
            .andExpect(status().isOk())
            .andExpect(jsonPath("$").isArray())

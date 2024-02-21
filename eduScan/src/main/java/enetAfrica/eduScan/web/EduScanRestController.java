@@ -23,34 +23,11 @@ import enetAfrica.eduScan.service.AccountExecutiveService;
 public class EduScanRestController {
     @Autowired private AccountExecutiveService service;
 
-    @GetMapping("/AllAccountExecutive")
-    public ResponseEntity<Iterable<AccountExecutive>> getAllAccountExecutives() {
-        try {
-            return ResponseEntity.ok(service.getAllAccountExecutives());
-        } catch (Exception e) {
-            
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
-    }
-
-    @GetMapping("/AccountExecutive/{id}")
-    public ResponseEntity<AccountExecutive> getAccountExecutiveById(@PathVariable int id) {
-        try {
-            return ResponseEntity.ok(service.getAccountExecutiveById(id));
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().build();
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
-    }
-
     @PostMapping("/AddAccountExecutive")
     public ResponseEntity<AccountExecutive> addAccountExecutive(@RequestBody AccountDto accountDto) {
         try {
             AccountExecutive newAccountExecutive = service.addAccountExecutive(accountDto);
             return ResponseEntity.status(HttpStatus.CREATED).body(newAccountExecutive);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().build();
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
@@ -61,8 +38,6 @@ public class EduScanRestController {
         try {
             AccountExecutive updatedAccountExecutive = service.updateAccountExecutive(newData);
             return ResponseEntity.ok(updatedAccountExecutive);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().build();
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
@@ -73,8 +48,24 @@ public class EduScanRestController {
         try {
             service.deleteAccountExecutive(id);
             return ResponseEntity.noContent().build();
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @GetMapping("/AllAccountExecutive")
+    public ResponseEntity<Iterable<AccountExecutive>> getAllAccountExecutives() {
+        try {
+            return ResponseEntity.ok(service.getAllAccountExecutives());
+        } catch (Exception e) {       
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @GetMapping("/AccountExecutive/{id}")
+    public ResponseEntity<AccountExecutive> getAccountExecutiveById(@PathVariable int id) {
+        try {
+            return ResponseEntity.ok(service.getAccountExecutiveById(id));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }

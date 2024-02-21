@@ -1,6 +1,5 @@
 package enetAfrica.eduScan.dto;
 
-import io.micrometer.common.lang.NonNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,12 +8,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AccountDto {
-    @NonNull private String firstName;
-    @NonNull private String lastName;
-    @NonNull private String phoneNumber;
-    @NonNull private String prospectingZone;
-    @NonNull private String prospectingMunicipality;
-    @NonNull private String photo;
+    private String firstName;
+    private String lastName;
+    private String phoneNumber;
+    private String prospectingZone;
+    private String prospectingMunicipality;
+    private String photo;
     private int role;
     private int superiorN1;
     private int superiorN2;

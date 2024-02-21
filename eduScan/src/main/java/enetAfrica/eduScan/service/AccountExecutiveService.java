@@ -3,9 +3,7 @@ package enetAfrica.eduScan.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import enetAfrica.eduScan.database.AccountExecutiveDB;
 import enetAfrica.eduScan.database.RoleDB;
@@ -24,20 +22,16 @@ public class AccountExecutiveService {
      * @return AccountExecutive
      */
     public AccountExecutive getAccountExecutiveById(int id){
-        /*if (id != 0) {
-            return accountExecutiveDB.findById(id).get();
-        } else {
-            throw new IllegalArgumentException("L'identifiant ne doit pas être null pour récupérer un AccountExecutive.");
-        }*/
         if (id != 0) {
             Optional<AccountExecutive> optionalAccountExecutive = accountExecutiveDB.findById(id);
             if (optionalAccountExecutive.isPresent()) {
                 return optionalAccountExecutive.get();
             } else {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Aucun AccountExecutive trouvé avec cet identifiant.");
+                throw new IllegalArgumentException("Aucun AccountExecutive trouvé avec cet identifiant.");
             }
+            
         } else {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "L'identifiant ne doit pas être null pour récupérer un AccountExecutive.");
+            throw new IllegalArgumentException("L'identifiant ne doit pas être null pour récupérer un AccountExecutive.");
         }
     }
 

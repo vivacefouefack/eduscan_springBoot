@@ -8,12 +8,15 @@ import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
-
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
+@EqualsAndHashCode(callSuper = true)
 public class ProspectionRecord extends InstitutInformation {
     @Id
     @GeneratedValue
