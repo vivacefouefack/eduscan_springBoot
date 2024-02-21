@@ -1,7 +1,11 @@
 package enetAfrica.eduScan.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import enetAfrica.eduScan.database.AccountExecutiveDB;
 import enetAfrica.eduScan.database.RoleDB;
@@ -9,7 +13,7 @@ import enetAfrica.eduScan.dto.AccountDto;
 import enetAfrica.eduScan.model.AccountExecutive;
 
 @Service
-public class Business {
+public class AccountExecutiveService {
 
     @Autowired private AccountExecutiveDB accountExecutiveDB;
     @Autowired private RoleDB roleDB;
@@ -20,10 +24,20 @@ public class Business {
      * @return AccountExecutive
      */
     public AccountExecutive getAccountExecutiveById(int id){
-        if (id != 0) {
+        /*if (id != 0) {
             return accountExecutiveDB.findById(id).get();
         } else {
             throw new IllegalArgumentException("L'identifiant ne doit pas être null pour récupérer un AccountExecutive.");
+        }*/
+        if (id != 0) {
+            Optional<AccountExecutive> optionalAccountExecutive = accountExecutiveDB.findById(id);
+            if (optionalAccountExecutive.isPresent()) {
+                return optionalAccountExecutive.get();
+            } else {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Aucun AccountExecutive trouvé avec cet identifiant.");
+            }
+        } else {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "L'identifiant ne doit pas être null pour récupérer un AccountExecutive.");
         }
     }
 
@@ -38,14 +52,13 @@ public class Business {
             newAccount.setFirstName(accountDto.getFirstName());
             newAccount.setLastName(accountDto.getLastName());
             newAccount.setPhoneNumber(accountDto.getPhoneNumber());
-            newAccount.setFunction(accountDto.getFunction());
             newAccount.setProspectingZone(accountDto.getProspectingZone());
             newAccount.setProspectingMunicipality(accountDto.getProspectingMunicipality());
             newAccount.setPhoto(accountDto.getPhoto());
             newAccount.setSuperiorN1(accountDto.getSuperiorN1());
             newAccount.setSuperiorN2(accountDto.getSuperiorN2());
             newAccount.setSuperiorN3(accountDto.getSuperiorN3());
-            newAccount.setRole(roleDB.findById(accountDto.getRole()).get());
+            newAccount.setFunction(roleDB.findById(accountDto.getRole()).get());
             return accountExecutiveDB.save(newAccount);
         } else {
             throw new IllegalArgumentException("L'objet ne doit pas être null pour l'ajout d'un AccountExecutive.");

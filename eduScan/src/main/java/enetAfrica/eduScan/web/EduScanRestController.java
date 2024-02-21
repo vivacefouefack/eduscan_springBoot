@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import enetAfrica.eduScan.dto.AccountDto;
 import enetAfrica.eduScan.model.AccountExecutive;
-import enetAfrica.eduScan.service.Business;
+import enetAfrica.eduScan.service.AccountExecutiveService;
 
 @RestController
 @CrossOrigin(origins="*")
 @RequestMapping("/api/eduscan")
 public class EduScanRestController {
-    @Autowired private Business service;
+    @Autowired private AccountExecutiveService service;
 
     @GetMapping("/AllAccountExecutive")
     public ResponseEntity<Iterable<AccountExecutive>> getAllAccountExecutives() {

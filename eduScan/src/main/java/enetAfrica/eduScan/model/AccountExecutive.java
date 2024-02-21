@@ -25,14 +25,13 @@ public class AccountExecutive {
     @NonNull private String firstName;
     @NonNull private String lastName;
     @NonNull private String phoneNumber;
-    @NonNull private String function;
     @NonNull private String prospectingZone;
     @NonNull private String prospectingMunicipality;
     @NonNull private String photo;
 
     @OneToOne
     @JoinColumn(name = "role_id", referencedColumnName = "id")
-    private Role role;
+    private Role function;
 
     @OneToMany(mappedBy="accountExecutive")
     private Set<Agenda> agendas;
@@ -43,5 +42,19 @@ public class AccountExecutive {
     private int superiorN1;
     private int superiorN2;
     private int superiorN3;
+
+
+    public AccountExecutive (int id,String firstName, String lastName, String phoneNumber, String prospectingZone, String prospectingMunicipality, String photo, int superiorN1, int superiorN2, int superiorN3) {
+        this.id=id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.prospectingZone = prospectingZone;
+        this.prospectingMunicipality = prospectingMunicipality;
+        this.photo = photo;
+        this.superiorN1 = superiorN1;
+        this.superiorN2 = superiorN2;
+        this.superiorN3 = superiorN3;
+    }
 
 }
