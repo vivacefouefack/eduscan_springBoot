@@ -12,6 +12,7 @@ import lombok.Data;
 
 @Data
 public class PropectionRecordDto {
+    private int id;
     @NotBlank(message = "Le nom de l'école ne peut pas être vide")
     private String schoolName;
 

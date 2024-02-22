@@ -1,5 +1,8 @@
 package enetAfrica.eduScan.web;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,32 +16,32 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import enetAfrica.eduScan.dto.VisitDto;
-import enetAfrica.eduScan.model.Visit;
-import enetAfrica.eduScan.service.VisitService;
+import enetAfrica.eduScan.dto.AgendaDto;
+import enetAfrica.eduScan.model.Agenda;
+import enetAfrica.eduScan.service.AgendaService;
 
 @RestController
 @CrossOrigin(origins="*")
-@RequestMapping("/api/visite")
-public class VisitRestController {
-    
-    @Autowired private VisitService visitService;
+@RequestMapping("/api/agenda")
+public class AgendaRestController {
+
+    @Autowired  private AgendaService agendaService;
 
     @PostMapping("/add")
-    public ResponseEntity<Visit> addVisit(@RequestBody VisitDto visitDto) {
+    public ResponseEntity<Agenda> addVisit(@RequestBody AgendaDto agendaDto) {
         try {
-            Visit newVisit = visitService.addVisit(visitDto);
-            return ResponseEntity.status(HttpStatus.CREATED).body(newVisit);
+            Agenda newAgenda = agendaService.addAgenda(agendaDto);
+            return ResponseEntity.status(HttpStatus.CREATED).body(newAgenda);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 
     @PutMapping("/update")
-    public ResponseEntity<Visit> updateVisit(@RequestBody VisitDto visit) {
+    public ResponseEntity<Agenda> updateVisit(@RequestBody AgendaDto agendaDto) {
         try {
-            Visit updatedVisit = visitService.updateVisit(visit);
-            return ResponseEntity.ok(updatedVisit);
+            Agenda updatedaAgenda = agendaService.updateAgenda(agendaDto);
+            return ResponseEntity.ok(updatedaAgenda);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
@@ -47,32 +50,22 @@ public class VisitRestController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Integer> deleteVisit(@PathVariable int id) {
         try {
-            visitService.deleteVisit(id);
+            agendaService.deleteAgenda(id);
             return ResponseEntity.ok(id);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 
-    @GetMapping("/get/{id}")
-    public ResponseEntity<Visit> getVisitById(@PathVariable int id) {
+    @GetMapping("/getbyAccountId/{id}")
+    public ResponseEntity<List<Agenda>> getAgendaOfAccountExecutive(@PathVariable int id) {
         try {
-            Visit visit = visitService.getVisitById(id);
-            return ResponseEntity.ok(visit);
+            List<Agenda> agendas=new ArrayList<>();
+            agendas=agendaService.findAllAgendaOfAccountExecutiveById(id);
+            return ResponseEntity.ok(agendas);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-
-    @GetMapping("/getall")
-    public ResponseEntity<Iterable<Visit>> getAllVisits() {
-        try {
-            Iterable<Visit> visits = visitService.getAllVisit();
-            return ResponseEntity.ok(visits);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
-    }
-
 
 }

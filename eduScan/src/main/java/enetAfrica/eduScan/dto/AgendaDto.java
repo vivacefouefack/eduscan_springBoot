@@ -2,7 +2,9 @@ package enetAfrica.eduScan.dto;
 
 import java.time.LocalDate;
 
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,10 +12,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class VisitDto {
+public class AgendaDto {
     private int id;
-    private boolean supValidation;
     @NotNull private LocalDate visitDate;
-    @NotNull private int accountExecutive;
-    @NotNull private int prospectingRecord;
+    @Positive @NotEmpty private int accountExecutive;
+    @Positive @NotEmpty private int institution;
 }

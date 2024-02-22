@@ -36,9 +36,9 @@ public class ProspectionRestControler {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<ProspectionRecord> updateProspectionRecord(@RequestBody ProspectionRecord prospectionRecord) {
+    public ResponseEntity<ProspectionRecord> updateProspectionRecord(@RequestBody PropectionRecordDto prospectDto) {
         try {
-            ProspectionRecord updatedProspectionRecord = prospectionRecordService.updateProspectionRecord(prospectionRecord);
+            ProspectionRecord updatedProspectionRecord = prospectionRecordService.updateProspectionRecord(prospectDto);
             return ResponseEntity.ok(updatedProspectionRecord);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();

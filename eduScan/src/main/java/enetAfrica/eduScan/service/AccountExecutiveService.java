@@ -52,7 +52,7 @@ public class AccountExecutiveService {
             newAccount.setSuperiorN1(accountDto.getSuperiorN1());
             newAccount.setSuperiorN2(accountDto.getSuperiorN2());
             newAccount.setSuperiorN3(accountDto.getSuperiorN3());
-            newAccount.setFunction(roleDB.findById(accountDto.getRole()).get());
+            newAccount.setFunction(roleDB.findById(accountDto.getFunction()).get());
             return accountExecutiveDB.save(newAccount);
         } else {
             throw new IllegalArgumentException("L'objet ne doit pas être null pour l'ajout d'un AccountExecutive.");
@@ -64,11 +64,22 @@ public class AccountExecutiveService {
      * @param newData objet contenant les nouvelle valeur de l'accountExecutive à mettre à jour.
      * @return  l'AccountExecutive mis à jour.
      */
-    public AccountExecutive updateAccountExecutive(AccountExecutive newData) {
-        if (newData.getId() != 0) {
-            return accountExecutiveDB.save(newData);
+    public AccountExecutive updateAccountExecutive(AccountDto accountDto) {
+        if (accountExecutiveDB.existsById(accountDto.getId())) {
+            AccountExecutive accountExecutive=accountExecutiveDB.findById(accountDto.getId()).get();
+            accountExecutive.setFirstName(accountDto.getFirstName());
+            accountExecutive.setLastName(accountDto.getLastName());
+            accountExecutive.setPhoneNumber(accountDto.getPhoneNumber());
+            accountExecutive.setProspectingZone(accountDto.getProspectingZone());
+            accountExecutive.setProspectingMunicipality(accountDto.getProspectingMunicipality());
+            accountExecutive.setPhoto(accountDto.getPhoto());
+            accountExecutive.setSuperiorN1(accountDto.getSuperiorN1());
+            accountExecutive.setSuperiorN2(accountDto.getSuperiorN2());
+            accountExecutive.setSuperiorN3(accountDto.getSuperiorN3());
+            accountExecutive.setFunction(roleDB.findById(accountDto.getFunction()).get());
+            return accountExecutiveDB.save(accountExecutive);
         } else {
-            throw new IllegalArgumentException("L'identifiant ne doit pas être null pour mettre à jour un AccountExecutive.");
+            throw new IllegalArgumentException("Ce compte n'existe pas.");
         }
     }
 
@@ -77,10 +88,10 @@ public class AccountExecutiveService {
      * @param id représente l'identifiant de l'AccountExecutive à supprimer.
      */
     public void deleteAccountExecutive(int id) {
-        if (id != 0) {
+        if (accountExecutiveDB.existsById(id)) {
             accountExecutiveDB.deleteById(id);
         } else {
-            throw new IllegalArgumentException("L'identifiant ne doit pas être null pour supprimer un AccountExecutive.");
+            throw new IllegalArgumentException("Ce compte n'existe pas.");
         }
     }
 

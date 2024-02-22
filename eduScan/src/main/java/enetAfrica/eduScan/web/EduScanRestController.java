@@ -27,7 +27,6 @@ public class EduScanRestController {
     public ResponseEntity<AccountExecutive> addAccountExecutive(@RequestBody AccountDto accountDto) {
         try {
             AccountExecutive newAccountExecutive = service.addAccountExecutive(accountDto);
-            System.out.println("post man pass**************************************"+accountDto.toString());
             return ResponseEntity.status(HttpStatus.CREATED).body(newAccountExecutive);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
@@ -35,9 +34,9 @@ public class EduScanRestController {
     }
 
     @PutMapping("/UpdateAccountExecutive")
-    public ResponseEntity<AccountExecutive> updateAccountExecutive(@RequestBody AccountExecutive newData) {
+    public ResponseEntity<AccountExecutive> updateAccountExecutive(@RequestBody AccountDto accountDto) {
         try {
-            AccountExecutive updatedAccountExecutive = service.updateAccountExecutive(newData);
+            AccountExecutive updatedAccountExecutive = service.updateAccountExecutive(accountDto);
             return ResponseEntity.ok(updatedAccountExecutive);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
@@ -45,10 +44,10 @@ public class EduScanRestController {
     }
 
     @DeleteMapping("/DeleteAccountExecutive/{id}")
-    public ResponseEntity<Void> deleteAccountExecutive(@PathVariable int id) {
+    public ResponseEntity<Integer> deleteAccountExecutive(@PathVariable int id) {
         try {
             service.deleteAccountExecutive(id);
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.ok(id);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }

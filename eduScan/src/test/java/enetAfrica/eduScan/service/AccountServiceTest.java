@@ -18,6 +18,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import enetAfrica.eduScan.dto.AccountDto;
 import enetAfrica.eduScan.model.AccountExecutive;
 
 @WebMvcTest
@@ -69,11 +70,14 @@ public class AccountServiceTest {
 
     @Test
     public void testUpdateAccountExecutive() throws Exception {
-        AccountExecutive newData = new AccountExecutive();
+        AccountDto newData = new AccountDto();
         newData.setId(1);
         newData.setFirstName("abié 2");
 
-        Mockito.when(service.updateAccountExecutive(newData)).thenReturn(newData);
+        AccountExecutive account=service.getAccountExecutiveById(1);
+        account.setFirstName("abié 2");
+
+        Mockito.when(service.updateAccountExecutive(newData)).thenReturn(account);
         mvc.perform(put("/api/eduscan/UpdateAccountExecutive")
             .contentType(MediaType.APPLICATION_JSON)
             .content("{\"id\": 1, \"firstName\": \"abié 2\"}"))

@@ -2,7 +2,6 @@ package enetAfrica.eduScan.model;
 
 import java.util.Set;
 
-import io.micrometer.common.lang.NonNull;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -22,12 +21,12 @@ public class AccountExecutive {
     @GeneratedValue
     private int id;
     
-    @NonNull private String firstName;
-    @NonNull private String lastName;
-    @NonNull private String phoneNumber;
-    @NonNull private String prospectingZone;
-    @NonNull private String prospectingMunicipality;
-    @NonNull private String photo;
+    private String firstName;
+    private String lastName;
+    private String phoneNumber;
+    private String prospectingZone;
+    private String prospectingMunicipality;
+    private String photo;
 
     @OneToOne
     @JoinColumn(name = "role_id", referencedColumnName = "id")
