@@ -27,6 +27,7 @@ public class EduScanRestController {
     public ResponseEntity<AccountExecutive> addAccountExecutive(@RequestBody AccountDto accountDto) {
         try {
             AccountExecutive newAccountExecutive = service.addAccountExecutive(accountDto);
+            System.out.println("post man pass**************************************"+accountDto.toString());
             return ResponseEntity.status(HttpStatus.CREATED).body(newAccountExecutive);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();

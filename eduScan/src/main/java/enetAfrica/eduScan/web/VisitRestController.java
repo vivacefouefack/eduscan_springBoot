@@ -13,66 +13,66 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import enetAfrica.eduScan.dto.PropectionRecordDto;
-import enetAfrica.eduScan.model.ProspectionRecord;
-import enetAfrica.eduScan.service.ProspectionRecordService;
+import enetAfrica.eduScan.dto.VisitDto;
+import enetAfrica.eduScan.model.Visit;
+import enetAfrica.eduScan.service.VisitService;
 
 @RestController
 @CrossOrigin(origins="*")
-@RequestMapping("/api/prospection")
-public class ProspectionRestControler {
+@RequestMapping("/api/visite")
+public class VisitRestController {
     
-    @Autowired
-    private ProspectionRecordService prospectionRecordService;
+    @Autowired private VisitService visitService;
 
     @PostMapping("/add")
-    public ResponseEntity<ProspectionRecord> addProspectionRecord(@RequestBody PropectionRecordDto prospectDto) {
+    public ResponseEntity<Visit> addVisit(@RequestBody VisitDto visitDto) {
         try {
-            ProspectionRecord newProspectionRecord = prospectionRecordService.addProspectionRecord(prospectDto);
-            return ResponseEntity.status(HttpStatus.CREATED).body(newProspectionRecord);
+            Visit newVisit = visitService.addVisit(visitDto);
+            return ResponseEntity.status(HttpStatus.CREATED).body(newVisit);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 
     @PutMapping("/update")
-    public ResponseEntity<ProspectionRecord> updateProspectionRecord(@RequestBody ProspectionRecord prospectionRecord) {
+    public ResponseEntity<Visit> updateVisit(@RequestBody Visit visit) {
         try {
-            ProspectionRecord updatedProspectionRecord = prospectionRecordService.updateProspectionRecord(prospectionRecord);
-            return ResponseEntity.ok(updatedProspectionRecord);
+            Visit updatedVisit = visitService.updateVisit(visit);
+            return ResponseEntity.ok(updatedVisit);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Integer> deleteProspectionRecord(@PathVariable int id) {
+    public ResponseEntity<Void> deleteVisit(@PathVariable int id) {
         try {
-            prospectionRecordService.deleteProspectionRecord(id);
-            return ResponseEntity.ok(id);
+            visitService.deleteVisit(id);
+            return ResponseEntity.noContent().build();
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<ProspectionRecord> getProspectionRecordById(@PathVariable int id) {
+    public ResponseEntity<Visit> getVisitById(@PathVariable int id) {
         try {
-            ProspectionRecord prospectionRecord = prospectionRecordService.getProspectionRecordById(id);
-            return ResponseEntity.ok(prospectionRecord);
+            Visit visit = visitService.getVisitById(id);
+            return ResponseEntity.ok(visit);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 
     @GetMapping("/getall")
-    public ResponseEntity<Iterable<ProspectionRecord>> getAllProspectionRecords() {
+    public ResponseEntity<Iterable<Visit>> getAllVisits() {
         try {
-            Iterable<ProspectionRecord> allProspectionRecords = prospectionRecordService.getAllProspectionRecord();
-            return ResponseEntity.ok(allProspectionRecords);
+            Iterable<Visit> visits = visitService.getAllVisit();
+            return ResponseEntity.ok(visits);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-    
+
+
 }
