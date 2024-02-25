@@ -11,7 +11,6 @@ import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 
 @Entity
 @AllArgsConstructor
@@ -20,9 +19,9 @@ import lombok.NonNull;
 public class Visit {
     @Id
     @GeneratedValue
-    private int id;
+    private Integer id;
     private boolean supValidation;
-    @NonNull private LocalDate visitDate;
+    private LocalDate visitDate;
 
     @ManyToOne
     @JoinColumn(name="accountExecutive_id", nullable=false)

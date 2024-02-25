@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 public class AccountExecutive {
     @Id
     @GeneratedValue
-    private int id;
+    private Integer id;
     
     private String firstName;
     private String lastName;

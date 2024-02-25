@@ -11,8 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AccountDto {
-    private int id;
-
+    private int id; 
     @NotBlank(message = "Le prénom ne peut pas être vide")
     private String firstName;
 
@@ -28,7 +27,7 @@ public class AccountDto {
     @NotBlank(message = "La municipalité de prospection ne peut pas être vide")
     private String prospectingMunicipality;
 
-    @NotBlank(message = "La photo ne peut pas être vide")
+    @NotBlank(message = "La photo ne peut pas être vide") 
     private String photo;
 
     @NotNull(message = "Le rôle ne peut pas être nul")

@@ -16,5 +16,5 @@ import lombok.NoArgsConstructor;
 public class InstitutionProfile extends InstitutInformation {
     @Id
     @GeneratedValue
-    private int id;
+    private Integer id;
 }

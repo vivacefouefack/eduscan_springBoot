@@ -3,10 +3,10 @@ package enetAfrica.eduScan.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 
 @Entity
 @AllArgsConstructor
@@ -15,7 +15,8 @@ import lombok.NonNull;
 public class Role {
     @Id
     @GeneratedValue
-    private int id;
-    @NonNull private String name;
-    private String description;
+    private Integer id;
+    @NotBlank(message = "Le nom ne peut pas être vide") 
+    private String name;
+    @NotBlank private String description;
 }

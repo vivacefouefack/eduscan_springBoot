@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 public class ProspectionRecord extends InstitutInformation {
     @Id
     @GeneratedValue
-    private int id;
+    private Integer id;
     
     @NotEmpty private int seniority;
     @NotEmpty private LocalDate firstVisitDate;
