@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AgendaDto {
-    private int id;
+    private Integer id;
     @NotNull private LocalDate visitDate;
     @Positive @NotEmpty private int accountExecutive;
     @Positive @NotEmpty private int institution;

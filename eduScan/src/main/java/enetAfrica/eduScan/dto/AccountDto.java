@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AccountDto {
-    private int id; 
+    private Integer id; 
     @NotBlank(message = "Le prénom ne peut pas être vide")
     private String firstName;
 
