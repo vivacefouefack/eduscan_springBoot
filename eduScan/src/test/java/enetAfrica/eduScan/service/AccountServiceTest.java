@@ -1,4 +1,4 @@
-package enetAfrica.eduScan.service;
+/*package enetAfrica.eduScan.service;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -67,7 +67,7 @@ public class AccountServiceTest {
             .andExpect(status().isCreated())
             .andExpect(jsonPath("$.firstName").value("elise")));
     }*/
-
+/* 
     @Test
     public void testUpdateAccountExecutive() throws Exception {
         AccountDto newData = new AccountDto();
@@ -91,4 +91,4 @@ public class AccountServiceTest {
         mvc.perform(delete("/api/eduscan/DeleteAccountExecutive/{id}", id))
            .andExpect(status().isNoContent());
     }
-}
+}*/

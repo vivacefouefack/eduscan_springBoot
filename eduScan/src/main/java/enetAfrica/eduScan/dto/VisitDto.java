@@ -11,9 +11,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class VisitDto {
-    private int id;
+    private Integer id;
     private boolean supValidation;
     @NotNull private LocalDate visitDate;
-    @NotNull private int accountExecutive;
-    @NotNull private int prospectingRecord;
+    @NotNull private Integer accountExecutive;
+    @NotNull private Integer prospectingRecord;
 }

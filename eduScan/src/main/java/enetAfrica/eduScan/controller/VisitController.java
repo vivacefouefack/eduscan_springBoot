@@ -1,4 +1,4 @@
-package enetAfrica.eduScan.web;
+package enetAfrica.eduScan.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,7 +20,7 @@ import enetAfrica.eduScan.service.VisitService;
 @RestController
 @CrossOrigin(origins="*")
 @RequestMapping("/api/visite")
-public class VisitRestController {
+public class VisitController {
     
     @Autowired private VisitService visitService;
 

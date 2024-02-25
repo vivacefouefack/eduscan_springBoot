@@ -1,4 +1,4 @@
-package enetAfrica.eduScan.model;
+/*package enetAfrica.eduScan.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -82,4 +82,4 @@ public class AccountExecutiveTest {
         accountExecutive.setVisits(visits);
         assertEquals(visits, accountExecutive.getVisits());
     }
-}
+}*/

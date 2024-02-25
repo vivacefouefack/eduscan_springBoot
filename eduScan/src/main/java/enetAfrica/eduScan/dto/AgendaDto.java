@@ -15,6 +15,6 @@ import lombok.NoArgsConstructor;
 public class AgendaDto {
     private Integer id;
     @NotNull private LocalDate visitDate;
-    @Positive @NotEmpty private int accountExecutive;
-    @Positive @NotEmpty private int institution;
+    @Positive @NotEmpty private Integer accountExecutive;
+    @Positive @NotEmpty private Integer institution;
 }

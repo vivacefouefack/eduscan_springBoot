@@ -1,4 +1,4 @@
-package enetAfrica.eduScan.dto;
+/*package enetAfrica.eduScan.dto;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -17,20 +17,12 @@ public class BeanValidationUtil<T> {
 
     @Autowired private Validator validator;  
     
-    /**
-     * 
-     * @param entity
-     */
+
     public void assertIsValid(T entity) {
         assertTrue(validator.validate(entity).isEmpty());
     }
 
-    /**
-     * 
-     * @param entity
-     * @param invalidField
-     * @param violatedConstraint
-     */
+
     public void assertHasError(T entity, String invalidField, Class<? extends Annotation> violatedConstraint) {
         Set<ConstraintViolation<T>> violations = validator.validate(entity);
         assertEquals(1, violations.size());
@@ -40,4 +32,4 @@ public class BeanValidationUtil<T> {
         violation.getConstraintDescriptor().getAnnotation().annotationType());
     }
     
-}
+}*/

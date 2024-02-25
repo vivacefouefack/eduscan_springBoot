@@ -1,4 +1,4 @@
-package enetAfrica.eduScan.web;
+package enetAfrica.eduScan.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,7 +20,7 @@ import enetAfrica.eduScan.service.InstitutionProfileService;
 @RestController
 @CrossOrigin(origins="*")
 @RequestMapping("/api/institution")
-public class InstitutionProfileRestController {
+public class InstitutionProfileController {
 
     @Autowired private InstitutionProfileService institutionProfileService;
 

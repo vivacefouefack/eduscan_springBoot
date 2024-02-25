@@ -1,4 +1,4 @@
-package enetAfrica.eduScan.web;
+package enetAfrica.eduScan.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,7 +20,7 @@ import enetAfrica.eduScan.service.AccountExecutiveService;
 @RestController
 @CrossOrigin(origins="*")
 @RequestMapping("/api/eduscan")
-public class EduScanRestController {
+public class AccountExecutiveController {
     @Autowired private AccountExecutiveService service;
 
     @PostMapping("/AddAccountExecutive")

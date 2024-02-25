@@ -52,6 +52,7 @@ public class AccountExecutiveService {
             newAccount.setSuperiorN1(accountDto.getSuperiorN1());
             newAccount.setSuperiorN2(accountDto.getSuperiorN2());
             newAccount.setSuperiorN3(accountDto.getSuperiorN3());
+            System.out.println("***************************"+accountDto.toString());
             newAccount.setFunction(roleDB.findById(accountDto.getFunction()).get());
             return accountExecutiveDB.save(newAccount);
         } else {

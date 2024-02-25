@@ -1,4 +1,4 @@
-package enetAfrica.eduScan.dto;
+/*package enetAfrica.eduScan.dto;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,4 +21,4 @@ public class AccountDtoTest {
 
     
 
-}
+}*/

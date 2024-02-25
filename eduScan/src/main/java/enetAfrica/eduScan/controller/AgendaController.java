@@ -1,4 +1,4 @@
-package enetAfrica.eduScan.web;
+package enetAfrica.eduScan.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,15 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import enetAfrica.eduScan.controller.api.AgendaApi;
 import enetAfrica.eduScan.dto.AgendaDto;
 import enetAfrica.eduScan.model.Agenda;
 import enetAfrica.eduScan.service.AgendaService;
@@ -23,11 +20,11 @@ import enetAfrica.eduScan.service.AgendaService;
 @RestController
 @CrossOrigin(origins="*")
 @RequestMapping("/api/agenda")
-public class AgendaRestController {
+public class AgendaController implements AgendaApi {
 
-    @Autowired  private AgendaService agendaService;
+    @Autowired private AgendaService agendaService;
 
-    @PostMapping("/add")
+    @Override
     public ResponseEntity<Agenda> addVisit(@RequestBody AgendaDto agendaDto) {
         try {
             Agenda newAgenda = agendaService.addAgenda(agendaDto);
@@ -37,7 +34,7 @@ public class AgendaRestController {
         }
     }
 
-    @PutMapping("/update")
+    @Override
     public ResponseEntity<Agenda> updateVisit(@RequestBody AgendaDto agendaDto) {
         try {
             Agenda updatedaAgenda = agendaService.updateAgenda(agendaDto);
@@ -47,7 +44,7 @@ public class AgendaRestController {
         }
     }
 
-    @DeleteMapping("/delete/{id}")
+    @Override
     public ResponseEntity<Integer> deleteVisit(@PathVariable int id) {
         try {
             agendaService.deleteAgenda(id);
@@ -57,7 +54,7 @@ public class AgendaRestController {
         }
     }
 
-    @GetMapping("/getbyAccountId/{id}")
+    @Override
     public ResponseEntity<List<Agenda>> getAgendaOfAccountExecutive(@PathVariable int id) {
         try {
             List<Agenda> agendas=new ArrayList<>();
