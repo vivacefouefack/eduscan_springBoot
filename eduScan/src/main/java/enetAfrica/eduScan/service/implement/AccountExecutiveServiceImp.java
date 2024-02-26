@@ -29,6 +29,9 @@ public class AccountExecutiveServiceImp implements AccountExecutiveService {
         } else {
             throw new IllegalArgumentException("L'identifiant ne doit pas être null pour récupérer un AccountExecutive.");
         }
+        /*return accountExecutiveDB.findById(id).orElseThrow(
+
+        );*/
     }
 
     @Override
