@@ -4,15 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import enetAfrica.eduScan.controller.api.VisitApi;
 import enetAfrica.eduScan.dto.VisitDto;
 import enetAfrica.eduScan.model.Visit;
 import enetAfrica.eduScan.service.VisitService;
@@ -20,11 +17,11 @@ import enetAfrica.eduScan.service.VisitService;
 @RestController
 @CrossOrigin(origins="*")
 @RequestMapping("/api/visite")
-public class VisitController {
+public class VisitController implements VisitApi {
     
     @Autowired private VisitService visitService;
 
-    @PostMapping("/add")
+    @Override
     public ResponseEntity<Visit> addVisit(@RequestBody VisitDto visitDto) {
         try {
             Visit newVisit = visitService.addVisit(visitDto);
@@ -34,7 +31,7 @@ public class VisitController {
         }
     }
 
-    @PutMapping("/update")
+    @Override
     public ResponseEntity<Visit> updateVisit(@RequestBody VisitDto visit) {
         try {
             Visit updatedVisit = visitService.updateVisit(visit);
@@ -44,7 +41,7 @@ public class VisitController {
         }
     }
 
-    @DeleteMapping("/delete/{id}")
+    @Override
     public ResponseEntity<Integer> deleteVisit(@PathVariable int id) {
         try {
             visitService.deleteVisit(id);
@@ -54,7 +51,7 @@ public class VisitController {
         }
     }
 
-    @GetMapping("/get/{id}")
+    @Override
     public ResponseEntity<Visit> getVisitById(@PathVariable int id) {
         try {
             Visit visit = visitService.getVisitById(id);
@@ -64,7 +61,7 @@ public class VisitController {
         }
     }
 
-    @GetMapping("/getall")
+    @Override
     public ResponseEntity<Iterable<Visit>> getAllVisits() {
         try {
             Iterable<Visit> visits = visitService.getAllVisit();

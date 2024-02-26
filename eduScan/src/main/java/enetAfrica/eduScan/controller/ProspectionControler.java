@@ -4,15 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import enetAfrica.eduScan.controller.api.ProspectionApi;
 import enetAfrica.eduScan.dto.PropectionRecordDto;
 import enetAfrica.eduScan.model.ProspectionRecord;
 import enetAfrica.eduScan.service.ProspectionRecordService;
@@ -20,12 +17,12 @@ import enetAfrica.eduScan.service.ProspectionRecordService;
 @RestController
 @CrossOrigin(origins="*")
 @RequestMapping("/api/prospection")
-public class ProspectionControler {
+public class ProspectionControler implements ProspectionApi {
     
     @Autowired
     private ProspectionRecordService prospectionRecordService;
 
-    @PostMapping("/add")
+    @Override
     public ResponseEntity<ProspectionRecord> addProspectionRecord(@RequestBody PropectionRecordDto prospectDto) {
         try {
             ProspectionRecord newProspectionRecord = prospectionRecordService.addProspectionRecord(prospectDto);
@@ -35,7 +32,7 @@ public class ProspectionControler {
         }
     }
 
-    @PutMapping("/update")
+    @Override
     public ResponseEntity<ProspectionRecord> updateProspectionRecord(@RequestBody PropectionRecordDto prospectDto) {
         try {
             ProspectionRecord updatedProspectionRecord = prospectionRecordService.updateProspectionRecord(prospectDto);
@@ -45,7 +42,7 @@ public class ProspectionControler {
         }
     }
 
-    @DeleteMapping("/delete/{id}")
+    @Override
     public ResponseEntity<Integer> deleteProspectionRecord(@PathVariable int id) {
         try {
             prospectionRecordService.deleteProspectionRecord(id);
@@ -55,7 +52,7 @@ public class ProspectionControler {
         }
     }
 
-    @GetMapping("/get/{id}")
+    @Override
     public ResponseEntity<ProspectionRecord> getProspectionRecordById(@PathVariable int id) {
         try {
             ProspectionRecord prospectionRecord = prospectionRecordService.getProspectionRecordById(id);
@@ -65,7 +62,7 @@ public class ProspectionControler {
         }
     }
 
-    @GetMapping("/getall")
+    @Override
     public ResponseEntity<Iterable<ProspectionRecord>> getAllProspectionRecords() {
         try {
             Iterable<ProspectionRecord> allProspectionRecords = prospectionRecordService.getAllProspectionRecord();

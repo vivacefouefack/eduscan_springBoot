@@ -5,8 +5,11 @@ import org.springframework.stereotype.Service;
 
 import enetAfrica.eduScan.database.InstitutionProfileDB;
 import enetAfrica.eduScan.dto.PropectionRecordDto;
+import enetAfrica.eduScan.exception.ErrorCode;
+import enetAfrica.eduScan.exception.NotFoundException;
 import enetAfrica.eduScan.model.InstitutionProfile;
 import enetAfrica.eduScan.service.InstitutionProfileService;
+import enetAfrica.eduScan.utils.Constant;
 
 @Service
 public class InstitutionProfileServiceImp implements InstitutionProfileService {
@@ -51,14 +54,12 @@ public class InstitutionProfileServiceImp implements InstitutionProfileService {
         } 
     }
 
-    
+
     @Override
     public InstitutionProfile getInstitutionProfileById(Integer id) {
-        if (institutionProfileDB.existsById(id)) {
-            return institutionProfileDB.findById(id).get();
-        } else {
-            throw new IllegalArgumentException("Ce profile n'existe pas.");
-        }
+        return institutionProfileDB.findById(id).orElseThrow(() ->
+            new NotFoundException(Constant.AGENDA_NOT_FOUND_MESSAGE, ErrorCode.INSTITUTION_NOT_FOUND)
+        );
     }
 
     @Override

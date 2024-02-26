@@ -4,15 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import enetAfrica.eduScan.controller.api.InstitutionProfileApi;
 import enetAfrica.eduScan.dto.PropectionRecordDto;
 import enetAfrica.eduScan.model.InstitutionProfile;
 import enetAfrica.eduScan.service.InstitutionProfileService;
@@ -20,11 +17,11 @@ import enetAfrica.eduScan.service.InstitutionProfileService;
 @RestController
 @CrossOrigin(origins="*")
 @RequestMapping("/api/institution")
-public class InstitutionProfileController {
+public class InstitutionProfileController implements InstitutionProfileApi {
 
     @Autowired private InstitutionProfileService institutionProfileService;
 
-    @PostMapping("/add")
+    @Override
     public ResponseEntity<InstitutionProfile> addInstitutionProfile(@RequestBody PropectionRecordDto profileDto) {
         try {
             InstitutionProfile newProfile = institutionProfileService.addInstitutionProfile(profileDto);
@@ -34,7 +31,7 @@ public class InstitutionProfileController {
         }
     }
 
-    @DeleteMapping("/delete/{id}")
+    @Override
     public ResponseEntity<Integer> deleteInstitutionProfile(@PathVariable int id) {
         try {
             institutionProfileService.deleteInstitutionProfileById(id);
@@ -44,7 +41,7 @@ public class InstitutionProfileController {
         }
     }
 
-    @GetMapping("/get/{id}")
+    @Override
     public ResponseEntity<InstitutionProfile> getInstitutionProfile(@PathVariable int id) {
         try {
             InstitutionProfile profile = institutionProfileService.getInstitutionProfileById(id);
@@ -54,7 +51,7 @@ public class InstitutionProfileController {
         }
     }
 
-    @PutMapping("/update")
+    @Override
     public ResponseEntity<InstitutionProfile> updateInstitutionProfile(@RequestBody PropectionRecordDto profileDto) {
         try {
             InstitutionProfile updatedProfile = institutionProfileService.updateInstitutionProfile(profileDto);
@@ -68,7 +65,7 @@ public class InstitutionProfileController {
         }
     }
 
-    @GetMapping("/getAll")
+    @Override
     public ResponseEntity<Iterable<InstitutionProfile>> getAllInstitutionProfiles() {
         try {
             Iterable<InstitutionProfile> profiles = institutionProfileService.getAll();
