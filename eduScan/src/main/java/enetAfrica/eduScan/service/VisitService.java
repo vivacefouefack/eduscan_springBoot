@@ -1,66 +1,42 @@
 package enetAfrica.eduScan.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import enetAfrica.eduScan.database.AccountExecutiveDB;
-import enetAfrica.eduScan.database.ProspectionRecordDB;
-import enetAfrica.eduScan.database.VisitDB;
 import enetAfrica.eduScan.dto.VisitDto;
 import enetAfrica.eduScan.model.Visit;
 
-@Service
-public class VisitService {
-    
-    @Autowired private VisitDB visitDB;
-    @Autowired private AccountExecutiveDB accountExecutiveDB;
-    @Autowired private ProspectionRecordDB prospectionRecordDB;
+public interface VisitService {
 
-    public Visit addVisit(VisitDto visitDto) {
-        if (visitDto!= null) {
-            Visit visite=new Visit();
-            visite.setSupValidation(visitDto.isSupValidation());
-            visite.setVisitDate(visitDto.getVisitDate());
-            visite.setAccountExecutive(accountExecutiveDB.findById(visitDto.getAccountExecutive()).get());
-            visite.setProspectingRecord(prospectionRecordDB.findById(visitDto.getProspectingRecord()).get());
-            return visitDB.save(visite);
-        } else {
-            throw new IllegalArgumentException("L'identifiant de la visite ne peut pas être null");
-        }
-    }
+    /**
+     * 
+     * @param visitDto
+     * @return
+     */
+    public Visit addVisit(VisitDto visitDto);
 
-    public Visit updateVisit(VisitDto visitDto) {
-        if (visitDB.existsById(visitDto.getId())) {
-            Visit visite=visitDB.findById(visitDto.getId()).get();
-            visite.setSupValidation(visitDto.isSupValidation());
-            visite.setVisitDate(visitDto.getVisitDate());
-            visite.setAccountExecutive(accountExecutiveDB.findById(visitDto.getAccountExecutive()).get());
-            visite.setProspectingRecord(prospectionRecordDB.findById(visitDto.getProspectingRecord()).get());
-            return visitDB.save(visite);
-        } else {
-            throw new IllegalArgumentException("L'identifiant de la visite ne peut pas être null pour la modification.");
-        }
-    }
+    /**
+     * 
+     * @param visitDto
+     * @return
+     */
+    public Visit updateVisit(VisitDto visitDto);
 
-    public void deleteVisit(int id) {
-        if (visitDB.existsById(id)) {
-            visitDB.deleteById(id);
-        } else {
-            throw new IllegalArgumentException("La visite n'existe pas.");
-        }
-    }
+    /**
+     * 
+     * @param id
+     */
+    public void deleteVisit(int id);
 
-    public Visit getVisitById(int id) {
-        if (visitDB.existsById(id)) {
-            return visitDB.findById(id).get();
-        } else {
-            throw new IllegalArgumentException("La visite n'existe pas.");
-        }
-    }
+    /**
+     * 
+     * @param id
+     * @return
+     */
+    public Visit getVisitById(int id);
 
-    public Iterable<Visit> getAllVisit(){
-        return visitDB.findAll();
-    }
+    /**
+     * 
+     * @return
+     */
+    public Iterable<Visit> getAllVisit();
 
 
 }

@@ -21,7 +21,7 @@ public class AccountExecutiveServiceTest {
 
     @Test
     public void shouldSaveAccountExecutiveWithSuccess() {
-        AccountDto accountDto=new AccountDto(10, "elise", "vivace", "0596001001", "cocody", "riviera", "/src/img.jpg", 3, 1, 2, 3);
+        AccountDto accountDto=new AccountDto(10, "elise", "Abie", "0596001001", "cocody", "riviera", "/src/img.jpg", 3, 1, 2, 3);
         AccountExecutive account=service.addAccountExecutive(accountDto);
 
         assertNotNull(account);
