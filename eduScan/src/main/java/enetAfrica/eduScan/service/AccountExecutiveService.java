@@ -10,7 +10,7 @@ public interface AccountExecutiveService {
      * @param id identifiant du AccountExecutive que nous souhaitons récupérer. 
      * @return AccountExecutive
      */
-    public AccountExecutive getAccountExecutiveById(int id);
+    public AccountExecutive getAccountExecutiveById(Integer id);
 
     /**
      * permet d'ajouter un nouveau AccountExecutive
@@ -30,7 +30,7 @@ public interface AccountExecutiveService {
      * supprimer un AccountExecutive à travers son identifiant.
      * @param id représente l'identifiant de l'AccountExecutive à supprimer.
      */
-    public void deleteAccountExecutive(int id);
+    public void deleteAccountExecutive(Integer id);
 
 
     /**

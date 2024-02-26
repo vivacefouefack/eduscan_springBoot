@@ -23,14 +23,14 @@ public interface VisitService {
      * 
      * @param id
      */
-    public void deleteVisit(int id);
+    public void deleteVisit(Integer id);
 
     /**
      * 
      * @param id
      * @return
      */
-    public Visit getVisitById(int id);
+    public Visit getVisitById(Integer id);
 
     /**
      * 

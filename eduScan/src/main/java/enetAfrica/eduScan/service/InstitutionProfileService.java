@@ -17,14 +17,14 @@ public interface InstitutionProfileService {
      * 
      * @param id
      */
-    public void deleteInstitutionProfileById(int id);
+    public void deleteInstitutionProfileById(Integer id);
 
     /**
      * 
      * @param id
      * @return 
      */
-    public InstitutionProfile getInstitutionProfileById(int id);
+    public InstitutionProfile getInstitutionProfileById(Integer id);
 
     /**
      * 

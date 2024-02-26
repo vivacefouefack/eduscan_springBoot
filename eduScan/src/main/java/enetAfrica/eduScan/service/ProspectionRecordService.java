@@ -24,14 +24,14 @@ public interface ProspectionRecordService {
      * Permet de supprimer un fichier de prospection à travers son identifiant.
      * @param id l'identifiant du fichier de prospection à supprimer.
      */
-    public void deleteProspectionRecord(int id);
+    public void deleteProspectionRecord(Integer id);
 
     /**
      * Permet d'obtenir un fichier de prospection à travers son identifiant.
      * @param id l'identifiant du fichier de prospection à obtenir.
      * @return le fichier de prospection correspondant à l'identifiant donné, s'il existe.
      */
-    public ProspectionRecord getProspectionRecordById(int id);
+    public ProspectionRecord getProspectionRecordById(Integer id);
 
 
     /**

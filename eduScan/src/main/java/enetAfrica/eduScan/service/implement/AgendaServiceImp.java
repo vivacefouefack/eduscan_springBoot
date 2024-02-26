@@ -9,8 +9,11 @@ import enetAfrica.eduScan.database.AccountExecutiveDB;
 import enetAfrica.eduScan.database.AgendaDB;
 import enetAfrica.eduScan.database.InstitutionProfileDB;
 import enetAfrica.eduScan.dto.AgendaDto;
+import enetAfrica.eduScan.exception.ErrorCode;
+import enetAfrica.eduScan.exception.NotFoundException;
 import enetAfrica.eduScan.model.Agenda;
 import enetAfrica.eduScan.service.AgendaService;
+import enetAfrica.eduScan.utils.Constant;
 
 @Service
 public class AgendaServiceImp implements AgendaService {
@@ -20,55 +23,41 @@ public class AgendaServiceImp implements AgendaService {
 
     @Override
     public Agenda addAgenda(AgendaDto agendaDto) {
-        if (agendaDto != null) {
-            Agenda agenda=new Agenda();
-            agenda.setVisitDate(agendaDto.getVisitDate());
-            agenda.setAccountExecutive(accountExecutiveDB.findById(agendaDto.getAccountExecutive()).get());
-            agenda.setInstitution(institutionProfileDB.findById(agendaDto.getInstitution()).get());
-            return agendaDB.save(agenda);
-        } else {
-            throw new IllegalArgumentException("L'agenda ne peut pas être null pour l'ajout.");
-        }
+        Agenda agenda=new Agenda();
+        agenda.setVisitDate(agendaDto.getVisitDate());
+        agenda.setAccountExecutive(accountExecutiveDB.findById(agendaDto.getAccountExecutive()).get());
+        agenda.setInstitution(institutionProfileDB.findById(agendaDto.getInstitution()).get());
+        return agendaDB.save(agenda);
+        
     }
 
     @Override
     public Agenda updateAgenda(AgendaDto agendaDto) {
-        if (agendaDto != null) {
-            Agenda agenda=agendaDB.findById(agendaDto.getId()).get();
-            agenda.setVisitDate(agendaDto.getVisitDate());
-            agenda.setAccountExecutive(accountExecutiveDB.findById(agendaDto.getAccountExecutive()).get());
-            agenda.setInstitution(institutionProfileDB.findById(agendaDto.getInstitution()).get());
-            return agendaDB.save(agenda);
-        } else {
-            throw new IllegalArgumentException("L'identifiant de l'agenda ne peut pas être null pour la modification.");
-        }
+        Agenda agenda=agendaDB.findById(agendaDto.getId()).get();
+        agenda.setVisitDate(agendaDto.getVisitDate());
+        agenda.setAccountExecutive(accountExecutiveDB.findById(agendaDto.getAccountExecutive()).get());
+        agenda.setInstitution(institutionProfileDB.findById(agendaDto.getInstitution()).get());
+        return agendaDB.save(agenda);
     }
 
     @Override
-    public void deleteAgenda(int id) {
-        if (id != 0) {
+    public void deleteAgenda(Integer id) {
+        if (id != null ){
             agendaDB.deleteById(id);
-        } else {
-            throw new IllegalArgumentException("L'identifiant de l'agenda ne peut pas être null pour la suppression.");
         }
     }
 
     @Override
-    public Agenda getAgendaById(int id) {
-        if (id != 0) {
-            return agendaDB.findById(id).get();
-        } else {
-            throw new IllegalArgumentException("L'identifiant de l'agenda ne peut pas être null pour la récupération.");
-        }
+    public Agenda getAgendaById(Integer id) {
+        return agendaDB.findById(id).orElseThrow(() ->
+        new NotFoundException(Constant.AGENDA_NOT_FOUND_MESSAGE, ErrorCode.AGENDA_NOT_FOUND)
+    );
+
     }
 
     @Override
-    public  List<Agenda> findAllAgendaOfAccountExecutiveById(int id) {
-        if (id != 0) {
-            return agendaDB.findAllAgendaOfAccountExecutiveById(id);
-        } else {
-            throw new IllegalArgumentException("L'identifiant de l'accountExecutive ne peut pas être null pour la récupération de l'agenda.");
-        }
+    public  List<Agenda> findAllAgendaOfAccountExecutiveById(Integer id) {
+        return agendaDB.findAllAgendaOfAccountExecutiveById(id);
     }
 
     @Override

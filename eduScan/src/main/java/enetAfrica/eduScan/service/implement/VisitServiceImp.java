@@ -7,8 +7,11 @@ import enetAfrica.eduScan.database.AccountExecutiveDB;
 import enetAfrica.eduScan.database.ProspectionRecordDB;
 import enetAfrica.eduScan.database.VisitDB;
 import enetAfrica.eduScan.dto.VisitDto;
+import enetAfrica.eduScan.exception.ErrorCode;
+import enetAfrica.eduScan.exception.NotFoundException;
 import enetAfrica.eduScan.model.Visit;
 import enetAfrica.eduScan.service.VisitService;
+import enetAfrica.eduScan.utils.Constant;
 
 @Service
 public class VisitServiceImp implements VisitService {
@@ -19,48 +22,36 @@ public class VisitServiceImp implements VisitService {
 
     @Override
     public Visit addVisit(VisitDto visitDto) {
-        if (visitDto!= null) {
-            Visit visite=new Visit();
-            visite.setSupValidation(visitDto.isSupValidation());
-            visite.setVisitDate(visitDto.getVisitDate());
-            visite.setAccountExecutive(accountExecutiveDB.findById(visitDto.getAccountExecutive()).get());
-            visite.setProspectingRecord(prospectionRecordDB.findById(visitDto.getProspectingRecord()).get());
-            return visitDB.save(visite);
-        } else {
-            throw new IllegalArgumentException("L'identifiant de la visite ne peut pas être null");
-        }
+        Visit visite=new Visit();
+        visite.setSupValidation(visitDto.isSupValidation());
+        visite.setVisitDate(visitDto.getVisitDate());
+        visite.setAccountExecutive(accountExecutiveDB.findById(visitDto.getAccountExecutive()).get());
+        visite.setProspectingRecord(prospectionRecordDB.findById(visitDto.getProspectingRecord()).get());
+        return visitDB.save(visite);
     }
 
     @Override
     public Visit updateVisit(VisitDto visitDto) {
-        if (visitDB.existsById(visitDto.getId())) {
-            Visit visite=visitDB.findById(visitDto.getId()).get();
-            visite.setSupValidation(visitDto.isSupValidation());
-            visite.setVisitDate(visitDto.getVisitDate());
-            visite.setAccountExecutive(accountExecutiveDB.findById(visitDto.getAccountExecutive()).get());
-            visite.setProspectingRecord(prospectionRecordDB.findById(visitDto.getProspectingRecord()).get());
-            return visitDB.save(visite);
-        } else {
-            throw new IllegalArgumentException("L'identifiant de la visite ne peut pas être null pour la modification.");
-        }
+        Visit visite=visitDB.findById(visitDto.getId()).get();
+        visite.setSupValidation(visitDto.isSupValidation());
+        visite.setVisitDate(visitDto.getVisitDate());
+        visite.setAccountExecutive(accountExecutiveDB.findById(visitDto.getAccountExecutive()).get());
+        visite.setProspectingRecord(prospectionRecordDB.findById(visitDto.getProspectingRecord()).get());
+        return visitDB.save(visite);
     }
 
     @Override
-    public void deleteVisit(int id) {
-        if (visitDB.existsById(id)) {
+    public void deleteVisit(Integer id) {
+        if (id!=null) {
             visitDB.deleteById(id);
-        } else {
-            throw new IllegalArgumentException("La visite n'existe pas.");
         }
     }
 
     @Override
-    public Visit getVisitById(int id) {
-        if (visitDB.existsById(id)) {
-            return visitDB.findById(id).get();
-        } else {
-            throw new IllegalArgumentException("La visite n'existe pas.");
-        }
+    public Visit getVisitById(Integer id) {
+        return visitDB.findById(id).orElseThrow(() ->
+            new NotFoundException(Constant.VISIT_NOT_FOUND_MESSAGE, ErrorCode.VISIT_NOT_FOUND)
+        );
     }
 
     @Override

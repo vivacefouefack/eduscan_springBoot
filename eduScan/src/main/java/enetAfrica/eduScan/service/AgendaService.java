@@ -25,21 +25,21 @@ public interface AgendaService {
      * 
      * @param id
      */
-    public void deleteAgenda(int id) ;
+    public void deleteAgenda(Integer id) ;
 
     /**
      * 
      * @param id
      * @return
      */
-    public Agenda getAgendaById(int id);
+    public Agenda getAgendaById(Integer id);
 
     /**
      * 
      * @param id
      * @return 
      */
-    public  List<Agenda> findAllAgendaOfAccountExecutiveById(int id);
+    public  List<Agenda> findAllAgendaOfAccountExecutiveById(Integer id);
 
     /**
      * 
