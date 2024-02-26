@@ -5,8 +5,11 @@ import org.springframework.stereotype.Service;
 
 import enetAfrica.eduScan.database.ProspectionRecordDB;
 import enetAfrica.eduScan.dto.PropectionRecordDto;
+import enetAfrica.eduScan.exception.ErrorCode;
+import enetAfrica.eduScan.exception.NotFoundException;
 import enetAfrica.eduScan.model.ProspectionRecord;
 import enetAfrica.eduScan.service.ProspectionRecordService;
+import enetAfrica.eduScan.utils.Constant;
 
 @Service
 public class ProspectionRecordServiceImp implements ProspectionRecordService{
@@ -91,7 +94,9 @@ public class ProspectionRecordServiceImp implements ProspectionRecordService{
 
     @Override
     public ProspectionRecord getProspectionRecordById(Integer id) {
-        return prospectionRecordDB.findById(id).get();
+        return prospectionRecordDB.findById(id).orElseThrow(() ->
+            new NotFoundException(Constant.AGENDA_NOT_FOUND_MESSAGE, ErrorCode.PROSPECTION_NOT_FOUND)
+        );
     }
 
 
