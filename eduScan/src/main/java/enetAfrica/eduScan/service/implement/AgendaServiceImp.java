@@ -23,21 +23,28 @@ public class AgendaServiceImp implements AgendaService {
 
     @Override
     public Agenda addAgenda(AgendaDto agendaDto) {
-        Agenda agenda=new Agenda();
-        agenda.setVisitDate(agendaDto.getVisitDate());
-        agenda.setAccountExecutive(accountExecutiveDB.findById(agendaDto.getAccountExecutive()).get());
-        agenda.setInstitution(institutionProfileDB.findById(agendaDto.getInstitution()).get());
-        return agendaDB.save(agenda);
-        
+        if(agendaDto==null){
+            return null;
+        }else{
+            Agenda agenda=new Agenda();
+            agenda.setVisitDate(agendaDto.getVisitDate());
+            agenda.setAccountExecutive(accountExecutiveDB.findById(agendaDto.getAccountExecutive()).get());
+            agenda.setInstitution(institutionProfileDB.findById(agendaDto.getInstitution()).get());
+            return agendaDB.save(agenda);
+        }
     }
 
     @Override
     public Agenda updateAgenda(AgendaDto agendaDto) {
-        Agenda agenda=agendaDB.findById(agendaDto.getId()).get();
-        agenda.setVisitDate(agendaDto.getVisitDate());
-        agenda.setAccountExecutive(accountExecutiveDB.findById(agendaDto.getAccountExecutive()).get());
-        agenda.setInstitution(institutionProfileDB.findById(agendaDto.getInstitution()).get());
-        return agendaDB.save(agenda);
+        if(agendaDto==null){
+            return null;
+        }else{
+            Agenda agenda=agendaDB.findById(agendaDto.getId()).get();
+            agenda.setVisitDate(agendaDto.getVisitDate());
+            agenda.setAccountExecutive(accountExecutiveDB.findById(agendaDto.getAccountExecutive()).get());
+            agenda.setInstitution(institutionProfileDB.findById(agendaDto.getInstitution()).get());
+            return agendaDB.save(agenda);
+        }
     }
 
     @Override

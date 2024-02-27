@@ -6,6 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +36,34 @@ public class ProspectionRecordServiceTest {
     public void shouldSaveProspectionRecordWithSuccess() {
         
         PropectionRecordDto profilDto=new PropectionRecordDto();
+        profilDto.setSchoolName("Ecole d informatique");
+        profilDto.setMunicipality("Cocody");
+        profilDto.setDistrict("District");
+        profilDto.setGeographicAddress("Riviera 2");
+        profilDto.setSchoolType("Ecole public");
+        profilDto.setTeachingType("Type d'enseignement");
+        profilDto.setTeachingLevel("Niveau d'enseignement");
+        profilDto.setEnrollment(100);
+        profilDto.setContactPhone("0523456789"); 
+        profilDto.setEmail("eduScan@imasoftGroup.com");
+        profilDto.setHasComputer(true);
+        profilDto.setTotalComputers(50); 
+        profilDto.setSchoolPhoto("Src/images/photo.jpg");
+        profilDto.setSeniority(5); 
+        profilDto.setFirstVisitDate(LocalDate.of(2023, 10, 15)); 
+        profilDto.setInterlocutorFirstName("Prénom de l'interlocuteur");
+        profilDto.setInterlocutorLastName("Nom de l'interlocuteur");
+        profilDto.setInterlocutorFunction("Fonction de l'interlocuteur");
+        profilDto.setHasInternet(true);
+        profilDto.setConnectionType("Fibre optique");
+        profilDto.setRouterType("Type de routeur");
+        profilDto.setTelecomOperator("Opérateur télécom");
+        profilDto.setHasComputerRoom(true);
+        profilDto.setHasElectricity(true);
+        profilDto.setHasManagementSoftware(true);
+        profilDto.setSoftwareName("Enet");
+        profilDto.setVisitTime(LocalTime.of(9, 0)); 
+        profilDto.setEndTime(LocalTime.of(12, 0));
         ProspectionRecord record=service.addProspectionRecord(profilDto);
 
         assertNotNull(record);
@@ -45,7 +76,7 @@ public class ProspectionRecordServiceTest {
         
         PropectionRecordDto profilDto=null;// à revoir
         ProspectionRecord record=service.addProspectionRecord(profilDto);
-
+ 
         assertNull(record);
     }
 

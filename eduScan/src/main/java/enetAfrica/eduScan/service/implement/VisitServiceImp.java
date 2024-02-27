@@ -22,22 +22,30 @@ public class VisitServiceImp implements VisitService {
 
     @Override
     public Visit addVisit(VisitDto visitDto) {
-        Visit visite=new Visit();
-        visite.setSupValidation(visitDto.isSupValidation());
-        visite.setVisitDate(visitDto.getVisitDate());
-        visite.setAccountExecutive(accountExecutiveDB.findById(visitDto.getAccountExecutive()).get());
-        visite.setProspectingRecord(prospectionRecordDB.findById(visitDto.getProspectingRecord()).get());
-        return visitDB.save(visite);
+        if(visitDto==null){
+            return null;
+        }else{
+            Visit visite=new Visit();
+            visite.setSupValidation(visitDto.isSupValidation());
+            visite.setVisitDate(visitDto.getVisitDate());
+            visite.setAccountExecutive(accountExecutiveDB.findById(visitDto.getAccountExecutive()).get());
+            visite.setProspectingRecord(prospectionRecordDB.findById(visitDto.getProspectingRecord()).get());
+            return visitDB.save(visite);
+        }
     }
 
     @Override
     public Visit updateVisit(VisitDto visitDto) {
-        Visit visite=visitDB.findById(visitDto.getId()).get();
-        visite.setSupValidation(visitDto.isSupValidation());
-        visite.setVisitDate(visitDto.getVisitDate());
-        visite.setAccountExecutive(accountExecutiveDB.findById(visitDto.getAccountExecutive()).get());
-        visite.setProspectingRecord(prospectionRecordDB.findById(visitDto.getProspectingRecord()).get());
-        return visitDB.save(visite);
+        if(visitDto==null){
+            return null;
+        }else{
+            Visit visite=visitDB.findById(visitDto.getId()).get();
+            visite.setSupValidation(visitDto.isSupValidation());
+            visite.setVisitDate(visitDto.getVisitDate());
+            visite.setAccountExecutive(accountExecutiveDB.findById(visitDto.getAccountExecutive()).get());
+            visite.setProspectingRecord(prospectionRecordDB.findById(visitDto.getProspectingRecord()).get());
+            return visitDB.save(visite);
+        }
     }
 
     @Override

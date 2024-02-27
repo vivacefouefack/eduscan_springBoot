@@ -26,35 +26,43 @@ public class AccountExecutiveServiceImp implements AccountExecutiveService {
 
     @Override
     public AccountExecutive addAccountExecutive(AccountDto accountDto) {
-        AccountExecutive newAccount=new AccountExecutive();
-        newAccount.setFirstName(accountDto.getFirstName());
-        newAccount.setLastName(accountDto.getLastName());
-        newAccount.setPhoneNumber(accountDto.getPhoneNumber());
-        newAccount.setProspectingZone(accountDto.getProspectingZone());
-        newAccount.setProspectingMunicipality(accountDto.getProspectingMunicipality());
-        newAccount.setPhoto(accountDto.getPhoto());
-        newAccount.setSuperiorN1(accountDto.getSuperiorN1());
-        newAccount.setSuperiorN2(accountDto.getSuperiorN2());
-        newAccount.setSuperiorN3(accountDto.getSuperiorN3());
-        newAccount.setFunction(roleDB.findById(accountDto.getFunction()).get());
-        return accountExecutiveDB.save(newAccount);
-
+        if(accountDto==null){
+            return null;
+        }else{
+            AccountExecutive newAccount=new AccountExecutive();
+            newAccount.setFirstName(accountDto.getFirstName());
+            newAccount.setLastName(accountDto.getLastName());
+            newAccount.setPhoneNumber(accountDto.getPhoneNumber());
+            newAccount.setProspectingZone(accountDto.getProspectingZone());
+            newAccount.setProspectingMunicipality(accountDto.getProspectingMunicipality());
+            newAccount.setPhoto(accountDto.getPhoto());
+            newAccount.setSuperiorN1(accountDto.getSuperiorN1());
+            newAccount.setSuperiorN2(accountDto.getSuperiorN2());
+            newAccount.setSuperiorN3(accountDto.getSuperiorN3());
+            newAccount.setFunction(roleDB.findById(accountDto.getFunction()).get());
+            return accountExecutiveDB.save(newAccount);
+        }
     }
 
     @Override
     public AccountExecutive updateAccountExecutive(AccountDto accountDto) {
-        AccountExecutive accountExecutive=accountExecutiveDB.findById(accountDto.getId()).get();
-        accountExecutive.setFirstName(accountDto.getFirstName());
-        accountExecutive.setLastName(accountDto.getLastName());
-        accountExecutive.setPhoneNumber(accountDto.getPhoneNumber());
-        accountExecutive.setProspectingZone(accountDto.getProspectingZone());
-        accountExecutive.setProspectingMunicipality(accountDto.getProspectingMunicipality());
-        accountExecutive.setPhoto(accountDto.getPhoto());
-        accountExecutive.setSuperiorN1(accountDto.getSuperiorN1());
-        accountExecutive.setSuperiorN2(accountDto.getSuperiorN2());
-        accountExecutive.setSuperiorN3(accountDto.getSuperiorN3());
-        accountExecutive.setFunction(roleDB.findById(accountDto.getFunction()).get());
-        return accountExecutiveDB.save(accountExecutive);
+        if(accountDto==null){
+            return null;
+        }else{
+            AccountExecutive accountExecutive=accountExecutiveDB.findById(accountDto.getId()).get();
+            accountExecutive.setFirstName(accountDto.getFirstName());
+            accountExecutive.setLastName(accountDto.getLastName());
+            accountExecutive.setPhoneNumber(accountDto.getPhoneNumber());
+            accountExecutive.setProspectingZone(accountDto.getProspectingZone());
+            accountExecutive.setProspectingMunicipality(accountDto.getProspectingMunicipality());
+            accountExecutive.setPhoto(accountDto.getPhoto());
+            accountExecutive.setSuperiorN1(accountDto.getSuperiorN1());
+            accountExecutive.setSuperiorN2(accountDto.getSuperiorN2());
+            accountExecutive.setSuperiorN3(accountDto.getSuperiorN3());
+            accountExecutive.setFunction(roleDB.findById(accountDto.getFunction()).get());
+            return accountExecutiveDB.save(accountExecutive);
+        }
+        
     }
 
     @Override

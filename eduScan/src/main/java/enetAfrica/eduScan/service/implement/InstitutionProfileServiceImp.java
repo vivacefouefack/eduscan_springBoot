@@ -18,32 +18,35 @@ public class InstitutionProfileServiceImp implements InstitutionProfileService {
 
     @Override
     public InstitutionProfile addInstitutionProfile(PropectionRecordDto profileDto) {
-        InstitutionProfile profile=new InstitutionProfile();
-        profile.setSchoolName(profileDto.getSchoolName());
-        profile.setMunicipality(profileDto.getMunicipality());
-        profile.setDistrict(profileDto.getDistrict());
-        profile.setGeographicAddress(profileDto.getGeographicAddress());
-        profile.setSchoolType(profileDto.getSchoolType());
-        profile.setTeachingType(profileDto.getTeachingType());
-        profile.setTeachingLevel(profileDto.getTeachingLevel());
-        profile.setEnrollment(profileDto.getEnrollment());
-        profile.setContactPhone(profileDto.getContactPhone());
-        profile.setEmail(profileDto.getEmail());
-        profile.setHasComputer(profileDto.isHasComputer());
-        profile.setTotalComputers(profileDto.getTotalComputers());
-        profile.setSchoolPhoto(profileDto.getSchoolPhoto());
-        profile.setHasInternet(profileDto.isHasInternet());
-        profile.setConnectionType(profileDto.getConnectionType());
-        profile.setRouterType(profileDto.getRouterType());
-        profile.setTelecomOperator(profileDto.getTelecomOperator());
-        profile.setHasComputerRoom(profileDto.isHasComputerRoom());
-        profile.setHasElectricity(profileDto.isHasElectricity());
-        profile.setHasManagementSoftware(profileDto.isHasManagementSoftware());
-        profile.setSoftwareName(profileDto.getSoftwareName());
-        profile.setVisitTime(profileDto.getVisitTime());
-        profile.setEndTime(profileDto.getEndTime());
-        return institutionProfileDB.save(profile);
-        
+        if(profileDto==null){
+            return null;
+        }else{
+            InstitutionProfile profile=new InstitutionProfile();
+            profile.setSchoolName(profileDto.getSchoolName());
+            profile.setMunicipality(profileDto.getMunicipality());
+            profile.setDistrict(profileDto.getDistrict());
+            profile.setGeographicAddress(profileDto.getGeographicAddress());
+            profile.setSchoolType(profileDto.getSchoolType());
+            profile.setTeachingType(profileDto.getTeachingType());
+            profile.setTeachingLevel(profileDto.getTeachingLevel());
+            profile.setEnrollment(profileDto.getEnrollment());
+            profile.setContactPhone(profileDto.getContactPhone());
+            profile.setEmail(profileDto.getEmail());
+            profile.setHasComputer(profileDto.isHasComputer());
+            profile.setTotalComputers(profileDto.getTotalComputers());
+            profile.setSchoolPhoto(profileDto.getSchoolPhoto());
+            profile.setHasInternet(profileDto.isHasInternet());
+            profile.setConnectionType(profileDto.getConnectionType());
+            profile.setRouterType(profileDto.getRouterType());
+            profile.setTelecomOperator(profileDto.getTelecomOperator());
+            profile.setHasComputerRoom(profileDto.isHasComputerRoom());
+            profile.setHasElectricity(profileDto.isHasElectricity());
+            profile.setHasManagementSoftware(profileDto.isHasManagementSoftware());
+            profile.setSoftwareName(profileDto.getSoftwareName());
+            profile.setVisitTime(profileDto.getVisitTime());
+            profile.setEndTime(profileDto.getEndTime());
+            return institutionProfileDB.save(profile);
+        }      
     }
 
 
@@ -64,31 +67,35 @@ public class InstitutionProfileServiceImp implements InstitutionProfileService {
 
     @Override
     public InstitutionProfile updateInstitutionProfile(PropectionRecordDto profileDto) {
-        InstitutionProfile profile=institutionProfileDB.findById(profileDto.getId()).get();
-        profile.setSchoolName(profileDto.getSchoolName());
-        profile.setMunicipality(profileDto.getMunicipality());
-        profile.setDistrict(profileDto.getDistrict());
-        profile.setGeographicAddress(profileDto.getGeographicAddress());
-        profile.setSchoolType(profileDto.getSchoolType());
-        profile.setTeachingType(profileDto.getTeachingType());
-        profile.setTeachingLevel(profileDto.getTeachingLevel());
-        profile.setEnrollment(profileDto.getEnrollment());
-        profile.setContactPhone(profileDto.getContactPhone());
-        profile.setEmail(profileDto.getEmail());
-        profile.setHasComputer(profileDto.isHasComputer());
-        profile.setTotalComputers(profileDto.getTotalComputers());
-        profile.setSchoolPhoto(profileDto.getSchoolPhoto());
-        profile.setHasInternet(profileDto.isHasInternet());
-        profile.setConnectionType(profileDto.getConnectionType());
-        profile.setRouterType(profileDto.getRouterType());
-        profile.setTelecomOperator(profileDto.getTelecomOperator());
-        profile.setHasComputerRoom(profileDto.isHasComputerRoom());
-        profile.setHasElectricity(profileDto.isHasElectricity());
-        profile.setHasManagementSoftware(profileDto.isHasManagementSoftware());
-        profile.setSoftwareName(profileDto.getSoftwareName());
-        profile.setVisitTime(profileDto.getVisitTime());
-        profile.setEndTime(profileDto.getEndTime());
-        return institutionProfileDB.save(profile);
+        if(profileDto==null){
+            return null;
+        }else{
+            InstitutionProfile profile=institutionProfileDB.findById(profileDto.getId()).get();
+            profile.setSchoolName(profileDto.getSchoolName());
+            profile.setMunicipality(profileDto.getMunicipality());
+            profile.setDistrict(profileDto.getDistrict());
+            profile.setGeographicAddress(profileDto.getGeographicAddress());
+            profile.setSchoolType(profileDto.getSchoolType());
+            profile.setTeachingType(profileDto.getTeachingType());
+            profile.setTeachingLevel(profileDto.getTeachingLevel());
+            profile.setEnrollment(profileDto.getEnrollment());
+            profile.setContactPhone(profileDto.getContactPhone());
+            profile.setEmail(profileDto.getEmail());
+            profile.setHasComputer(profileDto.isHasComputer());
+            profile.setTotalComputers(profileDto.getTotalComputers());
+            profile.setSchoolPhoto(profileDto.getSchoolPhoto());
+            profile.setHasInternet(profileDto.isHasInternet());
+            profile.setConnectionType(profileDto.getConnectionType());
+            profile.setRouterType(profileDto.getRouterType());
+            profile.setTelecomOperator(profileDto.getTelecomOperator());
+            profile.setHasComputerRoom(profileDto.isHasComputerRoom());
+            profile.setHasElectricity(profileDto.isHasElectricity());
+            profile.setHasManagementSoftware(profileDto.isHasManagementSoftware());
+            profile.setSoftwareName(profileDto.getSoftwareName());
+            profile.setVisitTime(profileDto.getVisitTime());
+            profile.setEndTime(profileDto.getEndTime());
+            return institutionProfileDB.save(profile);
+        }
     }
 
     @Override
