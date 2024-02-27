@@ -98,6 +98,7 @@ public class AccountExecutiveServiceTest {
         int afterDeleteSize=countElement(service.getAllAccountExecutives());
         assertEquals(afterDeleteSize, currentSize-1);
     }
+    
 
     public int countElement(Iterable<AccountExecutive> list){
         int counter = 0;

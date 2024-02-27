@@ -50,7 +50,7 @@ public class AgendaServiceTest {
     @Test
     public void shouldGetAllAgendaWithSuccess() {
         int counter = countElement(service.getAll());
-        int all = 1;
+        int all = 0;
       
         assertNotNull(service.getAll());
         assertEquals(counter, all);

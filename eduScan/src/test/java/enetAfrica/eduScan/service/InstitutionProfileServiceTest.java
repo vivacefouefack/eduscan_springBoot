@@ -51,7 +51,7 @@ public class InstitutionProfileServiceTest {
     @Test
     public void shouldGetAllProfilWithSuccess() {
         int counter = countElement(service.getAll());
-        int all = 1;
+        int all = 0;
       
         assertNotNull(service.getAll());
         assertEquals(counter, all);

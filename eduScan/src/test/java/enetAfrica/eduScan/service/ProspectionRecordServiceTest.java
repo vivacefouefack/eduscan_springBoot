@@ -72,11 +72,9 @@ public class ProspectionRecordServiceTest {
     }
 
     @Test
-    public void shouldSaveProspectionRecordWithFailure() {
-        
-        PropectionRecordDto profilDto=null;// à revoir
+    public void shouldSaveProspectionRecordWithFailure() {  
+        PropectionRecordDto profilDto=null;
         ProspectionRecord record=service.addProspectionRecord(profilDto);
- 
         assertNull(record);
     }
 
