@@ -95,7 +95,7 @@ public class ProspectionRecordServiceImp implements ProspectionRecordService{
     @Override
     public ProspectionRecord getProspectionRecordById(Integer id) {
         return prospectionRecordDB.findById(id).orElseThrow(() ->
-            new NotFoundException(Constant.AGENDA_NOT_FOUND_MESSAGE, ErrorCode.PROSPECTION_NOT_FOUND)
+            new NotFoundException(Constant.PROSPECTION_NOT_FOUND_MESSAGE, ErrorCode.PROSPECTION_NOT_FOUND)
         );
     }
 

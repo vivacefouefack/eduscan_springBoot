@@ -55,10 +55,10 @@ public class AgendaController implements AgendaApi {
     }
 
     @Override
-    public ResponseEntity<List<Agenda>> getAgendaOfAccountExecutive(@PathVariable int id) {
+    public ResponseEntity<List<Agenda>> getAgendaOfAccountExecutive(@PathVariable int prospectId) {
         try {
             List<Agenda> agendas=new ArrayList<>();
-            agendas=agendaService.findAllAgendaOfAccountExecutiveById(id);
+            agendas=agendaService.findAllAgendaOfAccountExecutiveById(prospectId);
             return ResponseEntity.ok(agendas);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
