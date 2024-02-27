@@ -29,7 +29,7 @@ public class AgendaServiceTest {
     }
 
     @Test
-    public void shouldSaveAgendatWithSuccess() {
+    public void shouldSaveAgendaWithSuccess() {
         AgendaDto agendaDto=new AgendaDto();
         Agenda agenda=service.addAgenda(agendaDto);
 

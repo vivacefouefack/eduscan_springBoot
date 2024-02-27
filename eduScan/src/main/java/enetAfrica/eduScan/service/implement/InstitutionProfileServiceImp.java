@@ -58,7 +58,7 @@ public class InstitutionProfileServiceImp implements InstitutionProfileService {
     @Override
     public InstitutionProfile getInstitutionProfileById(Integer id) {
         return institutionProfileDB.findById(id).orElseThrow(() ->
-            new NotFoundException(Constant.AGENDA_NOT_FOUND_MESSAGE, ErrorCode.INSTITUTION_NOT_FOUND)
+            new NotFoundException(Constant.INSTITUTION_NOT_FOUND_MESSAGE, ErrorCode.INSTITUTION_NOT_FOUND)
         );
     }
 
