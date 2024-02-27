@@ -1,4 +1,4 @@
-/*package enetAfrica.eduScan.service;
+/*package enetAfrica.eduScan.controller;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -20,6 +20,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import enetAfrica.eduScan.dto.AccountDto;
 import enetAfrica.eduScan.model.AccountExecutive;
+import enetAfrica.eduScan.service.AccountExecutiveService;
 
 @WebMvcTest
 public class AccountServiceTest {
@@ -56,7 +57,7 @@ public class AccountServiceTest {
            .andExpect(jsonPath("$").isEmpty());
     }
 
-    /*@Test
+    @Test
     public void testAddAccountExecutive() throws Exception {
         AccountDto accountDto = new AccountDto("elise","Tiete","0595010101","riviera","cocody","src/img.jpg",1,2,3,4);
 
@@ -66,8 +67,8 @@ public class AccountServiceTest {
         mvc.perform((RequestBuilder) ((ResultActions) post("/api/eduscan/AddAccountExecutive")
             .andExpect(status().isCreated())
             .andExpect(jsonPath("$.firstName").value("elise")));
-    }*/
-/* 
+    }
+ 
     @Test
     public void testUpdateAccountExecutive() throws Exception {
         AccountDto newData = new AccountDto();
