@@ -3,6 +3,7 @@ package enetAfrica.eduScan.service;
 import enetAfrica.eduScan.dto.AccountDto;
 import enetAfrica.eduScan.model.AccountExecutive;
 
+
 public interface AccountExecutiveService {
 
     /**

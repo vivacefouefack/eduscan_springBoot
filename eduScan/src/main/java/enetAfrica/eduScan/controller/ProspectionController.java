@@ -17,7 +17,7 @@ import enetAfrica.eduScan.service.ProspectionRecordService;
 @RestController
 @CrossOrigin(origins="*")
 @RequestMapping("/api/prospection")
-public class ProspectionControler implements ProspectionApi {
+public class ProspectionController implements ProspectionApi {
     
     @Autowired
     private ProspectionRecordService prospectionRecordService;

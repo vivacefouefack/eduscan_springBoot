@@ -1,4 +1,4 @@
-/* package enetAfrica.eduScan.configuration;
+/*package enetAfrica.eduScan.configuration;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
