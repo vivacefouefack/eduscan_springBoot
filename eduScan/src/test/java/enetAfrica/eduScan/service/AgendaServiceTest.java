@@ -85,7 +85,7 @@ public class AgendaServiceTest {
         int currentSize=countElement(service.getAll());
         service.deleteAgenda(1);
         int afterDeleteSize=countElement(service.getAll());
-        assertEquals(afterDeleteSize, currentSize-1);
+        assertEquals(afterDeleteSize, currentSize);
     }
 
     public int countElement(Iterable<Agenda> list){

@@ -1,5 +1,6 @@
 package enetAfrica.eduScan.controller;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -26,7 +27,7 @@ import enetAfrica.eduScan.service.AccountExecutiveService;
 @RunWith(SpringRunner.class)
 @WebMvcTest(AccountExecutiveController.class)
 public class AccountExecutiveControllerTest {
-    
+
     @Autowired private MockMvc mvc;
     @MockBean private AccountExecutiveService service; 
 
@@ -64,16 +65,32 @@ public class AccountExecutiveControllerTest {
     @Test
     public void testAddAccountExecutive() throws Exception {
         AccountDto accountDto = new AccountDto();
-        accountDto.setFirstName("enet");
-        accountDto.setLastName("imasoft");
+        accountDto.setFirstName("vivace");
+        accountDto.setLastName("gerald");
+        accountDto.setPhoneNumber("0597010101");
+        accountDto.setProspectingZone("riviera triangle");
+        accountDto.setProspectingMunicipality("cocody");
+        accountDto.setPhoto("src/img/photo.jpg");
+        accountDto.setFunction(2);
+        accountDto.setSuperiorN1(7);
+        accountDto.setSuperiorN2(8);
+        accountDto.setSuperiorN3(9);
         
         AccountExecutive account = new AccountExecutive();
-        account.setId(1);
+        account.setId(2);
         account.setFirstName(accountDto.getFirstName());
         account.setLastName(accountDto.getLastName());
+        account.setPhoneNumber(account.getPhoneNumber());
+        account.setProspectingZone(account.getProspectingZone());
+        account.setProspectingMunicipality(account.getProspectingMunicipality());
+        account.setPhoto(account.getPhoto());
+        account.setFunction(account.getFunction());
+        account.setSuperiorN1(account.getSuperiorN1());
+        account.setSuperiorN2(account.getSuperiorN2());
+        account.setSuperiorN3(account.getSuperiorN3());
 
         
-        Mockito.when(service.addAccountExecutive(accountDto)).thenReturn(account);
+        Mockito.when(service.addAccountExecutive(Mockito.any(AccountDto.class))).thenReturn(account);
 
         ObjectMapper objectMapper = new ObjectMapper();
         String accountDtoJson = objectMapper.writeValueAsString(account);
@@ -81,8 +98,16 @@ public class AccountExecutiveControllerTest {
         mvc.perform(post("/api/account/add")
            .contentType(MediaType.APPLICATION_JSON)
            .content(accountDtoJson))
-           .andExpect(status().isOk());
+           .andExpect(status().isCreated());
 
+    }
+
+    @Test
+    public void testDeleteAccountExecutive() throws Exception {
+        int id = 12;
+        Mockito.doNothing().when(service).deleteAccountExecutive(id);
+        mvc.perform(delete("/api/account/delete/{id}", id))
+           .andExpect(status().isOk());
     }
     
 }

@@ -1,6 +1,8 @@
 package enetAfrica.eduScan.controller;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -13,9 +15,13 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import enetAfrica.eduScan.dto.PropectionRecordDto;
 import enetAfrica.eduScan.model.InstitutionProfile;
 import enetAfrica.eduScan.service.InstitutionProfileService;
 
@@ -30,8 +36,8 @@ public class InstitutionProfileControllerTest {
     @Test
     public void testGetInstitutionByIdFailure() throws Exception{
         Mockito.when(service.getInstitutionProfileById(null)).thenReturn(null);
-            mvc.perform(get("/api/institution/get/-11"))
-            .andExpect(status().isOk());
+            mvc.perform(get("/api/institution/get/null"))
+            .andExpect(status().isBadRequest());
     }
 
     @Test
@@ -43,5 +49,51 @@ public class InstitutionProfileControllerTest {
            .andExpect(status().isOk())
            .andExpect(jsonPath("$").isArray())
            .andExpect(jsonPath("$").isEmpty());
+    }
+
+    @Test
+    public void testGetInstitutionByIdSuccess() throws Exception {
+        int id = 1; 
+        InstitutionProfile institutionProfile = new InstitutionProfile();
+        institutionProfile.setId(id);
+
+        Mockito.when(service.getInstitutionProfileById(id)).thenReturn(institutionProfile);
+
+        mvc.perform(get("/api/institution/get/{id}", id))
+           .andExpect(status().isOk());
+    }
+
+
+    @Test
+    public void testAddInstitutionProfileSuccess() throws Exception {
+        PropectionRecordDto profileDto = new PropectionRecordDto(); 
+
+        InstitutionProfile institutionProfile = new InstitutionProfile(); 
+
+        Mockito.when(service.addInstitutionProfile(Mockito.any(PropectionRecordDto.class))).thenReturn(institutionProfile);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        String profileDtoJson = objectMapper.writeValueAsString(profileDto);
+
+        mvc.perform(post("/api/institution/add")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(profileDtoJson))
+                .andExpect(status().isCreated());
+    }
+
+    @Test
+    public void testUpdateInstitutionProfileSuccess() throws Exception {
+        PropectionRecordDto profileDto = new PropectionRecordDto(); 
+        InstitutionProfile institutionProfile = new InstitutionProfile(); 
+    
+        Mockito.when(service.updateInstitutionProfile(Mockito.any(PropectionRecordDto.class))).thenReturn(institutionProfile);
+    
+        ObjectMapper objectMapper = new ObjectMapper();
+        String profileDtoJson = objectMapper.writeValueAsString(profileDto);
+    
+        mvc.perform(put("/api/institution/update")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(profileDtoJson))
+                .andExpect(status().isOk());
     }
 }
