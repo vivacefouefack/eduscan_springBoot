@@ -10,14 +10,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import enetAfrica.eduScan.dto.AccountDto;
 import enetAfrica.eduScan.model.AccountExecutive;
+import jakarta.validation.Valid;
 
 public interface AccountExecutiveApi {
 
     @PostMapping("/add")
-    public ResponseEntity<AccountExecutive> addAccountExecutive(@RequestBody AccountDto accountDto);
+    public ResponseEntity<AccountExecutive> addAccountExecutive(@Valid  @RequestBody AccountDto accountDto);
 
     @PutMapping("/update")
-    public ResponseEntity<AccountExecutive> updateAccountExecutive(@RequestBody AccountDto accountDto);
+    public ResponseEntity<AccountExecutive> updateAccountExecutive(@Valid  @RequestBody AccountDto accountDto);
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Integer> deleteAccountExecutive(@PathVariable int id);

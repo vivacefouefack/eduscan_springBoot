@@ -10,14 +10,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import enetAfrica.eduScan.dto.PropectionRecordDto;
 import enetAfrica.eduScan.model.ProspectionRecord;
+import jakarta.validation.Valid;
 
 public interface ProspectionApi {
 
     @PostMapping("/add")
-    public ResponseEntity<ProspectionRecord> addProspectionRecord(@RequestBody PropectionRecordDto prospectDto);
+    public ResponseEntity<ProspectionRecord> addProspectionRecord(@Valid @RequestBody PropectionRecordDto prospectDto);
 
     @PutMapping("/update")
-    public ResponseEntity<ProspectionRecord> updateProspectionRecord(@RequestBody PropectionRecordDto prospectDto);
+    public ResponseEntity<ProspectionRecord> updateProspectionRecord(@Valid @RequestBody PropectionRecordDto prospectDto);
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Integer> deleteProspectionRecord(@PathVariable int id);

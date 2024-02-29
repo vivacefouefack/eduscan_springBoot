@@ -12,14 +12,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import enetAfrica.eduScan.dto.AgendaDto;
 import enetAfrica.eduScan.model.Agenda;
+import jakarta.validation.Valid;
 
 public interface AgendaApi {
 
     @PostMapping("/add")
-    public ResponseEntity<Agenda> addVisit(@RequestBody AgendaDto agendaDto);
+    public ResponseEntity<Agenda> addVisit(@Valid @RequestBody AgendaDto agendaDto);
 
     @PutMapping("/update")
-    public ResponseEntity<Agenda> updateVisit(@RequestBody AgendaDto agendaDto);
+    public ResponseEntity<Agenda> updateVisit(@Valid @RequestBody AgendaDto agendaDto);
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Integer> deleteVisit(@PathVariable int id);

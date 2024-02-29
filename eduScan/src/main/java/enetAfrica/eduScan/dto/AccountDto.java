@@ -25,7 +25,7 @@ public class AccountDto {
     @NotBlank(message = "La zone de prospection ne peut pas être vide")
     private String prospectingZone;
 
-    @NotBlank(message = "La municipalité de prospection ne peut pas être vide")
+    @NotBlank(message = "La municipalité de prospection ne peut pas être vide")                                             
     private String prospectingMunicipality;
 
     @NotBlank(message = "La photo ne peut pas être vide") 

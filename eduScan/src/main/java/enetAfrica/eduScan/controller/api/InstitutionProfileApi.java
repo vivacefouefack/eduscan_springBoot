@@ -10,10 +10,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import enetAfrica.eduScan.dto.PropectionRecordDto;
 import enetAfrica.eduScan.model.InstitutionProfile;
+import jakarta.validation.Valid;
 
 public interface InstitutionProfileApi {
     @PostMapping("/add")
-    public ResponseEntity<InstitutionProfile> addInstitutionProfile(@RequestBody PropectionRecordDto profileDto);
+    public ResponseEntity<InstitutionProfile> addInstitutionProfile(@Valid @RequestBody PropectionRecordDto profileDto);
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Integer> deleteInstitutionProfile(@PathVariable int id);
@@ -22,7 +23,7 @@ public interface InstitutionProfileApi {
     public ResponseEntity<InstitutionProfile> getInstitutionProfile(@PathVariable int id);
 
     @PutMapping("/update")
-    public ResponseEntity<InstitutionProfile> updateInstitutionProfile(@RequestBody PropectionRecordDto profileDto);
+    public ResponseEntity<InstitutionProfile> updateInstitutionProfile(@Valid @RequestBody PropectionRecordDto profileDto);
 
     @GetMapping("/getall")
     public ResponseEntity<Iterable<InstitutionProfile>> getAllInstitutionProfiles();

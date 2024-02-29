@@ -14,6 +14,7 @@ import enetAfrica.eduScan.dto.PropectionRecordDto;
 import enetAfrica.eduScan.model.InstitutionProfile;
 import enetAfrica.eduScan.service.InstitutionProfileService;
 
+
 @RestController
 @CrossOrigin(origins="*")
 @RequestMapping("/api/institution")

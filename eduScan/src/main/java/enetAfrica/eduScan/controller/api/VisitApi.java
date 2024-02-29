@@ -10,14 +10,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import enetAfrica.eduScan.dto.VisitDto;
 import enetAfrica.eduScan.model.Visit;
+import jakarta.validation.Valid;
 
 public interface VisitApi {
     
     @PostMapping("/add")
-    public ResponseEntity<Visit> addVisit(@RequestBody VisitDto visitDto);
+    public ResponseEntity<Visit> addVisit(@Valid @RequestBody VisitDto visitDto);
 
     @PutMapping("/update")
-    public ResponseEntity<Visit> updateVisit(@RequestBody VisitDto visit);
+    public ResponseEntity<Visit> updateVisit(@Valid @RequestBody VisitDto visit);
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Integer> deleteVisit(@PathVariable int id);
