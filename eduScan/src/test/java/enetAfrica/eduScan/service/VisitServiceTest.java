@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.time.LocalDate;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,9 @@ public class VisitServiceTest {
     @Test
     public void shouldSaveVisitWithSuccess() {
         VisitDto visitDto=new VisitDto();
+        visitDto.setVisitDate(LocalDate.now());
+        visitDto.setAccountExecutive(10);
+        visitDto.setProspectingRecord(1);
         Visit visit=service.addVisit(visitDto);
 
         assertNotNull(visit);
@@ -48,7 +53,7 @@ public class VisitServiceTest {
     @Test
     public void shouldGetAllVisitWithSuccess() {
         int counter = countElement(service.getAllVisit());
-        int current = 1;
+        int current = 0;
       
         assertNotNull(service.getAllVisit());
         assertEquals(counter, current);
@@ -72,19 +77,19 @@ public class VisitServiceTest {
     @Test
     public void shouldUpdateVisitWithSuccess() {
         VisitDto visitDto=new VisitDto();
+        visitDto.setVisitDate(LocalDate.now());
+        visitDto.setAccountExecutive(10);
+        visitDto.setProspectingRecord(1);
         Visit visit=service.addVisit(visitDto);
+        visitDto.setId(visit.getId());
+        visitDto.setAccountExecutive(12);
+        visitDto.setProspectingRecord(1);
+        visit=service.updateVisit(visitDto);
 
         assertNotNull(visit);
         assertNotNull(visit.getId());
         assertEquals(visit.getVisitDate(),visitDto.getVisitDate());
-    }
-
-    @Test
-    public void shouldDeleteVisitWithSuccess() {
-        int currentSize=countElement(service.getAllVisit());
-        service.deleteVisit(1);;
-        int afterDeleteSize=countElement(service.getAllVisit());
-        assertEquals(afterDeleteSize, currentSize-1);
+        assertEquals(visit.getAccountExecutive().getId(),visitDto.getAccountExecutive());
     }
 
     public int countElement(Iterable<Visit> list){

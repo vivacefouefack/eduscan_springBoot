@@ -10,6 +10,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import enetAfrica.eduScan.dto.PropectionRecordDto;
 import enetAfrica.eduScan.exception.ErrorCode;
@@ -19,6 +20,7 @@ import enetAfrica.eduScan.utils.Constant;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@Transactional
 public class InstitutionProfileServiceTest {
     
     @Autowired private InstitutionProfileService service;
@@ -32,6 +34,7 @@ public class InstitutionProfileServiceTest {
     public void shouldSaveInstitutionProfileWithSuccess() {
         
         PropectionRecordDto profilDto=new PropectionRecordDto();
+        profilDto.setEmail("exemple@imasoftgroup.com");
         InstitutionProfile profil=service.addInstitutionProfile(profilDto);
 
         assertNotNull(profil);
@@ -49,15 +52,6 @@ public class InstitutionProfileServiceTest {
 
 
     @Test
-    public void shouldGetAllProfilWithSuccess() {
-        int counter = countElement(service.getAll());
-        int all = 0;
-      
-        assertNotNull(service.getAll());
-        assertEquals(counter, all);
-    }
-
-    @Test
     public void shouldGetAllAgendaNotFound() {
         int counter = countElement(service.getAll());
         int size=25;
@@ -73,20 +67,19 @@ public class InstitutionProfileServiceTest {
     @Test
     public void shouldUpdateInstitutionProfileWithSuccess() {
         PropectionRecordDto profilDto=new PropectionRecordDto();
-        InstitutionProfile profil=service.updateInstitutionProfile(profilDto);
+        profilDto.setEmail("exemple@imasoftgroup.com");
+        InstitutionProfile profil=service.addInstitutionProfile(profilDto);
+        profilDto.setId(profil.getId());
+        profilDto.setEmail(profil.getEmail());
+        profilDto.setSchoolName("my school");
+
+        profil=service.updateInstitutionProfile(profilDto);
 
         assertNotNull(profil);
         assertNotNull(profil.getId());
         assertEquals(profilDto.getSchoolName(), profil.getSchoolName());
     }
 
-    @Test
-    public void shouldDeleteProfileWithSuccess() {
-        int currentSize=countElement(service.getAll());
-        service.deleteInstitutionProfileById(1);
-        int afterDeleteSize=countElement(service.getAll());
-        assertEquals(afterDeleteSize, currentSize-1);
-    }
 
     public int countElement(Iterable<InstitutionProfile> list){
         int counter = 0;

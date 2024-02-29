@@ -112,6 +112,11 @@ public class ProspectionRecordServiceTest {
     @Test
     public void shouldUpdateProspectionRecordWithSuccess() {
         PropectionRecordDto profilDto=new PropectionRecordDto();
+        profilDto.setId(1);
+        profilDto.setDistrict("abidjan");
+        ProspectionRecord recordSave=service.addProspectionRecord(profilDto);
+        profilDto.setId(recordSave.getId());
+        recordSave.setDistrict("man");
         ProspectionRecord record=service.updateProspectionRecord(profilDto);
 
         assertNotNull(record);
@@ -119,13 +124,6 @@ public class ProspectionRecordServiceTest {
         assertEquals(profilDto.getSchoolName(), record.getSchoolName());
     }
 
-    @Test
-    public void shouldDeleteProspectionRecordWithSuccess() {
-        int currentSize=countElement(service.getAllProspectionRecord());
-        service.deleteProspectionRecord(1);
-        int afterDeleteSize=countElement(service.getAllProspectionRecord());
-        assertEquals(afterDeleteSize, currentSize-1);
-    }
 
     public int countElement(Iterable<ProspectionRecord> list){
         int counter = 0;

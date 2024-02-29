@@ -10,6 +10,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import enetAfrica.eduScan.dto.AccountDto;
 import enetAfrica.eduScan.exception.ErrorCode;
@@ -19,6 +20,7 @@ import enetAfrica.eduScan.utils.Constant;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@Transactional
 public class AccountExecutiveServiceTest {
     
     @Autowired
@@ -55,7 +57,7 @@ public class AccountExecutiveServiceTest {
         service.addAccountExecutive(accountDto1);
         service.addAccountExecutive(accountDto2);
         int counter = countElement(service.getAllAccountExecutives());
-        int current = 7;
+        int current = 5;
       
         assertNotNull(service.getAllAccountExecutives());
         assertEquals(counter, current);
