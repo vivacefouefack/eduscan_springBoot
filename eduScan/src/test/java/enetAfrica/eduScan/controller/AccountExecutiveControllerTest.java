@@ -104,7 +104,7 @@ public class AccountExecutiveControllerTest {
 
     @Test
     public void testDeleteAccountExecutive() throws Exception {
-        int id = 12;
+        Integer id = 12;
         Mockito.doNothing().when(service).deleteAccountExecutive(id);
         mvc.perform(delete("/api/account/delete/{id}", id))
            .andExpect(status().isOk());

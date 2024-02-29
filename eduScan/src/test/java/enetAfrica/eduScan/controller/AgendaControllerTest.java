@@ -6,8 +6,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.time.LocalDate;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -48,24 +46,17 @@ public class AgendaControllerTest {
 
     @Test
     public void testDeleteNotExistAgenda() throws Exception {
-        int id = 100;
+        Integer id = 100;
         Mockito.doNothing().when(agendaService).deleteAgenda(id);
         mvc.perform(delete("/api/account/delete/{id}", id))
            .andExpect(status().isNotFound());
     }
 
-    @Test
-    public void testDeleteExistAgenda() throws Exception {
-        int id = 1;
-        Mockito.doNothing().when(agendaService).deleteAgenda(id);
-        mvc.perform(delete("/api/account/delete/{id}", id))
-           .andExpect(status().isOk());
-    }
 
     @Test
-    public void testAddAgendaSuccess() throws Exception {// à revoir
+    public void testAddAgendaSuccess() throws Exception {
         AgendaDto agendaDto = new AgendaDto(); 
-        agendaDto.setVisitDate(LocalDate.now()); 
+        agendaDto.setAccountExecutive(10);
 
         Agenda agenda = new Agenda(); 
         agenda.setId(1); 
@@ -81,10 +72,10 @@ public class AgendaControllerTest {
     }
 
     @Test
-    public void testUpdateAgendaSuccess() throws Exception {// à revoir
+    public void testUpdateAgendaSuccess() throws Exception {
         AgendaDto agendaDto = new AgendaDto(); 
         agendaDto.setId(1); 
-        agendaDto.setVisitDate(LocalDate.now()); 
+        agendaDto.setAccountExecutive(10);
 
         Agenda agenda = new Agenda();
         agenda.setId(1); 

@@ -1,5 +1,6 @@
 package enetAfrica.eduScan.controller;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -95,5 +96,19 @@ public class InstitutionProfileControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(profileDtoJson))
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    public void testDeleteInstitutionProfileSuccess() throws Exception {
+        Integer id = 1; 
+        mvc.perform(delete("/api/institution/delete/{id}", id))
+           .andExpect(status().isOk());
+    }
+
+    @Test
+    public void testDeleteInstitutionProfileNotFound() throws Exception {
+        Integer id = null; 
+        mvc.perform(delete("/api/institution/delete/{id}", id))
+           .andExpect(status().isNotFound());
     }
 }

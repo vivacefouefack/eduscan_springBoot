@@ -43,7 +43,7 @@ public class ProspectionControllerTest {
 
     @Test
     public void testGetProspectionRecordByIdSuccess() throws Exception {
-        int id = 1; 
+        Integer id = 1; 
         ProspectionRecord prospectionRecord = new ProspectionRecord();
         prospectionRecord.setId(id);
 
@@ -87,7 +87,7 @@ public class ProspectionControllerTest {
 
     @Test
     public void testDeleteProspectionRecordSuccess() throws Exception {
-        int id = 1; 
+        Integer id = 1; 
         mvc.perform(delete("/api/prospection/delete/{id}", id))
            .andExpect(status().isOk());
     }
