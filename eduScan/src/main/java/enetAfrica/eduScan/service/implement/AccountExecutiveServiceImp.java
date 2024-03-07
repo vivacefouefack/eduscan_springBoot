@@ -1,7 +1,5 @@
 package enetAfrica.eduScan.service.implement;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -13,18 +11,19 @@ import enetAfrica.eduScan.exception.NotFoundException;
 import enetAfrica.eduScan.model.AccountExecutive;
 import enetAfrica.eduScan.service.AccountExecutiveService;
 import enetAfrica.eduScan.utils.Constant;
+import lombok.AllArgsConstructor;
+
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 @Service
+@AllArgsConstructor
 public class AccountExecutiveServiceImp implements AccountExecutiveService, UserDetailsService {
-    @Autowired private AccountExecutiveDB accountExecutiveDB;
-    @Autowired private RoleDB roleDB;
 
-    @Bean
-    public BCryptPasswordEncoder bCryptPassword() {
-        return new BCryptPasswordEncoder();
-    }
+    private BCryptPasswordEncoder bCryptPassword;
+    private AccountExecutiveDB accountExecutiveDB;
+    private RoleDB roleDB;
+    
 
     @Override
     public AccountExecutive getAccountExecutiveById(Integer id){
@@ -38,7 +37,7 @@ public class AccountExecutiveServiceImp implements AccountExecutiveService, User
         if(accountDto==null){
             return null;
         }else{
-            String passWord=bCryptPassword().encode(accountDto.getPassword());
+            String passWord=bCryptPassword.encode(accountDto.getPassword());
             AccountExecutive newAccount=new AccountExecutive();
             newAccount.setPassWord(passWord);
             newAccount.setActif(accountDto.isActif());
@@ -101,8 +100,4 @@ public class AccountExecutiveServiceImp implements AccountExecutiveService, User
         return loadUserByUsername(username);
     }
 
-    //@Override
-    //public UserDetails loadUserByUsernames(String username) {
-    //    return loadUserByUsername(username);
-    //}
 }

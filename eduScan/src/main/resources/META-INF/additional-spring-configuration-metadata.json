@@ -1,0 +1,12 @@
+{"properties": [
+    {
+        "name": "app.metadata.key",
+        "type": "java.lang.String",
+        "description": "A description for 'app.metadata.key'"
+    },
+    {
+        "name": "app.metadata.name",
+        "type": "java.lang.String",
+        "description": "A description for 'app.metadata.name'"
+    }
+]}

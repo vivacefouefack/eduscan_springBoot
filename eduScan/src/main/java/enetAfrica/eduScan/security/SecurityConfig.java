@@ -9,16 +9,24 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+    
+    @Autowired private BCryptPasswordEncoder bCryptPassword;
+    @Autowired private UserDetailsService userDetailsService;
+    @Autowired private JwtFilterService jwtFilterService;
      
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -33,8 +41,11 @@ public class SecurityConfig {
                                         .requestMatchers(GET,"/api/account/getall").permitAll()
                                         .requestMatchers(GET,"/api/account/get/**").permitAll()
                                         .requestMatchers(POST,"/api/account/test").permitAll()
-                                        .anyRequest().authenticated()
-                ).build();
+                                        .anyRequest().authenticated())
+                .sessionManagement(httpSecurityManagementConfigurer ->
+                    httpSecurityManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .addFilterBefore(jwtFilterService, UsernamePasswordAuthenticationFilter.class)
+                .build();
 
     }
 
@@ -44,16 +55,10 @@ public class SecurityConfig {
     }
 
     @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-    
-    @Bean
-    public AuthenticationProvider authenticationProvider (UserDetailsService userDetailsService) {
+    public AuthenticationProvider authenticationProvider () {
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
         daoAuthenticationProvider.setUserDetailsService(userDetailsService);
-        daoAuthenticationProvider.setPasswordEncoder(bCryptPasswordEncoder());
+        daoAuthenticationProvider.setPasswordEncoder(bCryptPassword);
         return daoAuthenticationProvider;
     }
 

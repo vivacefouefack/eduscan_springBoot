@@ -2,6 +2,7 @@ package enetAfrica.eduScan.controller;
 
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -18,35 +19,30 @@ import enetAfrica.eduScan.dto.AuthenticationDto;
 import enetAfrica.eduScan.model.AccountExecutive;
 import enetAfrica.eduScan.security.JwtService;
 import enetAfrica.eduScan.service.AccountExecutiveService;
-import enetAfrica.eduScan.utils.Constant;
-import lombok.AllArgsConstructor;
 
 @RestController
 @RequestMapping("/api/account")
-@AllArgsConstructor
 public class AccountExecutiveController implements AccountExecutiveApi{
-
-    private AccountExecutiveService service;
-    private AuthenticationManager authenticationManager;
-    private JwtService jwtService;
+    
+    @Autowired private AccountExecutiveService service;
+    @Autowired private AuthenticationManager authenticationManager;
+    @Autowired private JwtService jwtService;
 
     @Override
-    public Map<String, String> connexionAccountExecutive(@RequestBody AuthenticationDto authenticationDto){
+    public ResponseEntity<Map<String, String>> connexionAccountExecutive(@RequestBody AuthenticationDto authenticationDto){
        
-        final Authentication authenticate =authenticationManager.authenticate(
-            new UsernamePasswordAuthenticationToken(authenticationDto.getUsername(), authenticationDto.getPassword())
-        );
-        
-        if(authenticate.isAuthenticated()){
-            System.out.println("+++++++++++++++++++++++++++++++++++++"+authenticate.isAuthenticated());
-            return jwtService.generateJwt(authenticationDto.getUsername());
+        try {
+            final Authentication authenticate =authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(authenticationDto.getUsername(), authenticationDto.getPassword())
+            );
+            
+            if(authenticate.isAuthenticated()){
+                return ResponseEntity.ok(jwtService.generateJwt(authenticationDto.getUsername()));
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
-
-        Map<String, String> msg= Map.of(
-            Constant.CONNEXION_ERROR,Constant.CONNEXION_ERROR_VALUE
-        );
-         
-        return msg;
+        return null;
     }
 
 
