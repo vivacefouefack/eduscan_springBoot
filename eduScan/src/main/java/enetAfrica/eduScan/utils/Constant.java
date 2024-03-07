@@ -6,4 +6,6 @@ public interface Constant {
     String INSTITUTION_NOT_FOUND_MESSAGE = "L'institution n'existe pas";
     String PROSPECTION_NOT_FOUND_MESSAGE = "Ce fichier de prospection n'existe pas";
     String VISIT_NOT_FOUND_MESSAGE = "Visite introuvable";
+    String CONNEXION_ERROR="Erreur de connexion";
+    String CONNEXION_ERROR_VALUE="Ce compte n'existe pas";
 }

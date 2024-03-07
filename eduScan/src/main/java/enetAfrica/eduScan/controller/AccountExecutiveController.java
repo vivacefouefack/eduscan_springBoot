@@ -16,7 +16,9 @@ import enetAfrica.eduScan.controller.api.AccountExecutiveApi;
 import enetAfrica.eduScan.dto.AccountDto;
 import enetAfrica.eduScan.dto.AuthenticationDto;
 import enetAfrica.eduScan.model.AccountExecutive;
+import enetAfrica.eduScan.security.JwtService;
 import enetAfrica.eduScan.service.AccountExecutiveService;
+import enetAfrica.eduScan.utils.Constant;
 import lombok.AllArgsConstructor;
 
 @RestController
@@ -26,26 +28,25 @@ public class AccountExecutiveController implements AccountExecutiveApi{
 
     private AccountExecutiveService service;
     private AuthenticationManager authenticationManager;
-
-    @Override
-    public String test(@RequestBody AuthenticationDto authenticationDto){
-        System.out.println("+++++++++++++++++++++++++++++++++++++"+authenticationDto.toString());
-        return "bonjour";
-        
-    }
+    private JwtService jwtService;
 
     @Override
     public Map<String, String> connexionAccountExecutive(@RequestBody AuthenticationDto authenticationDto){
-        System.out.println("******************************************************************************************************");
+       
         final Authentication authenticate =authenticationManager.authenticate(
             new UsernamePasswordAuthenticationToken(authenticationDto.getUsername(), authenticationDto.getPassword())
         );
         
         if(authenticate.isAuthenticated()){
             System.out.println("+++++++++++++++++++++++++++++++++++++"+authenticate.isAuthenticated());
+            return jwtService.generateJwt(authenticationDto.getUsername());
         }
+
+        Map<String, String> msg= Map.of(
+            Constant.CONNEXION_ERROR,Constant.CONNEXION_ERROR_VALUE
+        );
          
-        return null;
+        return msg;
     }
 
 
@@ -53,7 +54,6 @@ public class AccountExecutiveController implements AccountExecutiveApi{
     public ResponseEntity<AccountExecutive> addAccountExecutive(@RequestBody AccountDto accountDto) {
         try {
             AccountExecutive newAccountExecutive = service.addAccountExecutive(accountDto);
-            System.out.println("+++++++++++++++++++++++++++++++++++++"+newAccountExecutive.toString());
             return ResponseEntity.status(HttpStatus.CREATED).body(newAccountExecutive);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();

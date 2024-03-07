@@ -13,7 +13,6 @@ import enetAfrica.eduScan.exception.NotFoundException;
 import enetAfrica.eduScan.model.AccountExecutive;
 import enetAfrica.eduScan.service.AccountExecutiveService;
 import enetAfrica.eduScan.utils.Constant;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
@@ -93,8 +92,13 @@ public class AccountExecutiveServiceImp implements AccountExecutiveService, User
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public AccountExecutive loadUserByUsername(String username) throws UsernameNotFoundException {
         return accountExecutiveDB.findByUserName(username).orElseThrow(() -> new  UsernameNotFoundException("Aucun utilisateur ne corespond à ce nom utilisateur"));
+    }
+
+    @Override
+    public AccountExecutive getAccountExecutiveByUserName(String username) {
+        return loadUserByUsername(username);
     }
 
     //@Override

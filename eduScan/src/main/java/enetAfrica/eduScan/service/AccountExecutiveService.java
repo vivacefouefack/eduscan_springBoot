@@ -14,6 +14,13 @@ public interface AccountExecutiveService{
     public AccountExecutive getAccountExecutiveById(Integer id);
 
     /**
+     * 
+     * @param username
+     * @return
+     */
+    public AccountExecutive getAccountExecutiveByUserName(String username);
+
+    /**
      * permet d'ajouter un nouveau AccountExecutive
      * @param accountDto
      * @return AccountExecutive 
