@@ -1,6 +1,8 @@
 package enetAfrica.eduScan.service.implement;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import enetAfrica.eduScan.database.AccountExecutiveDB;
@@ -11,11 +13,19 @@ import enetAfrica.eduScan.exception.NotFoundException;
 import enetAfrica.eduScan.model.AccountExecutive;
 import enetAfrica.eduScan.service.AccountExecutiveService;
 import enetAfrica.eduScan.utils.Constant;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 @Service
-public class AccountExecutiveServiceImp implements AccountExecutiveService {
+public class AccountExecutiveServiceImp implements AccountExecutiveService, UserDetailsService {
     @Autowired private AccountExecutiveDB accountExecutiveDB;
     @Autowired private RoleDB roleDB;
+
+    @Bean
+    public BCryptPasswordEncoder bCryptPassword() {
+        return new BCryptPasswordEncoder();
+    }
 
     @Override
     public AccountExecutive getAccountExecutiveById(Integer id){
@@ -29,7 +39,11 @@ public class AccountExecutiveServiceImp implements AccountExecutiveService {
         if(accountDto==null){
             return null;
         }else{
+            String passWord=bCryptPassword().encode(accountDto.getPassword());
             AccountExecutive newAccount=new AccountExecutive();
+            newAccount.setPassWord(passWord);
+            newAccount.setActif(accountDto.isActif());
+            newAccount.setUserName(accountDto.getUsername());
             newAccount.setFirstName(accountDto.getFirstName());
             newAccount.setLastName(accountDto.getLastName());
             newAccount.setPhoneNumber(accountDto.getPhoneNumber());
@@ -77,4 +91,14 @@ public class AccountExecutiveServiceImp implements AccountExecutiveService {
     public Iterable<AccountExecutive> getAllAccountExecutives() {
         return accountExecutiveDB.findAll();
     }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return accountExecutiveDB.findByUserName(username).orElseThrow(() -> new  UsernameNotFoundException("Aucun utilisateur ne corespond à ce nom utilisateur"));
+    }
+
+    //@Override
+    //public UserDetails loadUserByUsernames(String username) {
+    //    return loadUserByUsername(username);
+    //}
 }

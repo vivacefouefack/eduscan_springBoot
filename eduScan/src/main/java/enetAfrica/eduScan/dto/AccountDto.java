@@ -1,5 +1,6 @@
 package enetAfrica.eduScan.dto;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -13,6 +14,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AccountDto {
     private Integer id; 
+    private String password;
+    private boolean actif;
+    
+    @Email(message = "L'adresse email doit être valide")
+    private String username;
+    
     @NotBlank(message = "Le prénom ne peut pas être vide")
     private String firstName;
 

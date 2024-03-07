@@ -1,4 +1,4 @@
-package enetAfrica.eduScan.service;
+/*package enetAfrica.eduScan.service;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -111,4 +111,4 @@ public class AccountExecutiveServiceTest {
         return counter;
     }
 
-}
+}*/

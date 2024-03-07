@@ -4,7 +4,7 @@ import enetAfrica.eduScan.dto.AccountDto;
 import enetAfrica.eduScan.model.AccountExecutive;
 
 
-public interface AccountExecutiveService {
+public interface AccountExecutiveService{
 
     /**
      * permet d'obtenir un AccountExecutive à partir de son identifiant.
@@ -39,5 +39,6 @@ public interface AccountExecutiveService {
      * @return la liste de tous les AccountExecutive
      */
     public Iterable<AccountExecutive> getAllAccountExecutives();
+    
 
 }
