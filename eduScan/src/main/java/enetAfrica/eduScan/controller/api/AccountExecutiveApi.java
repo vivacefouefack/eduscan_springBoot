@@ -17,8 +17,11 @@ import jakarta.validation.Valid;
 
 public interface AccountExecutiveApi {
 
-    @PostMapping("/connexion")
-    public ResponseEntity<Map<String, String>> connexionAccountExecutive(@RequestBody AuthenticationDto authenticationDto);
+    @PostMapping("/logout")
+    public void logoutAccountExecutive();
+
+    @PostMapping("/login")
+    public ResponseEntity<Map<String, String>> loginAccountExecutive(@RequestBody AuthenticationDto authenticationDto);
 
     @PostMapping("/add")
     public ResponseEntity<AccountExecutive> addAccountExecutive(@Valid  @RequestBody AccountDto accountDto);

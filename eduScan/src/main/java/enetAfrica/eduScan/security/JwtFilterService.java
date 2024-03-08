@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import enetAfrica.eduScan.model.AccountExecutive;
+import enetAfrica.eduScan.model.JwToken;
 import enetAfrica.eduScan.service.AccountExecutiveService;
+import enetAfrica.eduScan.service.TokenService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -21,6 +23,7 @@ public class JwtFilterService extends OncePerRequestFilter {
 
     @Autowired private AccountExecutiveService accountService;
     @Autowired private JwtService jwtService;
+    @Autowired private TokenService tokenService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws IOException, ServletException{
@@ -28,15 +31,17 @@ public class JwtFilterService extends OncePerRequestFilter {
         String username=null;
         String token=null;
         boolean isTokenExpired = true;
+        JwToken dbToken=null;
         
         final String autorization=request.getHeader("Authorization");
         if(autorization!=null && autorization.startsWith("bearer ")){
             token=autorization.substring(7);
             isTokenExpired = jwtService.isTokenExpired(token);
+            dbToken=tokenService.findByValue(token);
             username=jwtService.extractUserName(token);
         }
         
-        if(!isTokenExpired && username!=null && SecurityContextHolder.getContext().getAuthentication()==null){
+        if(!isTokenExpired && username!=null && dbToken.getUser().getUsername().equals(username)  && SecurityContextHolder.getContext().getAuthentication()==null){
             AccountExecutive account = accountService.getAccountExecutiveByUserName(username);
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(account, null, account.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authenticationToken);

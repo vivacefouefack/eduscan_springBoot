@@ -18,3 +18,4 @@ INSERT INTO agenda (id,visit_date, account_executive_id, institution_id) VALUES 
 
 INSERT INTO prospection_record (id,school_name, municipality, district, geographic_address, school_type, teaching_type, teaching_level, enrollment, contact_phone, email, has_computer, total_computers, has_internet, connection_type, router_type, telecom_operator, has_computer_room, has_electricity, has_management_software, software_name, visit_time, end_time, school_photo, seniority, first_visit_date, interlocutor_first_name, interlocutor_last_name, interlocutor_function) 
 VALUES (1,'my school', 'municipalite', 'district', 'Adresse géographique', 'type ecole', 'type enseignement', 'Niveau', 100, '0123456789', 'exemple@imasoftgroup.com', true, 50, true, 'connexion', 'type routeur', 'operateur', true, true, true, 'logiciel de gestion', '09:00:00', '17:00:00', 'src/image/photo.jpg', 3, '2022-03-01', 'interlocuteur', 'Nom', 'fonction interlocuteur');
+ 

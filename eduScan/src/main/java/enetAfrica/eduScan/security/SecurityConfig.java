@@ -36,9 +36,9 @@ public class SecurityConfig {
                 .authorizeHttpRequests(
                         authorize ->
                                 authorize
-                                        .requestMatchers(POST,"/api/account/add").permitAll()
                                         .requestMatchers(POST,"/api/account/connexion").permitAll()
-                                        .requestMatchers(GET,"/api/account/getall").permitAll()
+                                        .requestMatchers(POST,"/api/account/add").permitAll()
+                                        .requestMatchers(GET,"/api/account/getall").hasAuthority("ROLE_manager") 
                                         .requestMatchers(GET,"/api/account/get/**").permitAll()
                                         .requestMatchers(POST,"/api/account/test").permitAll()
                                         .anyRequest().authenticated())
