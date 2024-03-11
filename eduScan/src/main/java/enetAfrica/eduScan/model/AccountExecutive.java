@@ -2,6 +2,7 @@ package enetAfrica.eduScan.model;
 
 import java.util.Set;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -25,8 +26,10 @@ public class AccountExecutive implements UserDetails{
     @Id
     @GeneratedValue
     private Integer id;
-    
+
+    @Column(unique = true)
     private String userName;
+     
     private String passWord;
     private boolean actif=false;
     private String firstName;

@@ -8,4 +8,5 @@ public interface Constant {
     String VISIT_NOT_FOUND_MESSAGE = "Visite introuvable";
     String CONNEXION_ERROR="Erreur de connexion";
     String CONNEXION_ERROR_VALUE="Ce compte n'existe pas";
+    String LOGOUT_MESSAGE = "Déconnexion réussie";
 }

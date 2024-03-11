@@ -1,12 +1,14 @@
 package enetAfrica.eduScan.security;
 
 import java.security.Key;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Map;
 import java.util.function.Function;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import enetAfrica.eduScan.dto.TokenDto;
 import enetAfrica.eduScan.model.AccountExecutive;
@@ -19,6 +21,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 @Service
@@ -32,17 +35,18 @@ public class JwtService {
     @Value("${app.metadata.key}")
     private String encriptKey;
 
-    public Map<String,String>  generateJwt(String userName){
+    public String  generateJwt(String userName){
         AccountExecutive account= accountService.getAccountExecutiveByUserName(userName);
-        Map<String, String> jwt = generateToken(account);
+        String jwt = generateToken(account);
 
-        TokenDto tokenDto=new TokenDto(0,jwt.get(BEARER),false,account);
+        TokenDto tokenDto=new TokenDto(0,jwt,false,account);
+        tokenService.setExpire(userName, true);
         tokenService.addToken(tokenDto);
 
         return generateToken(account);
     }
 
-    private Map<String,String> generateToken(AccountExecutive account) {
+    private String generateToken(AccountExecutive account) {
 
         final Long currentTime=System.currentTimeMillis();
         final Long endTime= currentTime + 60*60*1000;
@@ -61,7 +65,7 @@ public class JwtService {
                 .setClaims(claims)
                 .signWith(getKey(), SignatureAlgorithm.HS256)
                 .compact();
-        return Map.of(BEARER, bearer);
+        return bearer;
     }
 
     private Key getKey() {
@@ -98,8 +102,16 @@ public class JwtService {
 
     public void logout() {
         AccountExecutive account=(AccountExecutive) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        System.out.println("accc"+account.getUsername());
         JwToken jwtoken = tokenService.findByUserUsernameAndExpire(account.getUsername(), false).get();
         jwtoken.setExpire(true);
         tokenService.updateToken(jwtoken);                       
+    }
+
+    @Scheduled(cron = "0 */10 * * * *")
+    @Transactional
+    public void removeAllExpire(){
+        System.out.println("exécution toutes les minutes   "+LocalDateTime.now());
+        tokenService.deleteAllExpire(true);
     }
 }

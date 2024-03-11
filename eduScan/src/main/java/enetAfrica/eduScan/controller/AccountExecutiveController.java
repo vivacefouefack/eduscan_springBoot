@@ -1,7 +1,5 @@
 package enetAfrica.eduScan.controller;
 
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,10 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import enetAfrica.eduScan.controller.api.AccountExecutiveApi;
 import enetAfrica.eduScan.dto.AccountDto;
+import enetAfrica.eduScan.dto.AuthResponseDto;
 import enetAfrica.eduScan.dto.AuthenticationDto;
 import enetAfrica.eduScan.model.AccountExecutive;
 import enetAfrica.eduScan.security.JwtService;
 import enetAfrica.eduScan.service.AccountExecutiveService;
+import enetAfrica.eduScan.utils.Constant;
 
 @RestController
 @RequestMapping("/api/account")
@@ -29,15 +29,26 @@ public class AccountExecutiveController implements AccountExecutiveApi{
     @Autowired private JwtService jwtService;
 
     @Override
-    public ResponseEntity<Map<String, String>> connexionAccountExecutive(@RequestBody AuthenticationDto authenticationDto){
-       
+    public ResponseEntity<String> logoutAccountExecutive(){
+        try {
+            jwtService.logout();
+            return ResponseEntity.ok(Constant.LOGOUT_MESSAGE);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+    }
+
+    @Override
+    public ResponseEntity<AuthResponseDto> loginAccountExecutive(@RequestBody AuthenticationDto authenticationDto){
+
         try {
             final Authentication authenticate =authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(authenticationDto.getUsername(), authenticationDto.getPassword())
             );
-            
             if(authenticate.isAuthenticated()){
-                return ResponseEntity.ok(jwtService.generateJwt(authenticationDto.getUsername()));
+                AccountExecutive currentUser=(AccountExecutive) authenticate.getPrincipal();
+                AuthResponseDto resp=new AuthResponseDto(currentUser, jwtService.generateJwt(authenticationDto.getUsername()));
+                return ResponseEntity.ok(resp);
             }
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();

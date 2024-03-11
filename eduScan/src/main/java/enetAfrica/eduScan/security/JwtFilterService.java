@@ -34,7 +34,7 @@ public class JwtFilterService extends OncePerRequestFilter {
         JwToken dbToken=null;
         
         final String autorization=request.getHeader("Authorization");
-        if(autorization!=null && autorization.startsWith("bearer ")){
+        if(autorization!=null && autorization.startsWith("Bearer ")){
             token=autorization.substring(7);
             isTokenExpired = jwtService.isTokenExpired(token);
             dbToken=tokenService.findByValue(token);

@@ -33,4 +33,12 @@ public class TokenService {
     public Optional<JwToken> findByUserUsernameAndExpire(String username,boolean expire){
         return tokenDb.findByUserUsernameAndExpire(username, expire);
     }
+
+    public void deleteAllExpire(boolean expire) {
+        tokenDb.deleteByExpire(expire);
+    }
+
+    public void setExpire(String userName, boolean newValue) {
+        tokenDb.updateExpireField(userName, newValue, false);
+    }
 }
