@@ -15,8 +15,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import static org.springframework.http.HttpMethod.DELETE;
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
+import static org.springframework.http.HttpMethod.PUT;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -37,11 +39,12 @@ public class SecurityConfig {
                         authorize ->
                                 authorize
                                         .requestMatchers(POST,"/api/account/login").permitAll()
-                                        .requestMatchers(POST,"/api/account/logout").permitAll()
-                                        .requestMatchers(POST,"/api/account/add").permitAll()
-                                        .requestMatchers(GET,"/api/account/getall").hasAuthority("ROLE_manager") 
-                                        .requestMatchers(GET,"/api/account/get/**").permitAll()
-                                        .requestMatchers(POST,"/api/account/test").permitAll()
+                                        .requestMatchers(POST,"/api/account/logout").authenticated()
+                                        .requestMatchers(POST,"/api/account/add").hasAnyRole("ADMIN","MANAGER") 
+                                        .requestMatchers(PUT,"/api/account/update").hasAnyRole("PROSPECTOR")                                        
+                                        .requestMatchers(GET,"/api/account/getall").hasAnyRole("ADMIN","MANAGER") 
+                                        .requestMatchers(GET,"/api/account/get/**").hasAnyRole("ADMIN","MANAGER") 
+                                        .requestMatchers(DELETE,"/api/account/update").hasAnyRole("ADMIN","MANAGER") 
                                         .anyRequest().authenticated())
                 .sessionManagement(httpSecurityManagementConfigurer ->
                     httpSecurityManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
