@@ -42,7 +42,7 @@ public class SecurityConfig {
                                         .requestMatchers(POST,"/api/account/logout").authenticated()
                                         .requestMatchers(POST,"/api/account/add").hasAnyRole("ADMIN","MANAGER") 
                                         .requestMatchers(PUT,"/api/account/update").hasAnyRole("PROSPECTOR")                                        
-                                        .requestMatchers(GET,"/api/account/getall").hasAnyRole("ADMIN","MANAGER") 
+                                        .requestMatchers(GET,"/api/account/getall").hasAnyRole("PROSPECTOR","MANAGER") 
                                         .requestMatchers(GET,"/api/account/get/**").hasAnyRole("ADMIN","MANAGER") 
                                         .requestMatchers(DELETE,"/api/account/update").hasAnyRole("ADMIN","MANAGER") 
                                         .anyRequest().authenticated())

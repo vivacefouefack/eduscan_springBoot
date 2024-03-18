@@ -43,7 +43,7 @@ public class JwtService {
         tokenService.setExpire(userName, true);
         tokenService.addToken(tokenDto);
 
-        return generateToken(account);
+        return jwt;
     }
 
     private String generateToken(AccountExecutive account) {
