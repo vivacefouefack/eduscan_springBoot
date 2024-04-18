@@ -34,7 +34,7 @@ public class ProspectionRecordServiceImp implements ProspectionRecordService{
             prospect.setEmail(prospectDto.getEmail());
             prospect.setHasComputer(prospectDto.isHasComputer());
             prospect.setTotalComputers(prospectDto.getTotalComputers());
-            prospect.setSchoolPhoto(prospectDto.getSchoolPhoto());
+           // prospect.setSchoolPhoto(prospectDto.getSchoolPhoto());
             prospect.setSeniority(prospectDto.getSeniority());
             prospect.setFirstVisitDate(prospectDto.getFirstVisitDate());
             prospect.setInterlocutorFirstName(prospectDto.getInterlocutorFirstName());
@@ -73,7 +73,7 @@ public class ProspectionRecordServiceImp implements ProspectionRecordService{
             prospect.setEmail(prospectDto.getEmail());
             prospect.setHasComputer(prospectDto.isHasComputer());
             prospect.setTotalComputers(prospectDto.getTotalComputers());
-            prospect.setSchoolPhoto(prospectDto.getSchoolPhoto());
+            //prospect.setSchoolPhoto(prospectDto.getSchoolPhoto());
             prospect.setSeniority(prospectDto.getSeniority());
             prospect.setFirstVisitDate(prospectDto.getFirstVisitDate());
             prospect.setInterlocutorFirstName(prospectDto.getInterlocutorFirstName());
@@ -95,6 +95,7 @@ public class ProspectionRecordServiceImp implements ProspectionRecordService{
 
     @Override
     public void deleteProspectionRecord(Integer id) {
+        System.out.println("///////////////////////////////////////////////////////////////");
         if (id !=null) {
             prospectionRecordDB.deleteById(id);
         } 

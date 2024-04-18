@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,12 +23,22 @@ public class InstitutionProfileController implements InstitutionProfileApi {
 
     @Autowired private InstitutionProfileService institutionProfileService;
 
+
+    /*@Override
+    public ResponseEntity<?> addInstitutionProfile(@ModelAttribute PropectionRecordDto profileDto) {
+       // log.warn("TEST {}", profileDto);
+        log.warn("TEST {}", profileDto);
+        return ResponseEntity.ok().build();
+    }*/
+
+    
     @Override
-    public ResponseEntity<InstitutionProfile> addInstitutionProfile(@RequestBody PropectionRecordDto profileDto) {
+    public ResponseEntity<InstitutionProfile> addInstitutionProfile(@ModelAttribute PropectionRecordDto profileDto) {
         try {
             InstitutionProfile newProfile = institutionProfileService.addInstitutionProfile(profileDto);
             return ResponseEntity.status(HttpStatus.CREATED).body(newProfile);
         } catch (Exception e) {
+            System.out.println("message d'erreur : "+e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }

@@ -1,5 +1,12 @@
 package enetAfrica.eduScan.service.implement;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +28,17 @@ public class InstitutionProfileServiceImp implements InstitutionProfileService {
         if(profileDto==null){
             return null;
         }else{
+            System.out.println("enregistrement de l'imaage---------------------------------"+profileDto.getSchoolPhoto().getOriginalFilename());
+
+            String directory="D:\\6equadri\\imasoft\\pro\\mobile_prospect_app_backend\\eduScan\\src\\main\\resources\\static\\upload\\schoolprofil";
+            try {
+                Files.copy(profileDto.getSchoolPhoto().getInputStream(), Paths.get(directory+File.separator+profileDto.getSchoolPhoto().getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+            
             InstitutionProfile profile=new InstitutionProfile();
             profile.setSchoolName(profileDto.getSchoolName());
             profile.setMunicipality(profileDto.getMunicipality());
@@ -34,7 +52,7 @@ public class InstitutionProfileServiceImp implements InstitutionProfileService {
             profile.setEmail(profileDto.getEmail());
             profile.setHasComputer(profileDto.isHasComputer());
             profile.setTotalComputers(profileDto.getTotalComputers());
-            profile.setSchoolPhoto(profileDto.getSchoolPhoto());
+            profile.setSchoolPhoto(directory+"\\"+profileDto.getSchoolPhoto().getOriginalFilename()); 
             profile.setHasInternet(profileDto.isHasInternet());
             profile.setConnectionType(profileDto.getConnectionType());
             profile.setRouterType(profileDto.getRouterType());
@@ -49,6 +67,14 @@ public class InstitutionProfileServiceImp implements InstitutionProfileService {
         }      
     }
 
+    /*private String saveImage(String base64Image) throws IOException {
+        String uploadDir = "/upload/schoolprofil/";
+        String fileName = LocalDateTime.now() + ".jpg";
+        Path imagePath = Paths.get(uploadDir, fileName);
+        byte[] imageBytes = Base64.getDecoder().decode(base64Image);
+        Files.write(imagePath, imageBytes);
+        return imagePath.toString();
+    } */
 
     @Override
     public void deleteInstitutionProfileById(Integer id) {
@@ -83,7 +109,7 @@ public class InstitutionProfileServiceImp implements InstitutionProfileService {
             profile.setEmail(profileDto.getEmail());
             profile.setHasComputer(profileDto.isHasComputer());
             profile.setTotalComputers(profileDto.getTotalComputers());
-            profile.setSchoolPhoto(profileDto.getSchoolPhoto());
+            //profile.setSchoolPhoto(profileDto.getSchoolPhoto());
             profile.setHasInternet(profileDto.isHasInternet());
             profile.setConnectionType(profileDto.getConnectionType());
             profile.setRouterType(profileDto.getRouterType());

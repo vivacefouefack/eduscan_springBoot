@@ -34,6 +34,7 @@ public class ProspectionController implements ProspectionApi {
 
     @Override
     public ResponseEntity<ProspectionRecord> updateProspectionRecord(@RequestBody PropectionRecordDto prospectDto) {
+        System.out.println("delettttttttttttttttttttttttttttttttttttttttttttt");
         try {
             ProspectionRecord updatedProspectionRecord = prospectionRecordService.updateProspectionRecord(prospectDto);
             return ResponseEntity.ok(updatedProspectionRecord);

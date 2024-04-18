@@ -25,14 +25,14 @@ public class ExceptionController {
 
     @ResponseStatus(HttpStatus.FORBIDDEN)
     @ExceptionHandler(value=AccessDeniedException.class)
-    public ProblemDetail accessDeniedException(AccessDeniedException exception){
+    public ProblemDetail accessDeniedException(AccessDeniedException exception){ 
         return ProblemDetail.forStatusAndDetail(HttpStatus.FORBIDDEN, "Accès non autorisé");
     }
 
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     @ExceptionHandler(value=Exception.class)
     public Map<String,String> exceptionHandle(Exception exception){
-        return Map.of("erreur", "nous n'avons pas pu vous identifier");
+        return Map.of("erreur", "nous n'avons pas pu vous identifier"); 
     }
 
 }

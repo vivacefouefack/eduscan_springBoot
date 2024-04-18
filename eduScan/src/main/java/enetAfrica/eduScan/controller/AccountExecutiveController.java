@@ -20,6 +20,7 @@ import enetAfrica.eduScan.security.JwtService;
 import enetAfrica.eduScan.service.AccountExecutiveService;
 import enetAfrica.eduScan.utils.Constant;
 
+
 @RestController
 @RequestMapping("/api/account")
 public class AccountExecutiveController implements AccountExecutiveApi{
@@ -40,7 +41,6 @@ public class AccountExecutiveController implements AccountExecutiveApi{
 
     @Override
     public ResponseEntity<AuthResponseDto> loginAccountExecutive(@RequestBody AuthenticationDto authenticationDto){
-
         try {
             final Authentication authenticate =authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(authenticationDto.getUsername(), authenticationDto.getPassword())

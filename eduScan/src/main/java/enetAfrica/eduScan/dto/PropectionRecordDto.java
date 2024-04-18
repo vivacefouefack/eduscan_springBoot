@@ -3,6 +3,9 @@ package enetAfrica.eduScan.dto;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import org.springframework.web.multipart.MultipartFile;
+
+import io.micrometer.common.lang.Nullable;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Past;
@@ -48,8 +51,9 @@ public class PropectionRecordDto {
     @Positive(message = "Le nombre total d'ordinateurs doit être positif")
     private int totalComputers;
 
-    @NotBlank(message = "La photo de l'école ne peut pas être vide")
-    private String schoolPhoto;
+    //@NotBlank(message = "La photo de l'école ne peut pas être vide")
+    @Nullable
+    private MultipartFile schoolPhoto;
 
     @PositiveOrZero(message = "L'ancienneté doit être un nombre positif ou zéro")
     private int seniority;

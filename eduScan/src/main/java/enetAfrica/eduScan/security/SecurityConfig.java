@@ -38,14 +38,20 @@ public class SecurityConfig {
                 .authorizeHttpRequests(
                         authorize ->
                                 authorize
-                                        .requestMatchers(POST,"/api/account/login").permitAll()
-                                        .requestMatchers(POST,"/api/account/logout").authenticated()
-                                        .requestMatchers(POST,"/api/account/add").hasAnyRole("ADMIN","MANAGER") 
-                                        .requestMatchers(PUT,"/api/account/update").hasAnyRole("PROSPECTOR")                                        
-                                        .requestMatchers(GET,"/api/account/getall").hasAnyRole("PROSPECTOR","MANAGER") 
-                                        .requestMatchers(GET,"/api/account/get/**").hasAnyRole("ADMIN","MANAGER") 
-                                        .requestMatchers(DELETE,"/api/account/update").hasAnyRole("ADMIN","MANAGER") 
-                                        .anyRequest().authenticated())
+                                    .requestMatchers(POST,"/api/institution/ajouter").permitAll()
+                                    .requestMatchers(POST,"/api/account/login").permitAll()
+                                    .requestMatchers(POST,"/api/account/logout").authenticated()
+                                    .requestMatchers(POST,"/api/account/add").hasAnyRole("ADMIN","MANAGER") 
+                                    .requestMatchers(PUT,"/api/account/update").hasAnyRole("ADMIN","PROSPECTOR")                                        
+                                    .requestMatchers(GET,"/api/account/getall").hasAnyRole("PROSPECTOR","MANAGER") 
+                                    .requestMatchers(GET,"/api/account/get/**").hasAnyRole("ADMIN","MANAGER") 
+                                    .requestMatchers(DELETE,"/api/account/delete").hasAnyRole("ADMIN","MANAGER") 
+                                    .requestMatchers(DELETE,"/api/prospection/delete/**").hasAnyRole("ADMIN","PROSPECTOR") 
+                                    .requestMatchers(GET,"/api/prospection/**").hasAnyRole("ADMIN","PROSPECTOR") 
+                                    .requestMatchers(POST,"/api/institution/add").hasAnyRole("ADMIN","PROSPECTOR") 
+                                    .requestMatchers(PUT,"/api/institution/update").hasAnyRole("ADMIN","PROSPECTOR") 
+                                    .requestMatchers(GET,"/api/institution/getall").hasAnyRole("ADMIN","PROSPECTOR") 
+                                    .anyRequest().authenticated())
                 .sessionManagement(httpSecurityManagementConfigurer ->
                     httpSecurityManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtFilterService, UsernamePasswordAuthenticationFilter.class)

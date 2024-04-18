@@ -48,7 +48,7 @@ public class ProspectionRecordServiceTest {
         profilDto.setEmail("eduScan@imasoftGroup.com");
         profilDto.setHasComputer(true);
         profilDto.setTotalComputers(50); 
-        profilDto.setSchoolPhoto("Src/images/photo.jpg");
+        //profilDto.setSchoolPhoto("Src/images/photo.jpg");
         profilDto.setSeniority(5); 
         profilDto.setFirstVisitDate(LocalDate.of(2023, 10, 15)); 
         profilDto.setInterlocutorFirstName("Prénom de l'interlocuteur");
