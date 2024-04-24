@@ -1,6 +1,6 @@
 package enetAfrica.eduScan.service;
 
-import enetAfrica.eduScan.dto.PropectionRecordDto;
+import enetAfrica.eduScan.dto.InstitutionDto;
 import enetAfrica.eduScan.model.InstitutionProfile;
 
 public interface InstitutionProfileService {
@@ -10,7 +10,7 @@ public interface InstitutionProfileService {
      * @param profileDto
      * @return
      */
-    public InstitutionProfile addInstitutionProfile(PropectionRecordDto profileDto);
+    public InstitutionProfile addInstitutionProfile(InstitutionDto profileDto);
 
 
     /**
@@ -31,7 +31,7 @@ public interface InstitutionProfileService {
      * @param profileDto
      * @return
      */
-    public InstitutionProfile updateInstitutionProfile(PropectionRecordDto profileDto);
+    public InstitutionProfile updateInstitutionProfile(InstitutionDto profileDto);
 
     /**
      * 

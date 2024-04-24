@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import enetAfrica.eduScan.database.InstitutionProfileDB;
-import enetAfrica.eduScan.dto.PropectionRecordDto;
+import enetAfrica.eduScan.dto.InstitutionDto; 
 import enetAfrica.eduScan.exception.ErrorCode;
 import enetAfrica.eduScan.exception.NotFoundException;
 import enetAfrica.eduScan.model.InstitutionProfile;
@@ -24,20 +24,16 @@ public class InstitutionProfileServiceImp implements InstitutionProfileService {
     @Autowired private InstitutionProfileDB institutionProfileDB;
 
     @Override
-    public InstitutionProfile addInstitutionProfile(PropectionRecordDto profileDto) {
+    public InstitutionProfile addInstitutionProfile(InstitutionDto profileDto) {
         if(profileDto==null){
             return null;
         }else{
-            System.out.println("enregistrement de l'imaage---------------------------------"+profileDto.getSchoolPhoto().getOriginalFilename());
-
             String directory="D:\\6equadri\\imasoft\\pro\\mobile_prospect_app_backend\\eduScan\\src\\main\\resources\\static\\upload\\schoolprofil";
             try {
                 Files.copy(profileDto.getSchoolPhoto().getInputStream(), Paths.get(directory+File.separator+profileDto.getSchoolPhoto().getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-            System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
             
             InstitutionProfile profile=new InstitutionProfile();
             profile.setSchoolName(profileDto.getSchoolName());
@@ -63,18 +59,11 @@ public class InstitutionProfileServiceImp implements InstitutionProfileService {
             profile.setSoftwareName(profileDto.getSoftwareName());
             profile.setVisitTime(profileDto.getVisitTime());
             profile.setEndTime(profileDto.getEndTime());
+            profile.setLatitude(profileDto.getLatitude());
+            profile.setLongitude(profileDto.getLongitude());
             return institutionProfileDB.save(profile);
         }      
     }
-
-    /*private String saveImage(String base64Image) throws IOException {
-        String uploadDir = "/upload/schoolprofil/";
-        String fileName = LocalDateTime.now() + ".jpg";
-        Path imagePath = Paths.get(uploadDir, fileName);
-        byte[] imageBytes = Base64.getDecoder().decode(base64Image);
-        Files.write(imagePath, imageBytes);
-        return imagePath.toString();
-    } */
 
     @Override
     public void deleteInstitutionProfileById(Integer id) {
@@ -92,7 +81,7 @@ public class InstitutionProfileServiceImp implements InstitutionProfileService {
     }
 
     @Override
-    public InstitutionProfile updateInstitutionProfile(PropectionRecordDto profileDto) {
+    public InstitutionProfile updateInstitutionProfile(InstitutionDto profileDto) {
         if(profileDto==null){
             return null;
         }else{
@@ -126,6 +115,8 @@ public class InstitutionProfileServiceImp implements InstitutionProfileService {
 
     @Override
     public Iterable<InstitutionProfile> getAll(){
+        System.out.println("service -----------------------------------------------------");
+        System.out.println("+++++"+institutionProfileDB.findAll());
         return institutionProfileDB.findAll();
     }
 }

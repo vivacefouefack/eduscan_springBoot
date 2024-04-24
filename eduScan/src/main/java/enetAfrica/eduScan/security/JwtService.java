@@ -49,7 +49,7 @@ public class JwtService {
     private String generateToken(AccountExecutive account) {
 
         final Long currentTime=System.currentTimeMillis();
-        final Long endTime= currentTime + (60*60*1000)*2;
+        final Long endTime= currentTime + (60*60*1000)*24;
 
         final Map<String, Object> claims = Map.of(
             "name", account.getUsername(),

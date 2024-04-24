@@ -12,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import enetAfrica.eduScan.dto.InstitutionDto;
 import enetAfrica.eduScan.dto.PropectionRecordDto;
 import enetAfrica.eduScan.exception.ErrorCode;
 import enetAfrica.eduScan.exception.NotFoundException;
@@ -33,7 +34,7 @@ public class InstitutionProfileServiceTest {
     @Test
     public void shouldSaveInstitutionProfileWithSuccess() {
         
-        PropectionRecordDto profilDto=new PropectionRecordDto();
+        InstitutionDto profilDto=new InstitutionDto();
         profilDto.setEmail("exemple@imasoftgroup.com");
         InstitutionProfile profil=service.addInstitutionProfile(profilDto);
 
@@ -66,7 +67,7 @@ public class InstitutionProfileServiceTest {
 
     @Test
     public void shouldUpdateInstitutionProfileWithSuccess() {
-        PropectionRecordDto profilDto=new PropectionRecordDto();
+        InstitutionDto profilDto=new InstitutionDto();
         profilDto.setEmail("exemple@imasoftgroup.com");
         InstitutionProfile profil=service.addInstitutionProfile(profilDto);
         profilDto.setId(profil.getId());

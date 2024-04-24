@@ -22,6 +22,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import enetAfrica.eduScan.dto.InstitutionDto;
 import enetAfrica.eduScan.dto.PropectionRecordDto;
 import enetAfrica.eduScan.model.InstitutionProfile;
 import enetAfrica.eduScan.service.InstitutionProfileService;
@@ -71,7 +72,7 @@ public class InstitutionProfileControllerTest {
 
         InstitutionProfile institutionProfile = new InstitutionProfile(); 
 
-        Mockito.when(service.addInstitutionProfile(Mockito.any(PropectionRecordDto.class))).thenReturn(institutionProfile);
+        Mockito.when(service.addInstitutionProfile(Mockito.any(InstitutionDto.class))).thenReturn(institutionProfile);
 
         ObjectMapper objectMapper = new ObjectMapper();
         String profileDtoJson = objectMapper.writeValueAsString(profileDto);
@@ -87,7 +88,7 @@ public class InstitutionProfileControllerTest {
         PropectionRecordDto profileDto = new PropectionRecordDto(); 
         InstitutionProfile institutionProfile = new InstitutionProfile(); 
     
-        Mockito.when(service.updateInstitutionProfile(Mockito.any(PropectionRecordDto.class))).thenReturn(institutionProfile);
+        Mockito.when(service.updateInstitutionProfile(Mockito.any(InstitutionDto.class))).thenReturn(institutionProfile);
     
         ObjectMapper objectMapper = new ObjectMapper();
         String profileDtoJson = objectMapper.writeValueAsString(profileDto);

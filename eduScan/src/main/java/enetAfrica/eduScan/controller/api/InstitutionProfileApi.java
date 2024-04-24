@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import enetAfrica.eduScan.dto.PropectionRecordDto;
+import enetAfrica.eduScan.dto.InstitutionDto;
 import enetAfrica.eduScan.model.InstitutionProfile;
 import jakarta.validation.Valid;
 
@@ -21,7 +21,7 @@ public interface InstitutionProfileApi {
     //public ResponseEntity<?> addInstitutionProfile(@ModelAttribute PropectionRecordDto profileDto);
 
     @PostMapping(value ="/add",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<InstitutionProfile> addInstitutionProfile(@Valid @ModelAttribute  PropectionRecordDto profileDto);
+    public ResponseEntity<InstitutionProfile> addInstitutionProfile(@Valid @ModelAttribute InstitutionDto profileDto);
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Integer> deleteInstitutionProfile(@PathVariable int id);
@@ -30,7 +30,7 @@ public interface InstitutionProfileApi {
     public ResponseEntity<InstitutionProfile> getInstitutionProfile(@PathVariable int id);
 
     @PutMapping("/update")
-    public ResponseEntity<InstitutionProfile> updateInstitutionProfile(@Valid @RequestBody PropectionRecordDto profileDto);
+    public ResponseEntity<InstitutionProfile> updateInstitutionProfile(@Valid @RequestBody InstitutionDto profileDto);
 
     @GetMapping("/getall")
     public ResponseEntity<Iterable<InstitutionProfile>> getAllInstitutionProfiles();

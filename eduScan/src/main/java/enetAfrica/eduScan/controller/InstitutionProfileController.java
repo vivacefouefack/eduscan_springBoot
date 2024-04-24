@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import enetAfrica.eduScan.controller.api.InstitutionProfileApi;
-import enetAfrica.eduScan.dto.PropectionRecordDto;
+import enetAfrica.eduScan.dto.InstitutionDto;
 import enetAfrica.eduScan.model.InstitutionProfile;
 import enetAfrica.eduScan.service.InstitutionProfileService;
 
@@ -33,8 +33,9 @@ public class InstitutionProfileController implements InstitutionProfileApi {
 
     
     @Override
-    public ResponseEntity<InstitutionProfile> addInstitutionProfile(@ModelAttribute PropectionRecordDto profileDto) {
+    public ResponseEntity<InstitutionProfile> addInstitutionProfile(@ModelAttribute InstitutionDto profileDto) {
         try {
+            System.out.println("**********************************I>"+ profileDto.toString());
             InstitutionProfile newProfile = institutionProfileService.addInstitutionProfile(profileDto);
             return ResponseEntity.status(HttpStatus.CREATED).body(newProfile);
         } catch (Exception e) {
@@ -64,7 +65,7 @@ public class InstitutionProfileController implements InstitutionProfileApi {
     }
 
     @Override
-    public ResponseEntity<InstitutionProfile> updateInstitutionProfile(@RequestBody PropectionRecordDto profileDto) {
+    public ResponseEntity<InstitutionProfile> updateInstitutionProfile(@RequestBody InstitutionDto profileDto) {
         try {
             InstitutionProfile updatedProfile = institutionProfileService.updateInstitutionProfile(profileDto);
             if (updatedProfile != null) {
@@ -79,10 +80,14 @@ public class InstitutionProfileController implements InstitutionProfileApi {
 
     @Override
     public ResponseEntity<Iterable<InstitutionProfile>> getAllInstitutionProfiles() {
+        System.out.println("#########################################################################1");
         try {
+            System.out.println("#########################################################################2");
             Iterable<InstitutionProfile> profiles = institutionProfileService.getAll();
+            System.out.println("#########################################################################3");
             return ResponseEntity.ok(profiles);
         } catch (Exception e) {
+            System.out.println("#########################################################################");
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }

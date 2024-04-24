@@ -71,10 +71,10 @@ public class AccountExecutiveControllerTest {
         accountDto.setProspectingZone("riviera triangle");
         accountDto.setProspectingMunicipality("cocody");
         accountDto.setPhoto("src/img/photo.jpg");
-        accountDto.setFunction(2);
-        accountDto.setSuperiorN1(7);
-        accountDto.setSuperiorN2(8);
-        accountDto.setSuperiorN3(9);
+        //accountDto.setFunction(2);
+        //accountDto.setSuperiorN1(7);
+        //accountDto.setSuperiorN2(8);
+        //accountDto.setSuperiorN3(9);
         
         AccountExecutive account = new AccountExecutive();
         account.setId(2);

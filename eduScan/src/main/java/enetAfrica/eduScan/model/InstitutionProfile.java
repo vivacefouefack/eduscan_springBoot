@@ -17,4 +17,8 @@ public class InstitutionProfile extends InstitutInformation {
     @Id
     @GeneratedValue
     private Integer id;
+
+    private double latitude;
+
+    private double longitude;
 }

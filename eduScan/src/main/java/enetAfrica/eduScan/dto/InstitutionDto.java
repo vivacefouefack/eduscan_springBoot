@@ -1,6 +1,5 @@
 package enetAfrica.eduScan.dto;
 
-import java.time.LocalDate;
 import java.time.LocalTime;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -8,13 +7,11 @@ import org.springframework.web.multipart.MultipartFile;
 import io.micrometer.common.lang.Nullable;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Data;
 
 @Data
-public class PropectionRecordDto {
+public class InstitutionDto {
     private Integer id;
     @NotBlank(message = "Le nom de l'école ne peut pas être vide")
     private String schoolName;
@@ -54,21 +51,6 @@ public class PropectionRecordDto {
     @Nullable
     private MultipartFile schoolPhoto;
 
-    @PositiveOrZero(message = "L'ancienneté doit être un nombre positif ou zéro")
-    private int seniority;
-
-    @Past(message = "La date de première visite doit être dans le passé")
-    private LocalDate firstVisitDate;
-
-    @NotBlank(message = "Le prénom de l'interlocuteur ne doit pas être vide")
-    private String interlocutorFirstName;
-
-    @NotBlank(message = "Le nom de l'interlocuteur ne doit pas être vide")
-    private String interlocutorLastName;
-
-    @NotBlank(message = "La fonction de l'interlocuteur ne doit pas être vide")
-    private String interlocutorFunction;
-
     private boolean hasInternet;
 
     private String connectionType;
@@ -89,4 +71,8 @@ public class PropectionRecordDto {
 
     private LocalTime endTime;
 
+    private double latitude;
+
+    private double longitude;
+    
 }

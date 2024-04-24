@@ -2,8 +2,8 @@ package enetAfrica.eduScan.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
+//import jakarta.validation.constraints.NotNull;
+//import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -35,18 +35,18 @@ public class AccountDto {
     @NotBlank(message = "La municipalité de prospection ne peut pas être vide")                                             
     private String prospectingMunicipality;
 
-    @NotBlank(message = "La photo ne peut pas être vide") 
+    //@NotBlank(message = "La photo ne peut pas être vide") 
     private String photo;
 
-    @NotNull(message = "Le rôle ne peut pas être négatif")
-    private Integer function;
+    //@NotNull(message = "Le rôle ne peut pas être négatif")
+    private String function;
 
-    @Positive(message = "Le supérieur N1 ne peut pas être négatif")
-    private Integer superiorN1;
+    //@Positive(message = "Le supérieur N1 ne peut pas être négatif")
+    private String superiorN1;
 
-    @NotNull(message = "Le supérieur N2 ne peut pas être négatif")
-    private Integer superiorN2;
+    //@NotNull(message = "Le supérieur N2 ne peut pas être négatif")
+    private String superiorN2;
 
-    @NotNull(message = "Le supérieur N3 ne peut pas être négatif")
-    private Integer superiorN3;
+    //@NotNull(message = "Le supérieur N3 ne peut pas être négatif")
+    private String superiorN3;
 }
