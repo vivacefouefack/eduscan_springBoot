@@ -6,10 +6,10 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import enetAfrica.eduScan.database.AccountExecutiveDB;
 import enetAfrica.eduScan.database.InstitutionProfileDB;
 import enetAfrica.eduScan.dto.InstitutionDto; 
 import enetAfrica.eduScan.exception.ErrorCode;
@@ -22,6 +22,7 @@ import enetAfrica.eduScan.utils.Constant;
 public class InstitutionProfileServiceImp implements InstitutionProfileService {
     
     @Autowired private InstitutionProfileDB institutionProfileDB;
+    @Autowired private AccountExecutiveDB accountExecutiveDB;
 
     @Override
     public InstitutionProfile addInstitutionProfile(InstitutionDto profileDto) {
@@ -48,7 +49,7 @@ public class InstitutionProfileServiceImp implements InstitutionProfileService {
             profile.setEmail(profileDto.getEmail());
             profile.setHasComputer(profileDto.isHasComputer());
             profile.setTotalComputers(profileDto.getTotalComputers());
-            profile.setSchoolPhoto(directory+"\\"+profileDto.getSchoolPhoto().getOriginalFilename()); 
+            profile.setSchoolPhoto(profileDto.getSchoolPhoto().getOriginalFilename());
             profile.setHasInternet(profileDto.isHasInternet());
             profile.setConnectionType(profileDto.getConnectionType());
             profile.setRouterType(profileDto.getRouterType());
@@ -61,7 +62,12 @@ public class InstitutionProfileServiceImp implements InstitutionProfileService {
             profile.setEndTime(profileDto.getEndTime());
             profile.setLatitude(profileDto.getLatitude());
             profile.setLongitude(profileDto.getLongitude());
-            return institutionProfileDB.save(profile);
+
+            
+            profile.setAccountExecutive(accountExecutiveDB.findById(profileDto.getId()).get());
+            InstitutionProfile newProfil = institutionProfileDB.save(profile);
+
+            return newProfil;
         }      
     }
 
@@ -98,7 +104,7 @@ public class InstitutionProfileServiceImp implements InstitutionProfileService {
             profile.setEmail(profileDto.getEmail());
             profile.setHasComputer(profileDto.isHasComputer());
             profile.setTotalComputers(profileDto.getTotalComputers());
-            //profile.setSchoolPhoto(profileDto.getSchoolPhoto());
+            profile.setSchoolPhoto(profileDto.getSchoolPhoto().getOriginalFilename());
             profile.setHasInternet(profileDto.isHasInternet());
             profile.setConnectionType(profileDto.getConnectionType());
             profile.setRouterType(profileDto.getRouterType());
@@ -115,8 +121,6 @@ public class InstitutionProfileServiceImp implements InstitutionProfileService {
 
     @Override
     public Iterable<InstitutionProfile> getAll(){
-        System.out.println("service -----------------------------------------------------");
-        System.out.println("+++++"+institutionProfileDB.findAll());
         return institutionProfileDB.findAll();
     }
 }

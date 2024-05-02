@@ -39,7 +39,6 @@ public class AccountExecutiveServiceImp implements AccountExecutiveService, User
         if(accountDto==null){
             return null;
         }else{
-            System.out.println("*********************************>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
             String passWord=bCryptPassword.encode(accountDto.getPassword());
             AccountExecutive newAccount=new AccountExecutive();
             newAccount.setPassWord(passWord);
@@ -54,9 +53,9 @@ public class AccountExecutiveServiceImp implements AccountExecutiveService, User
             //newAccount.setSuperiorN1(accountDto.getSuperiorN1());
             //newAccount.setSuperiorN2(accountDto.getSuperiorN2());
             //newAccount.setSuperiorN3(accountDto.getSuperiorN3());
-            System.out.println("*********************************");
+            
             newAccount.setFunction(roleDB.findById(5).get());
-            System.out.println("++++++++++++++++++++++++++");
+
             AccountExecutive saveAccount = accountExecutiveDB.save(newAccount);
             if (saveAccount!=null) {
                 try {

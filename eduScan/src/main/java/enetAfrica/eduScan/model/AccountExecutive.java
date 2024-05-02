@@ -44,6 +44,9 @@ public class AccountExecutive implements UserDetails{
     private Role function;
 
     @OneToMany(mappedBy="accountExecutive")
+    private Set<InstitutionProfile> institutionProfiles;
+
+    @OneToMany(mappedBy="accountExecutive")
     private Set<Agenda> agendas;
 
     @OneToMany(mappedBy="accountExecutive")

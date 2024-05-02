@@ -102,7 +102,6 @@ public class JwtService {
 
     public void logout() {
         AccountExecutive account=(AccountExecutive) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        System.out.println("accc"+account.getUsername());
         JwToken jwtoken = tokenService.findByUserUsernameAndExpire(account.getUsername(), false).get();
         jwtoken.setExpire(true);
         tokenService.updateToken(jwtoken);                       

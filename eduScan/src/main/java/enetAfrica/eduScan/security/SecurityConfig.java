@@ -51,6 +51,7 @@ public class SecurityConfig {
                                     .requestMatchers(POST,"/api/institution/add").hasAnyRole("ADMIN","PROSPECTOR") 
                                     .requestMatchers(PUT,"/api/institution/update").hasAnyRole("ADMIN","PROSPECTOR") 
                                     .requestMatchers(GET,"/api/institution/getall").hasAnyRole("ADMIN","PROSPECTOR") 
+                                    .requestMatchers(GET,"/images/**").hasAnyRole("ADMIN","PROSPECTOR") 
                                     .anyRequest().authenticated())
                 .sessionManagement(httpSecurityManagementConfigurer ->
                     httpSecurityManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

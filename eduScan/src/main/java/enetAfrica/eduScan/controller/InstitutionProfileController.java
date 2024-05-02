@@ -35,7 +35,6 @@ public class InstitutionProfileController implements InstitutionProfileApi {
     @Override
     public ResponseEntity<InstitutionProfile> addInstitutionProfile(@ModelAttribute InstitutionDto profileDto) {
         try {
-            System.out.println("**********************************I>"+ profileDto.toString());
             InstitutionProfile newProfile = institutionProfileService.addInstitutionProfile(profileDto);
             return ResponseEntity.status(HttpStatus.CREATED).body(newProfile);
         } catch (Exception e) {
