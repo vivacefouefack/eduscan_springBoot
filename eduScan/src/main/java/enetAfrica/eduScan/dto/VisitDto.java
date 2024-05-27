@@ -14,6 +14,6 @@ public class VisitDto {
     private Integer id;
     private boolean supValidation;
     @NotNull private LocalDate visitDate;
-    @NotNull private Integer accountExecutive;
-    @NotNull private Integer prospectingRecord;
+    @NotNull private Integer accountExecutiveId;
+    @NotNull private Integer institutionId;
 }

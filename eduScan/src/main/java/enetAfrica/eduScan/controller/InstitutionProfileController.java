@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
+//import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -64,7 +64,7 @@ public class InstitutionProfileController implements InstitutionProfileApi {
     }
 
     @Override
-    public ResponseEntity<InstitutionProfile> updateInstitutionProfile(@RequestBody InstitutionDto profileDto) {
+    public ResponseEntity<InstitutionProfile> updateInstitutionProfile(@ModelAttribute InstitutionDto profileDto) {
         try {
             InstitutionProfile updatedProfile = institutionProfileService.updateInstitutionProfile(profileDto);
             if (updatedProfile != null) {
@@ -79,14 +79,10 @@ public class InstitutionProfileController implements InstitutionProfileApi {
 
     @Override
     public ResponseEntity<Iterable<InstitutionProfile>> getAllInstitutionProfiles() {
-        System.out.println("#########################################################################1");
         try {
-            System.out.println("#########################################################################2");
             Iterable<InstitutionProfile> profiles = institutionProfileService.getAll();
-            System.out.println("#########################################################################3");
             return ResponseEntity.ok(profiles);
         } catch (Exception e) {
-            System.out.println("#########################################################################");
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }

@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-
 import enetAfrica.eduScan.dto.InstitutionDto;
 import enetAfrica.eduScan.model.InstitutionProfile;
 import jakarta.validation.Valid;
@@ -30,7 +28,7 @@ public interface InstitutionProfileApi {
     public ResponseEntity<InstitutionProfile> getInstitutionProfile(@PathVariable int id);
 
     @PutMapping("/update")
-    public ResponseEntity<InstitutionProfile> updateInstitutionProfile(@Valid @RequestBody InstitutionDto profileDto);
+    public ResponseEntity<InstitutionProfile> updateInstitutionProfile(@Valid @ModelAttribute InstitutionDto profileDto);
 
     @GetMapping("/getall")
     public ResponseEntity<Iterable<InstitutionProfile>> getAllInstitutionProfiles();

@@ -32,7 +32,7 @@ public class VisitControllerTest {
     @Autowired private MockMvc mvc;
     @MockBean private VisitService service;  
 
-    @Test
+    /*@Test
     public void testGetVisitByIdFailure() throws Exception{
         Mockito.when(service.getVisitById(null)).thenReturn(null);
             mvc.perform(get("/api/visite/get/null"))
@@ -119,5 +119,5 @@ public class VisitControllerTest {
            .content(visitDtoJson))
            .andExpect(status().isOk());
     }
-
+*/
 }

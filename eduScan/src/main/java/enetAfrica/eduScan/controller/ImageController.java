@@ -32,8 +32,6 @@ public class ImageController {
             }
         } catch (MalformedURLException e) {
             return ResponseEntity.notFound().build();
-        } catch (IOException e) {
-            return ResponseEntity.internalServerError().build();
         }
     }
 }

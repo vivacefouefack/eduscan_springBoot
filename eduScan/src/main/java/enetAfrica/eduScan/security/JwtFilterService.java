@@ -27,8 +27,7 @@ public class JwtFilterService extends OncePerRequestFilter {
     @Autowired private JwtService jwtService;
     @Autowired private TokenService tokenService;
     
-    @Autowired 
-    @Qualifier("handlerExceptionResolver")
+    @Autowired @Qualifier("handlerExceptionResolver")
     private HandlerExceptionResolver exceptionResolver;
 
     @Override

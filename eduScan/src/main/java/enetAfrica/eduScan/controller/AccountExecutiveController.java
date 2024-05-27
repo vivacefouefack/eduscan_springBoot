@@ -47,11 +47,11 @@ public class AccountExecutiveController implements AccountExecutiveApi{
             );
             if(authenticate.isAuthenticated()){
                 AccountExecutive currentUser=(AccountExecutive) authenticate.getPrincipal();
-                AuthResponseDto resp=new AuthResponseDto(currentUser, jwtService.generateJwt(authenticationDto.getUsername()));
-                return ResponseEntity.ok(resp);
+                AuthResponseDto response=new AuthResponseDto(currentUser, jwtService.generateJwt(authenticationDto.getUsername()));
+                return ResponseEntity.ok(response);
             }
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
         return null;
     }

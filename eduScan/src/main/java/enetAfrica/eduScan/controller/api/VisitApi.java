@@ -20,6 +20,9 @@ public interface VisitApi {
     @PutMapping("/update")
     public ResponseEntity<Visit> updateVisit(@Valid @RequestBody VisitDto visit);
 
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Visit> valideVisit(@Valid @RequestBody int id);
+
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Integer> deleteVisit(@PathVariable int id);
 

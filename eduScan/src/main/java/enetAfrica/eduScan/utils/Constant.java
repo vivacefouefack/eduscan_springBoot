@@ -9,4 +9,5 @@ public interface Constant {
     String CONNEXION_ERROR="Erreur de connexion";
     String CONNEXION_ERROR_VALUE="Ce compte n'existe pas";
     String LOGOUT_MESSAGE = "Déconnexion réussie";
+    String USER_NOT_FOUND = "Aucun utilisateur ne corespond à ce nom utilisateur";
 }

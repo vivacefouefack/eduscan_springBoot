@@ -1,10 +1,11 @@
 package enetAfrica.eduScan.service.implement;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import enetAfrica.eduScan.database.AccountExecutiveDB;
-import enetAfrica.eduScan.database.ProspectionRecordDB;
+import enetAfrica.eduScan.database.InstitutionProfileDB;
 import enetAfrica.eduScan.database.VisitDB;
 import enetAfrica.eduScan.dto.VisitDto;
 import enetAfrica.eduScan.exception.ErrorCode;
@@ -12,13 +13,14 @@ import enetAfrica.eduScan.exception.NotFoundException;
 import enetAfrica.eduScan.model.Visit;
 import enetAfrica.eduScan.service.VisitService;
 import enetAfrica.eduScan.utils.Constant;
+import jakarta.validation.Valid;
 
 @Service
 public class VisitServiceImp implements VisitService {
 
     @Autowired private VisitDB visitDB;
     @Autowired private AccountExecutiveDB accountExecutiveDB;
-    @Autowired private ProspectionRecordDB prospectionRecordDB;
+    @Autowired private InstitutionProfileDB institutionProfileDB;
 
     @Override
     public Visit addVisit(VisitDto visitDto) {
@@ -28,8 +30,8 @@ public class VisitServiceImp implements VisitService {
             Visit visite=new Visit();
             visite.setSupValidation(visitDto.isSupValidation());
             visite.setVisitDate(visitDto.getVisitDate());
-            visite.setAccountExecutive(accountExecutiveDB.findById(visitDto.getAccountExecutive()).get());
-            visite.setProspectingRecord(prospectionRecordDB.findById(visitDto.getProspectingRecord()).get());
+            visite.setAccountExecutive(accountExecutiveDB.findById(visitDto.getAccountExecutiveId()).get());
+            visite.setInstitutionProfile(institutionProfileDB.findById(visitDto.getInstitutionId()).get());
             return visitDB.save(visite);
         }
     }
@@ -42,8 +44,8 @@ public class VisitServiceImp implements VisitService {
             Visit visite=visitDB.findById(visitDto.getId()).get();
             visite.setSupValidation(visitDto.isSupValidation());
             visite.setVisitDate(visitDto.getVisitDate());
-            visite.setAccountExecutive(accountExecutiveDB.findById(visitDto.getAccountExecutive()).get());
-            visite.setProspectingRecord(prospectionRecordDB.findById(visitDto.getProspectingRecord()).get());
+            visite.setAccountExecutive(accountExecutiveDB.findById(visitDto.getAccountExecutiveId()).get());
+            visite.setInstitutionProfile(institutionProfileDB.findById(visitDto.getInstitutionId()).get());
             return visitDB.save(visite);
         }
     }
@@ -65,6 +67,13 @@ public class VisitServiceImp implements VisitService {
     @Override
     public Iterable<Visit> getAllVisit(){
         return visitDB.findAll();
+    }
+
+    @Override
+    public Visit valideVisitById(@Valid int id) {
+        Visit visite = visitDB.findById(id).get();
+        visite.setSupValidation(true);
+        return visitDB.save(visite);
     }
 
 }

@@ -28,6 +28,12 @@ public class AccountExecutiveServiceImp implements AccountExecutiveService, User
     private EmailService emailService;
 
     @Override
+    public AccountExecutive loadUserByUsername(String username) throws UsernameNotFoundException {
+        return accountExecutiveDB.findByUserName(username).orElseThrow(
+            () -> new  UsernameNotFoundException(Constant.USER_NOT_FOUND));
+    }
+
+    @Override
     public AccountExecutive getAccountExecutiveById(Integer id){
         return accountExecutiveDB.findById(id).orElseThrow(() ->
             new NotFoundException(Constant.ACCOUNT_NOT_FOUND_MESSAGE, ErrorCode.ACCOUNTEXECUTIVE_NOT_FOUND)
@@ -50,11 +56,12 @@ public class AccountExecutiveServiceImp implements AccountExecutiveService, User
             newAccount.setProspectingZone(accountDto.getProspectingZone());
             newAccount.setProspectingMunicipality(accountDto.getProspectingMunicipality());
             newAccount.setPhoto(accountDto.getPhoto());
-            //newAccount.setSuperiorN1(accountDto.getSuperiorN1());
-            //newAccount.setSuperiorN2(accountDto.getSuperiorN2());
-            //newAccount.setSuperiorN3(accountDto.getSuperiorN3());
+            newAccount.setSuperiorN1(accountDto.getSuperiorN1());
+            newAccount.setSuperiorN2(accountDto.getSuperiorN2());
+            newAccount.setSuperiorN3(accountDto.getSuperiorN3());
+            newAccount.setPhoto("defaut.jpeg");
             
-            newAccount.setFunction(roleDB.findById(5).get());
+            newAccount.setFunction(roleDB.findById(5).get());//attention gestion des function
 
             AccountExecutive saveAccount = accountExecutiveDB.save(newAccount);
             if (saveAccount!=null) {
@@ -76,12 +83,14 @@ public class AccountExecutiveServiceImp implements AccountExecutiveService, User
             return null;
         }else{
             AccountExecutive accountExecutive=accountExecutiveDB.findById(accountDto.getId()).get();
+            accountExecutive.setUserName(accountDto.getUsername());
             accountExecutive.setFirstName(accountDto.getFirstName());
             accountExecutive.setLastName(accountDto.getLastName());
             accountExecutive.setPhoneNumber(accountDto.getPhoneNumber());
             accountExecutive.setProspectingZone(accountDto.getProspectingZone());
             accountExecutive.setProspectingMunicipality(accountDto.getProspectingMunicipality());
-            accountExecutive.setPhoto(accountDto.getPhoto());
+            accountExecutive.setActif(accountDto.isActif());
+            //accountExecutive.setPhoto(accountDto.getPhoto());
             //accountExecutive.setSuperiorN1(accountDto.getSuperiorN1());
             //accountExecutive.setSuperiorN2(accountDto.getSuperiorN2());
             //accountExecutive.setSuperiorN3(accountDto.getSuperiorN3());
@@ -104,10 +113,7 @@ public class AccountExecutiveServiceImp implements AccountExecutiveService, User
         return accountExecutiveDB.findAll();
     }
 
-    @Override
-    public AccountExecutive loadUserByUsername(String username) throws UsernameNotFoundException {
-        return accountExecutiveDB.findByUserName(username).orElseThrow(() -> new  UsernameNotFoundException("Aucun utilisateur ne corespond à ce nom utilisateur"));
-    }
+
 
     @Override
     public AccountExecutive getAccountExecutiveByUserName(String username) {

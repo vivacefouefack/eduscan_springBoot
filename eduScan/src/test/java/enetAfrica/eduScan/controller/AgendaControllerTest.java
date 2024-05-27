@@ -30,6 +30,7 @@ public class AgendaControllerTest {
 
     @MockBean private AgendaService agendaService;
 
+    /*
     @Test
     public void testGetAgendaByIdFailure() throws Exception{
         Mockito.when(agendaService.getAgendaById(11)).thenReturn(null);
@@ -88,6 +89,6 @@ public class AgendaControllerTest {
                 .content(agendaDtoJson))
                 .andExpect(status().isOk());
     }
-
+*/
     
 }

@@ -28,8 +28,8 @@ public class VisitServiceTest {
     public void shouldSaveVisitWithSuccess() {
         VisitDto visitDto=new VisitDto();
         visitDto.setVisitDate(LocalDate.now());
-        visitDto.setAccountExecutive(10);
-        visitDto.setProspectingRecord(1);
+        visitDto.setAccountExecutiveId(10);
+        visitDto.setInstitutionId(1);
         Visit visit=service.addVisit(visitDto);
 
         assertNotNull(visit);
@@ -78,18 +78,18 @@ public class VisitServiceTest {
     public void shouldUpdateVisitWithSuccess() {
         VisitDto visitDto=new VisitDto();
         visitDto.setVisitDate(LocalDate.now());
-        visitDto.setAccountExecutive(10);
-        visitDto.setProspectingRecord(1);
+        visitDto.setAccountExecutiveId(10);
+        visitDto.setInstitutionId(1);
         Visit visit=service.addVisit(visitDto);
         visitDto.setId(visit.getId());
-        visitDto.setAccountExecutive(12);
-        visitDto.setProspectingRecord(1);
+        visitDto.setAccountExecutiveId(12);
+        visitDto.setInstitutionId(1);
         visit=service.updateVisit(visitDto);
 
         assertNotNull(visit);
         assertNotNull(visit.getId());
         assertEquals(visit.getVisitDate(),visitDto.getVisitDate());
-        assertEquals(visit.getAccountExecutive().getId(),visitDto.getAccountExecutive());
+        assertEquals(visit.getAccountExecutive().getId(),visitDto.getAccountExecutiveId());
     }
 
     public int countElement(Iterable<Visit> list){

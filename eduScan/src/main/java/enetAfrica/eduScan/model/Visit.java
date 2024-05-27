@@ -27,8 +27,8 @@ public class Visit {
     @JoinColumn(name="accountExecutive_id", nullable=false)
     private AccountExecutive accountExecutive;
 
-    @OneToOne
-    @JoinColumn(name = "prospectingRecord_id", referencedColumnName = "id")
-    private ProspectionRecord prospectingRecord;
+    @ManyToOne
+    @JoinColumn(name = "institution_id", nullable=true)
+    private InstitutionProfile institutionProfile;
 
 }

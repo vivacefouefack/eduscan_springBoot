@@ -21,7 +21,7 @@ public class AccountDto {
     private String username;
     
     @NotBlank(message = "Le prénom ne peut pas être vide")
-    private String firstName;
+    private String firstName; 
 
     @NotBlank(message = "Le nom ne peut pas être vide")
     private String lastName;

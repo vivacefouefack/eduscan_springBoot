@@ -52,12 +52,12 @@ public class AccountExecutive implements UserDetails{
     @OneToMany(mappedBy="accountExecutive")
     private Set<Visit> visits;
 
-    private int superiorN1;
-    private int superiorN2;
-    private int superiorN3;
+    private String superiorN1;
+    private String superiorN2;
+    private String superiorN3;
 
 
-    public AccountExecutive (int id,String firstName, String lastName, String phoneNumber, String prospectingZone, String prospectingMunicipality, String photo, int superiorN1, int superiorN2, int superiorN3) {
+    public AccountExecutive (int id,String firstName, String lastName, String phoneNumber, String prospectingZone, String prospectingMunicipality, String photo, String superiorN1, String superiorN2, String superiorN3) {
         this.id=id;
         this.firstName = firstName;
         this.lastName = lastName;

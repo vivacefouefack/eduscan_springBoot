@@ -13,6 +13,7 @@ import enetAfrica.eduScan.controller.api.VisitApi;
 import enetAfrica.eduScan.dto.VisitDto;
 import enetAfrica.eduScan.model.Visit;
 import enetAfrica.eduScan.service.VisitService;
+import jakarta.validation.Valid;
 
 @RestController
 @CrossOrigin(origins="*")
@@ -66,6 +67,16 @@ public class VisitController implements VisitApi {
         try {
             Iterable<Visit> visits = visitService.getAllVisit();
             return ResponseEntity.ok(visits);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @Override
+    public ResponseEntity<Visit> valideVisit(@Valid int id) {
+        try {
+            Visit visit = visitService.valideVisitById(id);
+            return ResponseEntity.ok(visit);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }

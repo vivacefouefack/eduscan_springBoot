@@ -2,6 +2,7 @@ package enetAfrica.eduScan.service;
 
 import enetAfrica.eduScan.dto.VisitDto;
 import enetAfrica.eduScan.model.Visit;
+import jakarta.validation.Valid;
 
 public interface VisitService {
 
@@ -37,6 +38,8 @@ public interface VisitService {
      * @return
      */
     public Iterable<Visit> getAllVisit();
+
+    public Visit valideVisitById(@Valid int id);
 
 
 }

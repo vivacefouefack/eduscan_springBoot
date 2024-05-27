@@ -92,6 +92,16 @@ public class InstitutionProfileServiceImp implements InstitutionProfileService {
             return null;
         }else{
             InstitutionProfile profile=institutionProfileDB.findById(profileDto.getId()).get();
+            if(profileDto.getSchoolPhoto() !=null){
+                String directory="D:\\6equadri\\imasoft\\pro\\mobile_prospect_app_backend\\eduScan\\src\\main\\resources\\static\\upload\\schoolprofil";
+                try {
+                    Files.copy(profileDto.getSchoolPhoto().getInputStream(), Paths.get(directory+File.separator+profileDto.getSchoolPhoto().getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
+                    profile.setSchoolPhoto(profileDto.getSchoolPhoto().getOriginalFilename());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+                     
             profile.setSchoolName(profileDto.getSchoolName());
             profile.setMunicipality(profileDto.getMunicipality());
             profile.setDistrict(profileDto.getDistrict());
@@ -104,7 +114,6 @@ public class InstitutionProfileServiceImp implements InstitutionProfileService {
             profile.setEmail(profileDto.getEmail());
             profile.setHasComputer(profileDto.isHasComputer());
             profile.setTotalComputers(profileDto.getTotalComputers());
-            profile.setSchoolPhoto(profileDto.getSchoolPhoto().getOriginalFilename());
             profile.setHasInternet(profileDto.isHasInternet());
             profile.setConnectionType(profileDto.getConnectionType());
             profile.setRouterType(profileDto.getRouterType());

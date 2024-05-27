@@ -1,7 +1,6 @@
 package enetAfrica.eduScan.security;
 
 import java.security.Key;
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Map;
 import java.util.function.Function;
@@ -107,10 +106,9 @@ public class JwtService {
         tokenService.updateToken(jwtoken);                       
     }
 
-    @Scheduled(cron = "0 */10 * * * *")
+    @Scheduled(cron = "0 */10 * * * *") 
     @Transactional
     public void removeAllExpire(){
-        System.out.println("exécution toutes les minutes   "+LocalDateTime.now());
         tokenService.deleteAllExpire(true);
     }
 }
