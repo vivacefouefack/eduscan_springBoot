@@ -82,5 +82,15 @@ public class VisitController implements VisitApi {
         }
     }
 
+    @Override
+    public ResponseEntity<Visit> valideVisite(@Valid int id) {
+        try {
+            Visit newVisit = visitService.valide(id);
+            return ResponseEntity.status(HttpStatus.CREATED).body(newVisit);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
 
 }

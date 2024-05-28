@@ -23,13 +23,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 @NoArgsConstructor
 @Data
 public class AccountExecutive implements UserDetails{
-    @Id
-    @GeneratedValue
-    private Integer id;
-
-    @Column(unique = true)
-    private String userName;
-     
+    @Id @GeneratedValue private Integer id;
+    @Column(unique = true) private String userName;
     private String passWord;
     private boolean actif=false;
     private String firstName;
@@ -39,19 +34,24 @@ public class AccountExecutive implements UserDetails{
     private String prospectingMunicipality;
     private String photo;
 
-    @ManyToOne
-    @JoinColumn(name = "role_id", referencedColumnName = "id")
+    @ManyToOne @JoinColumn(name = "role_id", referencedColumnName = "id") 
     private Role function;
 
     @OneToMany(mappedBy="accountExecutive")
     private Set<InstitutionProfile> institutionProfiles;
 
     @OneToMany(mappedBy="accountExecutive")
-    private Set<Agenda> agendas;
-
-    @OneToMany(mappedBy="accountExecutive")
     private Set<Visit> visits;
 
+    @Override public String getPassword() { return passWord; }
+    @Override public String getUsername() { return userName; }
+    @Override public boolean isAccountNonExpired() { return actif;}
+    @Override public boolean isAccountNonLocked() { return actif; }
+    @Override public boolean isEnabled() { return actif; }
+
+
+    @OneToMany(mappedBy="accountExecutive")
+    private Set<Agenda> agendas;
     private String superiorN1;
     private String superiorN2;
     private String superiorN3;
@@ -75,33 +75,10 @@ public class AccountExecutive implements UserDetails{
         return Collections.singletonList(new SimpleGrantedAuthority("ROLE_"+function.getName()));
     }
 
-    @Override
-    public String getPassword() {
-        return passWord; 
-    }
-
-    @Override
-    public String getUsername() {
-        return userName;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return actif;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return actif;
-    }
+    
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return actif;
-    }
-
-    @Override
-    public boolean isEnabled() {
         return actif;
     }
 

@@ -24,7 +24,7 @@ public interface InstitutionProfileService {
      * @param id
      * @return 
      */
-    public InstitutionProfile getInstitutionProfileById(Integer id);
+    public Iterable<InstitutionProfile> getInstitutionProfileById(Integer id);
 
     /**
      * 

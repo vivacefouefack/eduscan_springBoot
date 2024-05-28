@@ -12,11 +12,9 @@ import org.springframework.stereotype.Service;
 import enetAfrica.eduScan.database.AccountExecutiveDB;
 import enetAfrica.eduScan.database.InstitutionProfileDB;
 import enetAfrica.eduScan.dto.InstitutionDto; 
-import enetAfrica.eduScan.exception.ErrorCode;
-import enetAfrica.eduScan.exception.NotFoundException;
 import enetAfrica.eduScan.model.InstitutionProfile;
 import enetAfrica.eduScan.service.InstitutionProfileService;
-import enetAfrica.eduScan.utils.Constant;
+
 
 @Service
 public class InstitutionProfileServiceImp implements InstitutionProfileService {
@@ -80,10 +78,9 @@ public class InstitutionProfileServiceImp implements InstitutionProfileService {
 
 
     @Override
-    public InstitutionProfile getInstitutionProfileById(Integer id) {
-        return institutionProfileDB.findById(id).orElseThrow(() ->
-            new NotFoundException(Constant.INSTITUTION_NOT_FOUND_MESSAGE, ErrorCode.INSTITUTION_NOT_FOUND)
-        );
+    public Iterable<InstitutionProfile> getInstitutionProfileById(Integer id) {
+        System.out.println("*********************************************************************************"+id);
+       return institutionProfileDB.findByAccountExecutiveId(id);
     }
 
     @Override

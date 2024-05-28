@@ -54,11 +54,13 @@ public class InstitutionProfileController implements InstitutionProfileApi {
     }
 
     @Override
-    public ResponseEntity<InstitutionProfile> getInstitutionProfile(@PathVariable int id) {
+    public ResponseEntity<Iterable<InstitutionProfile>> getInstitutionProfile(@PathVariable int id) {
         try {
-            InstitutionProfile profile = institutionProfileService.getInstitutionProfileById(id);
-            return ResponseEntity.ok(profile);
+            System.out.println("oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo");
+            Iterable<InstitutionProfile> profiles = institutionProfileService.getInstitutionProfileById(id);
+            return ResponseEntity.ok(profiles);
         } catch (Exception e) {
+            System.out.println("mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm");
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }

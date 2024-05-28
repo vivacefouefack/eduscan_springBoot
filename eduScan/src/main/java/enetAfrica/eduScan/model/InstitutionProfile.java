@@ -27,4 +27,5 @@ public class InstitutionProfile extends InstitutInformation {
     @ManyToOne
     @JoinColumn(name="accountExecutive_id", nullable=true)
     private AccountExecutive accountExecutive;
+
 }

@@ -17,6 +17,9 @@ public interface VisitApi {
     @PostMapping("/add")
     public ResponseEntity<Visit> addVisit(@Valid @RequestBody VisitDto visitDto);
 
+    @PostMapping("/valide/{id}")
+    public ResponseEntity<Visit> valideVisite(@Valid @RequestBody int id);
+
     @PutMapping("/update")
     public ResponseEntity<Visit> updateVisit(@Valid @RequestBody VisitDto visit);
 

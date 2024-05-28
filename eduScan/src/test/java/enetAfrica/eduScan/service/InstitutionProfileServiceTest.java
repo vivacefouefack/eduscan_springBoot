@@ -13,7 +13,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import enetAfrica.eduScan.dto.InstitutionDto;
-import enetAfrica.eduScan.dto.PropectionRecordDto;
 import enetAfrica.eduScan.exception.ErrorCode;
 import enetAfrica.eduScan.exception.NotFoundException;
 import enetAfrica.eduScan.model.InstitutionProfile;
@@ -59,11 +58,7 @@ public class InstitutionProfileServiceTest {
         assertNotEquals(counter, size);
     }
 
-    @Test
-    public void shouldGetInstitutionByIdWithSuccess() {
-        InstitutionProfile profil=service.getInstitutionProfileById(1);
-        assertNotNull(profil);
-    }
+
 
     @Test
     public void shouldUpdateInstitutionProfileWithSuccess() {

@@ -76,4 +76,12 @@ public class VisitServiceImp implements VisitService {
         return visitDB.save(visite);
     }
 
+    @Override
+    public Visit valide(@Valid int id) {
+        Visit visite = visitDB.findById(id).get();
+        visite.setSupValidation(true);
+        return visitDB.save(visite);
+    }
+
+
 }

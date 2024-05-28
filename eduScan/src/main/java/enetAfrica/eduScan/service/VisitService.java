@@ -41,5 +41,7 @@ public interface VisitService {
 
     public Visit valideVisitById(@Valid int id);
 
+    public Visit valide(@Valid int id);
+
 
 }

@@ -25,7 +25,7 @@ public interface InstitutionProfileApi {
     public ResponseEntity<Integer> deleteInstitutionProfile(@PathVariable int id);
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<InstitutionProfile> getInstitutionProfile(@PathVariable int id);
+    public ResponseEntity<Iterable<InstitutionProfile>> getInstitutionProfile(@PathVariable int id);
 
     @PutMapping("/update")
     public ResponseEntity<InstitutionProfile> updateInstitutionProfile(@Valid @ModelAttribute InstitutionDto profileDto);
