@@ -61,7 +61,7 @@ public class AccountExecutiveServiceImp implements AccountExecutiveService, User
             newAccount.setSuperiorN3(accountDto.getSuperiorN3());
             newAccount.setPhoto("defaut.jpeg");
             
-            newAccount.setFunction(roleDB.findById(5).get());//attention gestion des function
+            newAccount.setFunction(roleDB.findById(accountDto.getFunction()).get());
 
             AccountExecutive saveAccount = accountExecutiveDB.save(newAccount);
             if (saveAccount!=null) {
@@ -90,11 +90,11 @@ public class AccountExecutiveServiceImp implements AccountExecutiveService, User
             accountExecutive.setProspectingZone(accountDto.getProspectingZone());
             accountExecutive.setProspectingMunicipality(accountDto.getProspectingMunicipality());
             accountExecutive.setActif(accountDto.isActif());
-            //accountExecutive.setPhoto(accountDto.getPhoto());
-            //accountExecutive.setSuperiorN1(accountDto.getSuperiorN1());
-            //accountExecutive.setSuperiorN2(accountDto.getSuperiorN2());
-            //accountExecutive.setSuperiorN3(accountDto.getSuperiorN3());
-            //accountExecutive.setFunction(roleDB.findById(accountDto.getFunction()).get());
+            accountExecutive.setPhoto(accountDto.getPhoto());
+            accountExecutive.setSuperiorN1(accountDto.getSuperiorN1());
+            accountExecutive.setSuperiorN2(accountDto.getSuperiorN2());
+            accountExecutive.setSuperiorN3(accountDto.getSuperiorN3());
+            accountExecutive.setFunction(roleDB.findById(accountDto.getFunction()).get());
             return accountExecutiveDB.save(accountExecutive);
         }
         

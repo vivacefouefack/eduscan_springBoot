@@ -39,7 +39,7 @@ public class AccountDto {
     private String photo;
 
     //@NotNull(message = "Le rôle ne peut pas être négatif")
-    private String function;
+    private int function;
 
     //@Positive(message = "Le supérieur N1 ne peut pas être négatif")
     private String superiorN1;
