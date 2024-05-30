@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +24,7 @@ public class ProspectionController implements ProspectionApi {
     private ProspectionRecordService prospectionRecordService;
 
     @Override
-    public ResponseEntity<ProspectionRecord> addProspectionRecord(@RequestBody PropectionRecordDto prospectDto) {
+    public ResponseEntity<ProspectionRecord> addProspectionRecord(@ModelAttribute PropectionRecordDto prospectDto) {
         try {
             ProspectionRecord newProspectionRecord = prospectionRecordService.addProspectionRecord(prospectDto);
             return ResponseEntity.status(HttpStatus.CREATED).body(newProspectionRecord);
@@ -34,7 +35,6 @@ public class ProspectionController implements ProspectionApi {
 
     @Override
     public ResponseEntity<ProspectionRecord> updateProspectionRecord(@RequestBody PropectionRecordDto prospectDto) {
-        System.out.println("delettttttttttttttttttttttttttttttttttttttttttttt");
         try {
             ProspectionRecord updatedProspectionRecord = prospectionRecordService.updateProspectionRecord(prospectDto);
             return ResponseEntity.ok(updatedProspectionRecord);

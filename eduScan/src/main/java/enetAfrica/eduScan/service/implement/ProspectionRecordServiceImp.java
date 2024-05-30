@@ -1,5 +1,11 @@
 package enetAfrica.eduScan.service.implement;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,9 +24,16 @@ public class ProspectionRecordServiceImp implements ProspectionRecordService{
 
     @Override
     public ProspectionRecord addProspectionRecord(PropectionRecordDto prospectDto) {
-        if(prospectDto==null){
+         if(prospectDto==null){
             return null;
         }else{
+            String directory="D:\\6equadri\\imasoft\\pro\\mobile_prospect_app_backend\\eduScan\\src\\main\\resources\\static\\upload\\prospectprofil";
+            try {
+                Files.copy(prospectDto.getSchoolPhoto().getInputStream(), Paths.get(directory+File.separator+prospectDto.getSchoolPhoto().getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
             ProspectionRecord prospect=new ProspectionRecord();
             prospect.setSchoolName(prospectDto.getSchoolName());
             prospect.setMunicipality(prospectDto.getMunicipality());
@@ -34,7 +47,7 @@ public class ProspectionRecordServiceImp implements ProspectionRecordService{
             prospect.setEmail(prospectDto.getEmail());
             prospect.setHasComputer(prospectDto.isHasComputer());
             prospect.setTotalComputers(prospectDto.getTotalComputers());
-           // prospect.setSchoolPhoto(prospectDto.getSchoolPhoto());
+            prospect.setSchoolPhoto(prospectDto.getSchoolPhoto().getOriginalFilename());
             prospect.setSeniority(prospectDto.getSeniority());
             prospect.setFirstVisitDate(prospectDto.getFirstVisitDate());
             prospect.setInterlocutorFirstName(prospectDto.getInterlocutorFirstName());
@@ -95,7 +108,6 @@ public class ProspectionRecordServiceImp implements ProspectionRecordService{
 
     @Override
     public void deleteProspectionRecord(Integer id) {
-        System.out.println("///////////////////////////////////////////////////////////////");
         if (id !=null) {
             prospectionRecordDB.deleteById(id);
         } 

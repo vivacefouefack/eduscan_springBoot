@@ -1,8 +1,10 @@
 package enetAfrica.eduScan.controller.api;
 
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -14,8 +16,8 @@ import jakarta.validation.Valid;
 
 public interface ProspectionApi {
 
-    @PostMapping("/add")
-    public ResponseEntity<ProspectionRecord> addProspectionRecord(@Valid @RequestBody PropectionRecordDto prospectDto);
+    @PostMapping(value ="/add",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<ProspectionRecord> addProspectionRecord(@Valid @ModelAttribute PropectionRecordDto prospectDto);
 
     @PutMapping("/update")
     public ResponseEntity<ProspectionRecord> updateProspectionRecord(@Valid @RequestBody PropectionRecordDto prospectDto);
