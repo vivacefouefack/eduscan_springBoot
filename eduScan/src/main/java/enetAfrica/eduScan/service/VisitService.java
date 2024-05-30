@@ -31,7 +31,7 @@ public interface VisitService {
      * @param id
      * @return
      */
-    public Visit getVisitById(Integer id);
+    public Iterable<Visit> getVisitById(Integer id);
 
     /**
      * 

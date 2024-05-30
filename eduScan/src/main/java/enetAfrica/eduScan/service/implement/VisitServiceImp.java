@@ -8,11 +8,8 @@ import enetAfrica.eduScan.database.AccountExecutiveDB;
 import enetAfrica.eduScan.database.InstitutionProfileDB;
 import enetAfrica.eduScan.database.VisitDB;
 import enetAfrica.eduScan.dto.VisitDto;
-import enetAfrica.eduScan.exception.ErrorCode;
-import enetAfrica.eduScan.exception.NotFoundException;
 import enetAfrica.eduScan.model.Visit;
 import enetAfrica.eduScan.service.VisitService;
-import enetAfrica.eduScan.utils.Constant;
 import jakarta.validation.Valid;
 
 @Service
@@ -58,10 +55,8 @@ public class VisitServiceImp implements VisitService {
     }
 
     @Override
-    public Visit getVisitById(Integer id) {
-        return visitDB.findById(id).orElseThrow(() ->
-            new NotFoundException(Constant.VISIT_NOT_FOUND_MESSAGE, ErrorCode.VISIT_NOT_FOUND)
-        );
+    public Iterable<Visit> getVisitById(Integer id) {
+        return visitDB.findByAccountExecutiveId(id);
     }
 
     @Override

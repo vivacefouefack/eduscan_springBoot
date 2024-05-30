@@ -53,9 +53,9 @@ public class VisitController implements VisitApi {
     }
 
     @Override
-    public ResponseEntity<Visit> getVisitById(@PathVariable int id) {
+    public ResponseEntity<Iterable<Visit>> getVisitById(@PathVariable int id) {
         try {
-            Visit visit = visitService.getVisitById(id);
+            Iterable<Visit> visit = visitService.getVisitById(id);
             return ResponseEntity.ok(visit);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();

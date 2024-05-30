@@ -69,12 +69,6 @@ public class VisitServiceTest {
     }
 
     @Test
-    public void shouldGetVisitByIdWithSuccess() {
-        Visit visit=service.getVisitById(1);
-        assertNotNull(visit);
-    }
-
-    @Test
     public void shouldUpdateVisitWithSuccess() {
         VisitDto visitDto=new VisitDto();
         visitDto.setVisitDate(LocalDate.now());

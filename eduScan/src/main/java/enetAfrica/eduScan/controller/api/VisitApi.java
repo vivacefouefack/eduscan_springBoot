@@ -30,7 +30,7 @@ public interface VisitApi {
     public ResponseEntity<Integer> deleteVisit(@PathVariable int id);
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<Visit> getVisitById(@PathVariable int id);
+    public ResponseEntity<Iterable<Visit>> getVisitById(@PathVariable int id);
 
     @GetMapping("/getall")
     public ResponseEntity<Iterable<Visit>> getAllVisits();

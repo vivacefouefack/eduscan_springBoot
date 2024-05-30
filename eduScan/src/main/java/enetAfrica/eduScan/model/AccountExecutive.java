@@ -14,6 +14,9 @@ import java.util.Collections;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -35,6 +38,7 @@ public class AccountExecutive implements UserDetails{
     private String photo;
 
     @ManyToOne @JoinColumn(name = "role_id", referencedColumnName = "id") 
+    @Fetch(FetchMode.JOIN)
     private Role function;
 
     @OneToMany(mappedBy="accountExecutive")
