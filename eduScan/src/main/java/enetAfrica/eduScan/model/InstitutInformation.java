@@ -8,6 +8,12 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 import lombok.Data;
 
+/**
+ * Represents the information about an educational institution.
+ * This is a mapped superclass, which means that it provides common fields
+ * for other entity classes.
+ */
+
 @Data
 @MappedSuperclass
 public class InstitutInformation {

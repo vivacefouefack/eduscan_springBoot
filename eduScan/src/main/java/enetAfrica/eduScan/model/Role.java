@@ -8,6 +8,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Represents a role within the system.
+*/
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor

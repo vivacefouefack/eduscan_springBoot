@@ -6,37 +6,41 @@ import enetAfrica.eduScan.model.InstitutionProfile;
 public interface InstitutionProfileService {
 
     /**
-     * 
-     * @param profileDto
-     * @return
-     */
+     * Adds a new institution profile based on the provided data transfer object.
+     *
+     * @param profileDto the data transfer object containing details for the new institution profile.
+     * @return the added InstitutionProfile.
+    */
     public InstitutionProfile addInstitutionProfile(InstitutionDto profileDto);
 
-
     /**
-     * 
-     * @param id
-     */
+     * Deletes an institution profile by its identifier.
+     *
+     * @param id the identifier of the institution profile to delete.
+    */
     public void deleteInstitutionProfileById(Integer id);
 
     /**
-     * 
-     * @param id
-     * @return 
-     */
+     * Retrieves an institution profile by its identifier.
+     *
+     * @param id the identifier of the institution profile to retrieve.
+     * @return an Iterable of InstitutionProfile.
+    */
     public Iterable<InstitutionProfile> getInstitutionProfileById(Integer id);
 
     /**
-     * 
-     * @param profileDto
-     * @return
-     */
+     * Updates an existing institution profile based on the provided data transfer object.
+     *
+     * @param profileDto the data transfer object containing updated details for the institution profile.
+     * @return the updated InstitutionProfile.
+    */
     public InstitutionProfile updateInstitutionProfile(InstitutionDto profileDto);
 
     /**
-     * 
-     * @return
-     */
+     * Retrieves all institution profiles.
+     *
+     * @return an Iterable of all InstitutionProfile.
+    */
     public Iterable<InstitutionProfile> getAll();
     
 }

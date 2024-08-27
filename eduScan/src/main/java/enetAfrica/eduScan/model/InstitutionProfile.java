@@ -10,6 +10,10 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+/**
+ * Represents a profile of an institution, extending the class to include additional details.
+ */
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor

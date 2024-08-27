@@ -12,6 +12,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Represents an agenda entry in the system.
+ */
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor

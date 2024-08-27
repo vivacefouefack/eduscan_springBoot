@@ -9,6 +9,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Represents a JSON Web Token (JWT) associated with an account executive.
+*/
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor

@@ -7,36 +7,40 @@ import enetAfrica.eduScan.model.ProspectionRecord;
 public interface ProspectionRecordService {
 
     /**
-     * Permet d'ajouter un nouveau fichier de prospection.
-     * @param prospectionRecord le nouveau fichier de prospection à ajouter.
-     * @return le fichier de prospection ajouté.
-     */
+     * Adds a new prospection record based on the provided data transfer object.
+     *
+     * @param prospectDto the data transfer object containing details for the new prospection record.
+     * @return the added ProspectionRecord.
+    */
     public ProspectionRecord addProspectionRecord(PropectionRecordDto prospectDto);
 
     /**
-     * Permet de modifier un fichier de prospection existant.
-     * @param prospectionRecord le fichier de prospection avec les modifications à apporter.
-     * @return le fichier de prospection modifié.
-     */
+     * Updates an existing prospection record based on the provided data transfer object.
+     *
+     * @param prospectDto the data transfer object containing updated details for the prospection record.
+     * @return the updated ProspectionRecord.
+    */
     public ProspectionRecord updateProspectionRecord(PropectionRecordDto prospectDto);
 
     /**
-     * Permet de supprimer un fichier de prospection à travers son identifiant.
-     * @param id l'identifiant du fichier de prospection à supprimer.
+     * Deletes a prospection record by its identifier.
+     *
+     * @param id the identifier of the prospection record to delete.
      */
     public void deleteProspectionRecord(Integer id);
 
     /**
-     * Permet d'obtenir un fichier de prospection à travers son identifiant.
-     * @param id l'identifiant du fichier de prospection à obtenir.
-     * @return le fichier de prospection correspondant à l'identifiant donné, s'il existe.
-     */
+     * Retrieves a prospection record by its identifier.
+     *
+     * @param id the identifier of the prospection record to retrieve.
+     * @return the ProspectionRecord corresponding to the given identifier, if it exists.
+    */
     public ProspectionRecord getProspectionRecordById(Integer id);
 
-
     /**
-     * permet d'obtenir tous les fichiers de prospection.
-     * @return liste de tous les fichiers de prospetion.
-     */
+     * Retrieves all prospection records.
+     *
+     * @return an Iterable of all ProspectionRecord.
+    */
     public Iterable<ProspectionRecord> getAllProspectionRecord();
 }

@@ -12,6 +12,10 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+/**
+ * Represents a record of prospecting activities for an institution, extending the {@link InstitutInformation} class to include additional details.
+*/
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor

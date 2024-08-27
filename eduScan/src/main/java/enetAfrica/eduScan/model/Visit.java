@@ -11,6 +11,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Represents a visit record associated with an account executive and an institution profile.
+*/
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
